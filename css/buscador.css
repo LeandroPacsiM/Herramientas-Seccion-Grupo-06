@@ -1,0 +1,32 @@
+.fondo-buscador{
+    background-image: url('../img/fondo.jpg');
+    background-size: cover; 
+    background-position: center center; 
+}
+
+svg path {
+    fill: #155ce9; /* gris claro */
+    stroke: #000;
+    stroke-width: 0.5;
+    transition: all 0.3s ease-in-out;
+}
+
+svg path:hover {
+    fill: #5f98ec; /* azul Bootstrap */
+    transform: translateY(-4px);
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+    cursor: pointer;
+}
+
+.disable {
+      pointer-events: none; /* Evita que se le pueda hacer clic */
+      fill: #fffdfd; /* Color gris para indicar que está desactivado */
+      opacity: 0.7; /* Más transparente */
+      cursor: not-allowed;
+}
+
+/*header transparente*/
+.navbar-blur {
+    backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, 0.247);
+}

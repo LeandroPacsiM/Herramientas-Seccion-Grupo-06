@@ -1,0 +1,83 @@
+.fixed-size {
+    object-fit: cover;  /* Mantiene la relación de aspecto sin deformar */
+    height: 600px;      /* Establece una altura fija */
+    width: 100%;        /* Ocupa todo el ancho disponible en la columna */
+}
+
+@media (max-width: 768px) {
+    .fixed-size {
+        height: 400px;  /* Ajusta la altura en dispositivos más pequeños */
+    }
+}
+
+/* Ocultar el contenido y el botón inicialmente */
+.hover-content,.hover-button {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Mostrar el contenido y el botón solo al hacer hover sobre la imagen */
+.position-relative:hover .hover-content,
+.position-relative:hover .hover-button {
+    opacity: 1;
+}
+
+/* Estilos de la posición centrada */
+.hover-content {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/*para el carrusel info*/
+.hover-button {
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.position-relative:hover .hover-button {
+    opacity: 1;
+}
+
+/*Fondo grande de Machu Picchu*/
+.fondo{
+    background-image: url('../img/index/cuerpo/inicio.png'); 
+    background-size: cover; 
+    background-position: center center; 
+    height: 850px;
+}
+
+.boton-patito{
+    background-color: rgb(226, 226, 4); 
+    color: #000;
+}
+
+/*dos cuadros*/
+
+.comun{
+    height: 400px;
+    background-size: cover; 
+    background-position: center;
+}
+
+.cuadro1{
+    background-image: url('../img/index/cuerpo/cerroColores.png');
+}
+
+.cuadro2{
+    background-image: url('../img/index/cuerpo/sobreNostros.png');
+}
+
+/*cuadro con 3 secciones*/
+
+.cuadro3{
+    background-image: url('../img/index/cuerpo/ofrecemos.png'); 
+    background-size: cover; 
+    background-position: center;
+}
+
+/*header transparente*/
+.navbar-blur {
+    backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, 0.247);
+}
