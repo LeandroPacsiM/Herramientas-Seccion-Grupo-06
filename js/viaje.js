@@ -1,57 +1,133 @@
-const counterValueElement = document.getElementById('valor');
-const incrementButton = document.getElementById('suma');
-const decrementButton = document.getElementById('resta');
+// ========================================
+// BOOKING FUNCTIONALITY (skill-booking)
+// Referencia: .github/copilot/skills/skill-booking.md
+// ========================================
+
+const travelers = document.getElementById('travelers');
+const restaBtn = document.getElementById('resta');
+const sumaBtn = document.getElementById('suma');
+const reservarBtn = document.getElementById('reservarButton');
+const dateInput = document.getElementById('date');
 const viajerosDisplay = document.getElementById('viajerosDisplay');
+const totalPriceElement = localStorage.getItem("precioViaje");
 const viajerosModal = document.getElementById('viajerosModal');
-const totalPriceElement = localStorage.getItem("precioViaje")
-const importeTotalElement = document.querySelector('.importeTotal p');
 const importeModal = document.getElementById('importeModal');
 
-
-
-const numforms= counterValueElement;
-
-
 let counter = 1;
-function updateCounter() {
-    counterValueElement.value = counter;
-    viajerosDisplay.innerText = counter;
-    viajerosModal.innerText = `N° de Viajeros: ${counter}`
+
+// Contador de Viajeros
+restaBtn.addEventListener('click', () => {
+  if (parseInt(travelers.value) > 1) {
+    travelers.value = parseInt(travelers.value) - 1;
+    updateDisplay();
+    validateForm();
+  }
+});
+
+sumaBtn.addEventListener('click', () => {
+  travelers.value = parseInt(travelers.value) + 1;
+  updateDisplay();
+  validateForm();
+});
+
+// Date Picker con validación de fecha mínima
+flatpickr("#date", {
+  dateFormat: "d-m-Y",
+  minDate: new Date(),
+  onChange: function() {
+    validateForm();
+    updateDisplay();
+  }
+});
+
+function updateDisplay() {
+  counter = parseInt(travelers.value);
+  viajerosDisplay.textContent = counter;
+  
+  // Actualizar modal si existe
+  if (viajerosModal) {
+    viajerosModal.textContent = `N° de Viajeros: ${counter}`;
+  }
+  
+  // Calcular total si existe precio
+  if (totalPriceElement) {
     const totalAmount = counter * totalPriceElement;
-
-    importeTotalElement.innerText = `S/ ${totalAmount}`;
-    importeModal.innerText = `S/ ${totalAmount}`
-}
-
-counterValueElement.addEventListener('input', () => {
-    counter = parseInt(counterValueElement.value);
-    updateCounter();
-});
-
-incrementButton.addEventListener('click', () => {
-    counter++;
-    updateCounter();
-});
-
-decrementButton.addEventListener('click', () => {
-    if (counter > 1) {
-        counter--;
-        updateCounter();
+    if (importeModal) {
+      importeModal.textContent = `S/ ${totalAmount}`;
     }
+  }
+}
+
+function validateForm() {
+  const hasDate = dateInput.value.trim() !== "";
+  const hasValidTravelers = parseInt(travelers.value) > 0;
+  reservarBtn.disabled = !(hasDate && hasValidTravelers);
+}
+
+// Inicializar
+document.addEventListener('DOMContentLoaded', () => {
+  updateDisplay();
+  validateForm();
 });
 
-updateCounter();
 
+// ========================================
+// GALLERY FUNCTIONALITY (skill-gallery)
+// Referencia: .github/copilot/skills/skill-gallery.md
+// ========================================
 
-function changeImage(element) {
-    const featuredImage = document.getElementById('featured');
-    
-    featuredImage.src = element.src;
-    
-    const thumbnails = document.querySelectorAll('.thumbnails img');
-    thumbnails.forEach(img => img.classList.remove('active'));
-    element.classList.add('active'); 
+let currentImageIndex = 0;
+const images = [
+  'img/index/carusel/destino-MacchuPicchu.jpg',
+  'img/index/carusel/destino-MacchuPicchu.jpg',
+  'img/index/carusel/destino-MacchuPicchu.jpg',
+  'img/index/carusel/destino-MacchuPicchu.jpg'
+];
+
+function changeImage(thumbnail) {
+  const featured = document.getElementById('featured');
+  currentImageIndex = Array.from(document.querySelectorAll('.gallery-thumbnail'))
+    .indexOf(thumbnail);
+  featured.src = thumbnail.src;
+  updateThumbnails();
+  updateIndicator();
 }
+
+function previousImage() {
+  currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+  updateGallery();
+}
+
+function nextImage() {
+  currentImageIndex = (currentImageIndex + 1) % images.length;
+  updateGallery();
+}
+
+function updateGallery() {
+  document.getElementById('featured').src = images[currentImageIndex];
+  updateThumbnails();
+  updateIndicator();
+}
+
+function updateThumbnails() {
+  document.querySelectorAll('.gallery-thumbnail').forEach((t, i) => {
+    t.classList.toggle('active', i === currentImageIndex);
+  });
+}
+
+function updateIndicator() {
+  const indicator = document.querySelector('.gallery-indicator');
+  if (indicator) {
+    indicator.textContent = `${currentImageIndex + 1} de ${images.length}`;
+  }
+}
+
+// Initialize gallery on page load
+document.addEventListener('DOMContentLoaded', () => {
+  updateThumbnails();
+});
+
+
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -110,3 +186,145 @@ function scrollDestinosRight() {
       behavior: 'smooth'
   });
 }
+
+function cerrarPago() {
+  const pagar = document.getElementById('pagar');
+  if (!pagar) {
+    return;
+  }
+
+  pagar.style.display = 'none';
+  pagar.setAttribute('aria-hidden', 'true');
+
+  if (reservarBtn) {
+    reservarBtn.focus();
+  }
+}
+
+function abrirModal() {
+  const pagar = document.getElementById('pagar');
+  if (!pagar) {
+    return;
+  }
+
+  pagar.style.display = 'block';
+  pagar.setAttribute('aria-hidden', 'false');
+  pagar.focus();
+}
+
+function continuar() {
+  const pago = document.getElementById('Pago');
+  const contacto = document.getElementById('contacto');
+
+  if (contacto) {
+    contacto.style.display = 'none';
+  }
+
+  if (pago) {
+    pago.style.display = 'block';
+  }
+}
+
+function regresarADatos() {
+  const pago = document.getElementById('Pago');
+  const contacto = document.getElementById('contacto');
+
+  if (pago) {
+    pago.style.display = 'none';
+  }
+
+  if (contacto) {
+    contacto.style.display = 'block';
+  }
+}
+
+function populateTravelData() {
+  const featured = document.getElementById('featured');
+  const viaje = localStorage.getItem('viajeSeleccionado');
+  const tituloTicket = localStorage.getItem('TituloTicket');
+  const precioGuardado = localStorage.getItem('precioViaje');
+  const descripcionViaje = localStorage.getItem('descripcionViaje');
+  const descripcion2 = localStorage.getItem('descripcion-2');
+  const descripcion3 = localStorage.getItem('descripcion-3');
+  const dia1 = localStorage.getItem('dia1');
+  const dia2 = localStorage.getItem('dia2');
+  const listaEquipaje = localStorage.getItem('listaEquipaje');
+
+  const galleryImage = localStorage.getItem('imagen');
+  if (featured && galleryImage) {
+    featured.src = galleryImage;
+  }
+
+  if (viaje) {
+    const title = document.getElementById('tituloViaje');
+    if (title) {
+      title.textContent = `Reservar Viaje a ${viaje}`;
+    }
+  }
+
+  if (tituloTicket) {
+    const viajeModal = document.getElementById('viajeModal');
+    const tituloTicketElement = document.getElementById('tituloTicket');
+
+    if (viajeModal) {
+      viajeModal.textContent = tituloTicket;
+    }
+
+    if (tituloTicketElement) {
+      tituloTicketElement.textContent = tituloTicket;
+    }
+  }
+
+  if (precioGuardado) {
+    const precioViajeModal = document.getElementById('precioViajeModal');
+    const subTotalModal = document.getElementById('subTotalModal');
+    const totalSpan = document.querySelector('.total span');
+
+    if (precioViajeModal) {
+      precioViajeModal.innerText = `S/ ${precioGuardado}`;
+    }
+
+    if (subTotalModal) {
+      subTotalModal.innerText = `S/ ${precioGuardado}`;
+    }
+
+    if (totalSpan) {
+      totalSpan.innerText = `S/ ${precioGuardado}`;
+    }
+  }
+
+  const descripcion1Element = document.getElementById('descripcionViaje');
+  const descripcion2Element = document.getElementById('descripcionViaje-2');
+  const descripcion3Element = document.getElementById('descripcionViaje-3');
+  const dia1Element = document.getElementById('dia-1');
+  const dia2Element = document.getElementById('dia-2');
+  const listaEquipajeElement = document.getElementById('listaEquipaje');
+
+  if (descripcion1Element) {
+    descripcion1Element.textContent = descripcionViaje || '';
+  }
+
+  if (descripcion2Element) {
+    descripcion2Element.textContent = descripcion2 || '';
+  }
+
+  if (descripcion3Element) {
+    descripcion3Element.textContent = descripcion3 || '';
+  }
+
+  if (dia1Element) {
+    dia1Element.innerHTML = dia1 || '';
+  }
+
+  if (dia2Element) {
+    dia2Element.innerHTML = dia2 || '';
+  }
+
+  if (listaEquipajeElement) {
+    listaEquipajeElement.innerHTML = listaEquipaje || '';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  populateTravelData();
+});
