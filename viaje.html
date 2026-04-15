@@ -3,391 +3,799 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LlamaTours</title>
-<!-- 
-    <link rel="stylesheet" href="../css/viaje.css"> -->
-    <link rel="stylesheet" href="css/pago.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <title>LlamaTours - Reserva tu Aventura</title>
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
-        <!-- Bootstrap Icons & Tailwind CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-        <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Design System v1 (Poppins + Inter) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'llama': {
+                            'teal': '#A8FFF5',
+                            'blue': '#A8DDFF',
+                            'purple': '#A8B2FF',
+                            'dark': '#1e293b',
+                            'accent': '#06b6d4'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'fade-in': 'fadeIn 0.3s ease-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'scale-in': 'scaleIn 0.3s ease-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        scaleIn: {
+                            '0%': { transform: 'scale(0.95)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        @layer utilities {
+            .glass-effect {
+                @apply bg-white/10 backdrop-blur-lg border border-white/20;
+            }
+            .gradient-text {
+                @apply bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 bg-clip-text text-transparent;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-2xl hover:scale-[1.02];
+            }
+        }
+        
+        .flatpickr-calendar {
+            border-radius: 1rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+        
+        .gallery-image {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .gallery-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .btn-primary-custom {
+            @apply bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
+        }
+        
+        .input-custom {
+            @apply w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-300 outline-none;
+        }
+        .modal-open {
+            overflow: hidden;
+        }
+    </style>
 </head>
-<body>
-
-    <header class="sticky-top">
-        <nav class="bg-gradient-to-r from-[#A8FFF5] via-[#A8DDFF] to-[#A8B2FF] shadow-lg border-b border-white/50 backdrop-blur-md">
+<body class="font-inter bg-gradient-to-br from-slate-50 via-cyan-50 to-blue-50 min-h-screen">
+    <!-- Header -->
+    <header class="sticky top-0 z-50">
+        <nav class="bg-gradient-to-r from-[#A8FFF5] via-[#A8DDFF] to-[#A8B2FF] shadow-xl border-b border-white/50 backdrop-blur-md">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center h-20">
-                    <div class="flex-shrink-0 flex items-center space-x-3 group cursor-pointer">
-                        <a href="index.html" class="flex items-center space-x-3">
-                            <img src="img/index/header/llama.png" alt="Llama Tours" class="h-14 w-auto object-contain flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                            <span class="text-slate-900 font-poppins font-bold text-2xl hidden sm:block group-hover:text-slate-700 transition-colors duration-300">LlamaTours</span>
+                    <!-- Logo -->
+                    <a href="index.html" class="flex items-center space-x-3 group">
+                        <img src="img/index/header/llama.png" alt="Llama Tours" class="h-14 w-auto object-contain flex-shrink-0 group-hover:scale-110 transition-transform duration-300 animate-float">
+                        <span class="font-poppins font-bold text-2xl text-slate-900 hidden sm:block group-hover:text-cyan-600 transition-colors duration-300">LlamaTours</span>
+                    </a>
+                    <!-- Desktop Menu -->
+                    <div class="hidden md:flex items-center space-x-2">
+                        <a href="index.html" class="px-4 py-2 rounded-lg text-sm font-semibold text-slate-900 hover:bg-white/50 hover:text-cyan-600 transition-all duration-300">
+                            <i class="bi bi-house-door mr-1"></i>Inicio
+                        </a>
+                        <a href="buscador.html" class="px-4 py-2 rounded-lg text-sm font-semibold text-slate-900 hover:bg-white/50 hover:text-cyan-600 transition-all duration-300">
+                            <i class="bi bi-compass mr-1"></i>Viajes
+                        </a>
+                        <a href="contactanos.html" class="px-4 py-2 rounded-lg text-sm font-semibold text-slate-900 hover:bg-white/50 hover:text-cyan-600 transition-all duration-300">
+                            <i class="bi bi-chat-dots mr-1"></i>Contacto
+                        </a>
+                        <a href="SobreNosotros.html" class="px-4 py-2 rounded-lg text-sm font-semibold text-slate-900 hover:bg-white/50 hover:text-cyan-600 transition-all duration-300">
+                            <i class="bi bi-info-circle mr-1"></i>Nosotros
                         </a>
                     </div>
-
-                    <div class="hidden md:flex items-center space-x-1">
-                        <a href="index.html" class="navbar-link px-3 py-2 rounded-md text-sm font-inter font-semibold text-slate-900 hover:text-slate-700 transition-colors duration-300 border-b-2 border-transparent hover:border-slate-700">
-                            <i class="bi bi-house mr-1"></i>Inicio
-                        </a>
-                        <a href="buscador.html" class="navbar-link px-3 py-2 rounded-md text-sm font-inter font-semibold text-slate-900 hover:text-slate-700 transition-colors duration-300 border-b-2 border-transparent hover:border-slate-700">
-                            <i class="bi bi-map mr-1"></i>Viajes
-                        </a>
-                        <a href="contactanos.html" class="navbar-link px-3 py-2 rounded-md text-sm font-inter font-semibold text-slate-900 hover:text-slate-700 transition-colors duration-300 border-b-2 border-transparent hover:border-slate-700">
-                            <i class="bi bi-chat mr-1"></i>Contacto
-                        </a>
-                        <a href="SobreNosotros.html" class="navbar-link px-3 py-2 rounded-md text-sm font-inter font-semibold text-slate-900 hover:text-slate-700 transition-colors duration-300 border-b-2 border-transparent hover:border-slate-700">
-                            <i class="bi bi-info-circle mr-1"></i>Sobre Nosotros
-                        </a>
-                    </div>
-
+                    <!-- Login Button -->
                     <div class="hidden md:block">
-                        <button id="btnIngresar" class="bg-white/95 text-slate-900 px-6 py-2 rounded-lg font-inter font-semibold border border-white/70 shadow-sm hover:bg-slate-900 hover:text-white hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center space-x-2" data-bs-toggle="modal" data-bs-target="#loginUsuarios">
+                        <button onclick="openModal('loginModal')" class="bg-white/90 text-slate-900 px-6 py-2.5 rounded-xl font-semibold border border-white/70 shadow-md hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 hover:text-white hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center space-x-2">
                             <i class="bi bi-box-arrow-in-right"></i>
                             <span>Ingresar</span>
                         </button>
                     </div>
-
-                    <div class="md:hidden">
-                        <button id="mobileMenuBtn" class="text-slate-900 p-2 rounded-md hover:bg-white/50 transition-all duration-300">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                            </svg>
-                        </button>
-                    </div>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuBtn" class="md:hidden text-slate-900 p-2 rounded-lg hover:bg-white/50 transition-all duration-300" aria-label="Abrir menu" type="button">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
-
+            <!-- Mobile Menu -->
             <div id="mobileMenu" class="hidden md:hidden bg-gradient-to-b from-[#A8FFF5] via-[#A8DDFF] to-[#A8B2FF] border-t border-white/50">
-                <div class="px-2 pt-2 pb-3 space-y-1">
-                    <a href="index.html" class="block px-3 py-2 rounded-md text-slate-900 font-inter font-semibold hover:bg-white/60 transition-all duration-300">
-                        <i class="bi bi-house mr-2"></i>Inicio
+                <div class="px-4 py-4 space-y-2">
+                    <a href="index.html" class="block px-4 py-3 rounded-xl text-slate-900 font-semibold hover:bg-white/60 hover:text-cyan-600 transition-all duration-300">
+                        <i class="bi bi-house-door mr-2"></i>Inicio
                     </a>
-                    <a href="buscador.html" class="block px-3 py-2 rounded-md text-slate-900 font-inter font-semibold hover:bg-white/60 transition-all duration-300">
-                        <i class="bi bi-map mr-2"></i>Viajes
+                    <a href="buscador.html" class="block px-4 py-3 rounded-xl text-slate-900 font-semibold hover:bg-white/60 hover:text-cyan-600 transition-all duration-300">
+                        <i class="bi bi-compass mr-2"></i>Viajes
                     </a>
-                    <a href="contactanos.html" class="block px-3 py-2 rounded-md text-slate-900 font-inter font-semibold hover:bg-white/60 transition-all duration-300">
-                        <i class="bi bi-chat mr-2"></i>Contacto
+                    <a href="contactanos.html" class="block px-4 py-3 rounded-xl text-slate-900 font-semibold hover:bg-white/60 hover:text-cyan-600 transition-all duration-300">
+                        <i class="bi bi-chat-dots mr-2"></i>Contacto
                     </a>
-                    <a href="SobreNosotros.html" class="block px-3 py-2 rounded-md text-slate-900 font-inter font-semibold hover:bg-white/60 transition-all duration-300">
-                        <i class="bi bi-info-circle mr-2"></i>Sobre Nosotros
+                    <a href="SobreNosotros.html" class="block px-4 py-3 rounded-xl text-slate-900 font-semibold hover:bg-white/60 hover:text-cyan-600 transition-all duration-300">
+                        <i class="bi bi-info-circle mr-2"></i>Nosotros
                     </a>
-                    <button id="btnIngresarMobile" class="w-full text-left px-3 py-2 rounded-md bg-white/95 text-slate-900 font-inter font-semibold border border-white/70 shadow-sm hover:bg-slate-900 hover:text-white hover:shadow-lg transition-all duration-300 mt-2" data-bs-toggle="modal" data-bs-target="#loginUsuarios">
+                    <button onclick="openModal('loginModal')" class="w-full text-left px-4 py-3 rounded-xl bg-white/90 text-slate-900 font-semibold shadow-md hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-500 hover:text-white transition-all duration-300 mt-2">
                         <i class="bi bi-box-arrow-in-right mr-2"></i>Ingresar
                     </button>
                 </div>
             </div>
         </nav>
     </header>
-
-    <form class="modal fade border border-secondary rounded" tabindex="-1" id="loginUsuarios">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Iniciar Sesión</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex">
-                    <form>
-                        <div class="d-flex flex-column align-items-center justify-content-center">
-                            <input type="email" class="form-control mb-2" id="loginGmail" placeholder="Correo Electronico" required>
-                            <input type="password" class="form-control" id="loginContrasenia" placeholder="Password" required>
-                            <a href="#">Olvidé mi contraseña</a>
-                            <button class="btn btn-primary" type="submit" data-bs-dismiss="modal">Ingresar</button>
-                        </div>
-                        <img class="w-50" src="img/loginAndRegister/llamitaLogin.gif" alt="llama">
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <label class="form-label">¿Nuevo usuario?</label>
-                    <a role="button" data-bs-toggle="modal" data-bs-target="#registroUsuarios">Regístrate</a>
-                </div>
-            </div>
-        </div>
-    </form>
-
-    <form class="modal fade border border-secondary rounded" tabindex="-1" id="registroUsuarios">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Iniciar Sesión</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex">
-                    <form>
-                        <div class="d-flex flex-column align-items-center justify-content-center">
-                            <input type="text" class="form-control mb-2" id="usrGmail" placeholder="Correo Electrónico">
-                            <input type="text" class="form-control mb-2" id="usrName" placeholder="Nombres y Apellidos">
-                            <input type="text" class="form-control mb-2" id="usrPhone" placeholder="Numero de Celular">
-                            <input type="password" class="form-control mb-2" id="usrContrasenia" placeholder="Ingrese su contraseña">
-                            <button class="btn btn-primary" type="submit" data-bs-dismiss="modal">Registrarse</button>
-                        </div>
-                        <img class="w-50" src="img/loginAndRegister/llamitaLogin.gif" alt="llama">
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <label class="form-label">¿Ya registrado?</label>
-                    <a role="button" data-bs-toggle="modal" data-bs-target="#loginUsuarios">Ya soy usuario</a>
-                </div>
-            </div>
-        </div>
-    </form>
-
-    <main>
-    <div class="container gap-4 d-flex flex-column flex-md-row mb-4">
-        <article class="col-12 col-md-9" aria-label="Detalles del viaje">
-            <div class="card-group flex-column">
-                <section class="gallery" aria-label="Galería del viaje">
-                  <!-- Imagen Principal -->
-                  <div class="gallery-main">
-                    <img id="featured" class="gallery-featured" 
-                         src="img/index/carusel/destino-MacchuPicchu.jpg" alt="Imagen principal del viaje">
-                    <span class="gallery-indicator">1 de 4</span>
-                  </div>
-                  
-                  <!-- Thumbnails -->
-                  <div class="gallery-thumbnails">
-                    <img class="gallery-thumbnail" src="img/index/carusel/destino-MacchuPicchu.jpg" 
-                         alt="Miniatura 1" onclick="changeImage(this)">
-                    <img class="gallery-thumbnail" src="img/index/carusel/destino-MacchuPicchu.jpg" 
-                         alt="Miniatura 2" onclick="changeImage(this)">
-                    <img class="gallery-thumbnail" src="img/index/carusel/destino-MacchuPicchu.jpg" 
-                         alt="Miniatura 3" onclick="changeImage(this)">
-                    <img class="gallery-thumbnail" src="img/index/carusel/destino-MacchuPicchu.jpg" 
-                         alt="Miniatura 4" onclick="changeImage(this)">
-                  </div>
-                  
-                  <!-- Controles -->
-                  <div class="gallery-controls">
-                    <button class="btn-nav" onclick="previousImage()" aria-label="Imagen anterior">‹</button>
-                    <button class="btn-nav" onclick="nextImage()" aria-label="Imagen siguiente">›</button>
-                  </div>
-                </section>
-                <section class="card flex-column" aria-label="Descripcion del tour">
-                    <h2 class="fs-1">Detalles del Tours: </h2>
-                    <p id="descripcionViaje">Descripción del viaje...</p>
-                    <p id="descripcionViaje-2">Descripción 2......</p>
-                    <p id="descripcionViaje-3">Descripción 3......</p>
-                </section>
-                <section class="card flex-column" aria-label="Itinerario de expedicion">
-                    <h2 class="fs-1">Expedición: </h2>
-                    <div class="">
-                        <h3>Día 1</h3>
-                        <p id="dia-1">Dia1.......</p>
-                    </div>
-                    <div class="">
-                        <h3>Día 2</h3>
-                        <p id="dia-2">dia 2........</p>
-                    </div>
-                </section>
-                <section class="card flex-column" aria-label="Lista de equipaje recomendado">
-                    <h2 class="fs-1">Recomendamos llevar:</h2> <br>
-                    <div id="listaEquipaje">
-                        <!-- Aquí se insertará la lista -->
-                    </div>
-                </section>
-            </div>
-        </article>
-    
-        <aside class="booking-panel col-12 col-md-3" aria-label="Panel de reserva">
-            <!-- N° de Viajeros -->
-            <section class="booking-section" aria-label="Cantidad de viajeros">
-                <h3>N° de Viajeros</h3>
-                <div class="travelers-counter">
-                    <button class="btn-counter" id="resta" aria-label="Reducir cantidad de viajeros">−</button>
-                    <input type="number" class="travelers-input" id="travelers" value="1" readonly>
-                    <button class="btn-counter" id="suma" aria-label="Aumentar cantidad de viajeros">+</button>
-                </div>
-            </section>
-
-            <!-- Selector de Fecha -->
-            <section class="booking-section" aria-label="Selección de fecha de viaje">
-                <h3>Fecha de Viaje</h3>
-                <input type="text" id="date" class="form-input flatpickr-input" 
-                       placeholder="DD-MM-YYYY" required>
-            </section>
-
-            <!-- Resumen (Ticket) -->
-            <section class="booking-section booking-ticket" aria-label="Resumen del viaje">
-                <h3>Resumen</h3>
-                <div class="ticket-header">
-                    <div>
-                        <div class="ticket-title" id="tituloTicket">Viaje...</div>
-                        <div class="ticket-price">S/. <span id="precioViaje">0.00</span></div>
-                    </div>
-                    <div class="ticket-logo">
-                        <img src="img/index/header/llama.png" alt="Logo" width="40">
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 z-[60] hidden" aria-modal="true" role="dialog">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" onclick="closeModal('loginModal')"></div>
+        
+        <!-- Modal Content -->
+        <div class="fixed inset-0 flex items-center justify-center p-4">
+            <div class="bg-white rounded-3xl shadow-2xl border-0 overflow-hidden max-w-md w-full transform transition-all animate-scale-in relative">
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-cyan-500 to-blue-500 p-6">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-white font-poppins font-bold text-xl">¡Bienvenido de nuevo!</h2>
+                        <button onclick="closeModal('loginModal')" class="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
                     </div>
                 </div>
-                <div class="ticket-detail">
-                    Viajeros: <strong id="viajerosDisplay">1</strong>
-                </div>
-            </section>
-
-            <!-- Botón Reservar -->
-            <button id="reservarButton" class="btn btn-primary btn-block" 
-                    disabled onclick="abrirModal()" aria-label="Abrir formulario de reserva">
-                Reservar
-            </button>
-        </aside>
-    </div>
-    </main>
-
-    <footer class="bg-dark text-center">
-            <div>
-                <img src="img/index/header/llama.png" width="120px" alt="Logo de LlamaTours">
-            </div>
-            <div class="card-group">
-                <div class="col-md-6">
-                    <div class="card bg-dark">
-                        <section class="card-body text-start" aria-label="Informacion de la empresa">
-                            <h2 class="h4 text-warning">Llama Tours</h2>
-                            <p class="text-secondary">Somos una destacada empresa de turismo con 15 años de experiencia en el mercado, especializada en ofrecer diversos viajes guiados al interior del Perú. Reconocida por Tripadvisor con el premio "Travelers' Choice Experiences" en el año 2019 por su excelencia en el servicio al cliente, la empresa se enorgullece de haber sido destacada en múltiples ocasiones por su compromiso con la calidad y la autenticidad.</p>
-                        </section>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card bg-dark">
-                        <nav class="card-body text-start" aria-label="Links rapidos">
-                            <h2 class="h4 text-warning">Links Rapidos</h2>
-                            <ul class="list-group">
-                                <li><a class="link-secondary link-underline-opacity-0" href="index.html">Inicio</a></li>
-                                <li><a class="link-secondary link-underline-opacity-0" href="buscador.html">Viajes</a></li>
-                                <li><a class="link-secondary link-underline-opacity-0" href="contactanos.html">Contacto</a></li>
-                                <li><a class="link-secondary link-underline-opacity-0" href="../html/SobreNosotros.html">Sobre Nosotros</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card bg-dark">
-                        <section class="card-body text-start" aria-label="Datos de contacto">
-                            <h2 class="h4 text-warning">Contactanos</h2>
-                            <ul class="list-group">
-                                <li><a class="link-secondary link-underline-opacity-0" href="error.html"><img src="img/iconos/flecha-regreso.png" width="20px" alt="Telefono">+51 980837493</a></li>
-                                <li><a class="link-secondary link-underline-opacity-0" href="error.html"><img src="img/iconos/flecha-regreso.png" width="20px" alt="Correo electronico">LlamaTours@viajes.com</a></li>
-                                <li><a class="link-secondary link-underline-opacity-0" href="error.html"><img src="img/iconos/flecha-regreso.png" width="20px" alt="Ubicacion">Av. 28 de Julio - La Victoria - Lima</a></li>
-                            </ul>
-                        </section>
-                    </div>
-                </div>
-            </div>
-            <p class="text-secondary mb-0">Copyright &copy; 2024 All Rights Reserved by LlamaTours</p>
-    </footer>
-
-
-    <div class="backgroundPago" id="pagar" role="dialog" aria-modal="true" aria-labelledby="tituloModalReserva" aria-hidden="true" tabindex="-1">
-        <div class="mainModal">
-
-            <div class="headModal">
-                <div class="imghead">
-                    <img src="img/index/header/llama.png" width="120px" alt="Logo de LlamaTours">
-                </div>
-                <div class="exitHead">
-                    <button onclick="cerrarPago()" aria-label="Cerrar ventana de reserva"><img src="img/iconos/flecha-regreso.png" width="15px" alt=""></button>
-                </div>
-            </div>
-            <div class="espaciador"></div>
-            <div class="mainContenedor" >
                 
-                <div class="contenedorDatos" id="contacto">
-                    <div class="titulomodal">
-                        <h2 id="tituloModalReserva">Contacto de Viajero</h2>
+                <!-- Body -->
+                <div class="p-8">
+                    <div class="flex flex-col items-center">
+                        <img class="w-40 h-40 object-contain mb-6 animate-float" src="img/loginAndRegister/llamitaLogin.gif" alt="Llama">
+                        <form class="w-full space-y-4" onsubmit="handleLogin(event)">
+                            <div>
+                                <input type="email" class="input-custom" id="loginGmail" placeholder="Correo Electrónico" required>
+                            </div>
+                            <div>
+                                <input type="password" class="input-custom" id="loginContrasenia" placeholder="Contraseña" required>
+                            </div>
+                            <a href="#" class="text-sm text-cyan-600 hover:text-cyan-700 font-medium block text-center">¿Olvidaste tu contraseña?</a>
+                            <button type="submit" class="btn-primary-custom w-full">Ingresar</button>
+                        </form>
                     </div>
-                    <div class="contenedor">
-                        <div class="mainDatosdeContacto">
-                            <div class="datosViajeros">
-                                <form id="formModal" action="#" method="post">
-                                    <div class="formDatosViajeros">
-                                        <label for="nombre">Nombres:</label><br>
-                                        <input type="text" id="nombre" name="nombre" required>
+                </div>
+                
+                <!-- Footer -->
+                <div class="border-t border-gray-100 p-6 bg-gray-50 text-center">
+                    <p class="text-gray-600 font-medium mb-2">¿Nuevo usuario?</p>
+                    <button onclick="switchModal('loginModal', 'registroModal')" class="text-cyan-600 hover:text-cyan-700 font-semibold transition-colors duration-300">Regístrate aquí</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Registro Modal -->
+    <div id="registroModal" class="fixed inset-0 z-[60] hidden" aria-modal="true" role="dialog">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" onclick="closeModal('registroModal')"></div>
+        
+        <!-- Modal Content -->
+        <div class="fixed inset-0 flex items-center justify-center p-4">
+            <div class="bg-white rounded-3xl shadow-2xl border-0 overflow-hidden max-w-md w-full transform transition-all animate-scale-in relative">
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-purple-500 to-pink-500 p-6">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-white font-poppins font-bold text-xl">¡Crea tu cuenta!</h2>
+                        <button onclick="closeModal('registroModal')" class="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Body -->
+                <div class="p-8">
+                    <div class="flex flex-col items-center">
+                        <img class="w-40 h-40 object-contain mb-6 animate-float" src="img/loginAndRegister/llamitaLogin.gif" alt="Llama">
+                        <form class="w-full space-y-3" onsubmit="handleRegistro(event)">
+                            <input type="text" class="input-custom" id="usrGmail" placeholder="Correo Electrónico" required>
+                            <input type="text" class="input-custom" id="usrName" placeholder="Nombres y Apellidos" required>
+                            <input type="tel" class="input-custom" id="usrPhone" placeholder="Número de Celular" required>
+                            <input type="password" class="input-custom" id="usrContrasenia" placeholder="Contraseña" required>
+                            <button type="submit" class="btn-primary-custom w-full mt-4">Registrarse</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Footer -->
+                <div class="border-t border-gray-100 p-6 bg-gray-50 text-center">
+                    <p class="text-gray-600 font-medium mb-2">¿Ya tienes cuenta?</p>
+                    <button onclick="switchModal('registroModal', 'loginModal')" class="text-purple-600 hover:text-purple-700 font-semibold transition-colors duration-300">Inicia sesión</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Main Content Area -->
+            <div class="lg:col-span-2 space-y-8">
+                
+                <!-- Gallery Section -->
+                <section class="bg-white rounded-3xl shadow-xl overflow-hidden card-hover">
+                    <div class="relative">
+                        <div class="gallery-main relative overflow-hidden">
+                            <img id="featured" class="gallery-featured w-full h-[400px] object-cover gallery-image" 
+                                 src="img/index/carusel/destino-MacchuPicchu.jpg" alt="Imagen principal del viaje">
+                            <span class="absolute bottom-4 left-4 bg-black/60 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-semibold gallery-indicator" aria-live="polite">1 de 4</span>
+                        </div>
+                        <div class="gallery-thumbnails flex gap-3 p-4 bg-gray-50">
+                            <img class="gallery-thumbnail w-24 h-24 object-cover rounded-xl cursor-pointer ring-2 ring-cyan-500 transition-all duration-300 hover:ring-4 hover:scale-105" 
+                                 src="img/index/carusel/destino-MacchuPicchu.jpg" alt="Machu Picchu" data-gallery-index="0" onclick="changeImage(0)">
+                            <img class="gallery-thumbnail w-24 h-24 object-cover rounded-xl cursor-pointer ring-2 ring-transparent transition-all duration-300 hover:ring-4 hover:ring-cyan-500 hover:scale-105" 
+                                 src="img/index/carusel/destino-colca.jpg" alt="Cañón del Colca" data-gallery-index="1" onclick="changeImage(1)">
+                            <img class="gallery-thumbnail w-24 h-24 object-cover rounded-xl cursor-pointer ring-2 ring-transparent transition-all duration-300 hover:ring-4 hover:ring-cyan-500 hover:scale-105" 
+                                 src="img/index/carusel/destino-laguna69.jpg" alt="Laguna 69" data-gallery-index="2" onclick="changeImage(2)">
+                            <img class="gallery-thumbnail w-24 h-24 object-cover rounded-xl cursor-pointer ring-2 ring-transparent transition-all duration-300 hover:ring-4 hover:ring-cyan-500 hover:scale-105" 
+                                 src="img/index/carusel/destino-huacachina.jpg" alt="Huacachina" data-gallery-index="3" onclick="changeImage(3)">
+                        </div>
+                        <button type="button" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm hover:bg-white text-slate-900 w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-2xl font-bold transition-all duration-300 hover:scale-110" onclick="previousImage()" aria-label="Imagen anterior">‹</button>
+                        <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm hover:bg-white text-slate-900 w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-2xl font-bold transition-all duration-300 hover:scale-110" onclick="nextImage()" aria-label="Imagen siguiente">›</button>
+                    </div>
+                </section>
+                <!-- Details Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Tour Details -->
+                    <article class="bg-white rounded-3xl shadow-xl p-8 card-hover md:col-span-2">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="font-poppins font-bold text-2xl text-slate-900">Detalles del Tour</h2>
+                        </div>
+                        <div class="prose prose-cyan max-w-none">
+                            <p id="descripcionViaje" class="text-gray-600 leading-relaxed mb-4">Descripción del viaje...</p>
+                            <p id="descripcionViaje-2" class="text-gray-600 leading-relaxed mb-4">Descripción 2......</p>
+                            <p id="descripcionViaje-3" class="text-gray-600 leading-relaxed">Descripción 3......</p>
+                        </div>
+                    </article>
+                    <!-- Itinerary -->
+                    <article class="bg-white rounded-3xl shadow-xl p-8 card-hover">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="font-poppins font-bold text-xl text-slate-900">Itinerario</h2>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="relative pl-6 border-l-4 border-cyan-500">
+                                <div class="absolute -left-3 top-0 w-6 h-6 bg-cyan-500 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-xs font-bold">1</span>
+                                </div>
+                                <h3 class="font-semibold text-lg text-slate-900 mb-2">Día 1</h3>
+                                <p id="dia-1" class="text-gray-600 text-sm">Dia 1.......</p>
+                            </div>
+                            <div class="relative pl-6 border-l-4 border-purple-500">
+                                <div class="absolute -left-3 top-0 w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-xs font-bold">2</span>
+                                </div>
+                                <h3 class="font-semibold text-lg text-slate-900 mb-2">Día 2</h3>
+                                <p id="dia-2" class="text-gray-600 text-sm">dia 2........</p>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- Key Data -->
+                    <article class="bg-white rounded-3xl shadow-xl p-8 card-hover">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="font-poppins font-bold text-xl text-slate-900">Datos Clave</h2>
+                        </div>
+                        <ul class="space-y-4">
+                            <li class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                                <span class="text-gray-600 flex items-center">
+                                    <svg class="w-5 h-5 mr-2 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    Duración
+                                </span>
+                                <strong class="text-slate-900 font-semibold">2 días / 1 noche</strong>
+                            </li>
+                            <li class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                                <span class="text-gray-600 flex items-center">
+                                    <svg class="w-5 h-5 mr-2 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    </svg>
+                                    Salida
+                                </span>
+                                <strong class="text-slate-900 font-semibold">Huaraz</strong>
+                            </li>
+                            <li class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                                <span class="text-gray-600 flex items-center">
+                                    <svg class="w-5 h-5 mr-2 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                    Altitud máx
+                                </span>
+                                <strong class="text-slate-900 font-semibold">4,000 msnm</strong>
+                            </li>
+                            <li class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                                <span class="text-gray-600 flex items-center">
+                                    <svg class="w-5 h-5 mr-2 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                    </svg>
+                                    Nivel
+                                </span>
+                                <strong class="text-slate-900 font-semibold">Moderado</strong>
+                            </li>
+                        </ul>
+                    </article>
+                    <!-- Packing List -->
+                    <article class="bg-white rounded-3xl shadow-xl p-8 card-hover md:col-span-2">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-teal-500 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="font-poppins font-bold text-xl text-slate-900">Recomendamos Llevar</h2>
+                        </div>
+                        <div id="listaEquipaje" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                            <!-- Items se insertarán aquí -->
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <!-- Booking Sidebar -->
+            <aside class="lg:col-span-1">
+                <div class="bg-white rounded-3xl shadow-xl p-8 sticky top-28 space-y-6">
+                    
+                    <!-- Travelers -->
+                    <section>
+                        <h3 class="font-poppins font-bold text-lg text-slate-900 mb-4 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                            N° de Viajeros
+                        </h3>
+                        <div class="flex items-center justify-center space-x-4">
+                            <button type="button" class="btn-counter w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-xl font-bold text-xl shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center" id="resta" aria-label="Reducir">−</button>
+                            <input type="number" class="travelers-input w-20 h-12 text-center text-2xl font-bold text-slate-900 bg-gray-100 rounded-xl border-2 border-transparent focus:border-cyan-500 outline-none" id="travelers" value="1" readonly>
+                            <button type="button" class="btn-counter w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-xl font-bold text-xl shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center" id="suma" aria-label="Aumentar">+</button>
+                        </div>
+                    </section>
+                    <!-- Date Selection -->
+                    <section>
+                        <h3 class="font-poppins font-bold text-lg text-slate-900 mb-4 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            Fecha de Viaje
+                        </h3>
+                        <input type="text" id="date" class="input-custom flatpickr-input cursor-pointer" placeholder="Selecciona una fecha" required>
+                    </section>
+                    <!-- Summary -->
+                    <section class="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-2xl p-6 border border-cyan-100">
+                        <h3 class="font-poppins font-bold text-lg text-slate-900 mb-4 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            Resumen
+                        </h3>
+                        <div class="ticket-header flex items-center justify-between mb-4 pb-4 border-b border-cyan-200">
+                            <div>
+                                <div class="ticket-title font-semibold text-slate-900 mb-1" id="tituloTicket">Viaje...</div>
+                                <div class="ticket-price text-2xl font-bold text-cyan-600">S/. <span id="precioViaje">0.00</span></div>
+                            </div>
+                            <div class="ticket-logo">
+                                <img src="img/index/header/llama.png" alt="Logo" width="50" class="animate-float">
+                            </div>
+                        </div>
+                        <div class="ticket-detail flex items-center justify-between text-gray-600">
+                            <span>Viajeros:</span>
+                            <strong id="viajerosDisplay" class="text-slate-900 font-bold text-lg">1</strong>
+                        </div>
+                    </section>
+                    <!-- Book Button -->
+                    <button id="reservarButton" class="btn-primary-custom w-full text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100" 
+                            disabled onclick="abrirModal()" aria-label="Abrir formulario de reserva">
+                        <svg class="w-6 h-6 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                        Reservar Ahora
+                    </button>
+                    <!-- Trust Badges -->
+                    <div class="pt-4 border-t border-gray-100">
+                        <div class="flex items-center justify-center space-x-4 text-xs text-gray-500">
+                            <div class="flex items-center space-x-1">
+                                <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                </svg>
+                                <span>Pago Seguro</span>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                </svg>
+                                <span>5.0 Rating</span>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                                </svg>
+                                <span>Soporte 24/7</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Brand -->
+                <div class="text-center md:text-left">
+                    <img src="img/index/header/llama.png" width="100px" alt="LlamaTours" class="mx-auto md:mx-0 mb-4 animate-float">
+                    <h3 class="font-poppins font-bold text-xl text-cyan-400 mb-2">Llama Tours</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">15 años creando experiencias inolvidables en el Perú. Reconocidos por Tripadvisor 2019.</p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-poppins font-bold text-lg text-cyan-400 mb-4">Links Rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-cyan-400 transition-colors duration-300 flex items-center">
+                            <svg class="w-3 h-3 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Inicio
+                        </a></li>
+                        <li><a href="buscador.html" class="text-gray-400 hover:text-cyan-400 transition-colors duration-300 flex items-center">
+                            <svg class="w-3 h-3 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Viajes
+                        </a></li>
+                        <li><a href="contactanos.html" class="text-gray-400 hover:text-cyan-400 transition-colors duration-300 flex items-center">
+                            <svg class="w-3 h-3 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Contacto
+                        </a></li>
+                        <li><a href="SobreNosotros.html" class="text-gray-400 hover:text-cyan-400 transition-colors duration-300 flex items-center">
+                            <svg class="w-3 h-3 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Nosotros
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-poppins font-bold text-lg text-cyan-400 mb-4">Contáctanos</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center space-x-3 text-gray-400 hover:text-cyan-400 transition-colors duration-300">
+                            <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                            </svg>
+                            <span>+51 980837493</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-gray-400 hover:text-cyan-400 transition-colors duration-300">
+                            <svg class="w-5 h-5 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <span>LlamaTours@viajes.com</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-gray-400 hover:text-cyan-400 transition-colors duration-300">
+                            <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span>Av. 28 de Julio - La Victoria - Lima</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Social -->
+                <div>
+                    <h4 class="font-poppins font-bold text-lg text-cyan-400 mb-4">Síguenos</h4>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-gradient-to-br hover:from-cyan-500 hover:to-blue-500 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-gradient-to-br hover:from-pink-500 hover:to-purple-500 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-gradient-to-br hover:from-red-500 hover:to-orange-500 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 text-center">
+                <p class="text-gray-400 text-sm">© 2024 LlamaTours. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Payment Modal -->
+    <div id="pagarModal" class="fixed inset-0 z-[70] hidden" role="dialog" aria-modal="true">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity" onclick="cerrarPago()"></div>
+        
+        <!-- Modal Content -->
+        <div class="fixed inset-0 flex items-center justify-center p-4 overflow-y-auto">
+            <div class="bg-white rounded-3xl shadow-2xl max-w-4xl w-full mx-4 overflow-hidden transform transition-all animate-scale-in my-8">
+                
+                <!-- Modal Header -->
+                <div class="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 p-6 flex items-center justify-between">
+                    <img src="img/index/header/llama.png" width="100px" alt="LlamaTours" class="animate-float">
+                    <button onclick="cerrarPago()" class="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110" aria-label="Cerrar">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="p-8">
+                    <!-- Contact Section -->
+                    <div id="contacto">
+                        <div class="mb-6">
+                            <h2 class="font-poppins font-bold text-2xl text-slate-900 flex items-center">
+                                <svg class="w-7 h-7 mr-3 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                                <span id="tituloModalReserva">Contacto del Viajero</span>
+                            </h2>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <!-- Form -->
+                            <div class="lg:col-span-2">
+                                <form id="formModal" class="space-y-4">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-2">Nombres</label>
+                                            <input type="text" id="nombre" name="nombre" class="input-custom" required>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-2">Apellidos</label>
+                                            <input type="text" id="apellido" name="apellido" class="input-custom" required>
+                                        </div>
                                     </div>
-                                    <div class="formDatosViajeros">
-                                        <label for="apellido">Apellidos:</label> <br>
-                                        <input type="text" id="apellido" name="apellido" required>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-gray-700 mb-2">Correo Electrónico</label>
+                                        <input type="email" id="correo" name="correo" class="input-custom" required>
                                     </div>
-                                    <div class="formDatosViajeros">
-                                        <label for="correo">Correo Electrónico:</label> <br>
-                                        <input type="email" id="correo" name="correo" required>
-                                    </div>
-                                    <div class="formDatosViajeros">
-                                        <label for="wsp">Número de WhatsApp:</label> <br>
-                                        <input type="tel" id="wsp" name="wsp" required>
-                                    </div>
-                                    <div class="formDatosViajeros">
-                                        <label for="fecha-nacimiento">Fecha de Nacimiento:</label> <br>
-                                        <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" required>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-2">WhatsApp</label>
+                                            <input type="tel" id="wsp" name="wsp" class="input-custom" required>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-2">Fecha de Nacimiento</label>
+                                            <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" class="input-custom" required>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
-                        </div>
-
-                        <div class="mainImporte">
-                            <div class="importe">
-                                <div class="headImporte">
-                                    <div class="nombreCompra">
-                                        <p id="viajeModal"> Nombre de Viaje que se está comprando RESPECTIVAMENTE</p>
-                                        <p id="viajerosModal">n° de viajes</p>
+                            
+                            <!-- Summary -->
+                            <div class="lg:col-span-1">
+                                <div class="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-2xl p-6 border border-cyan-100">
+                                    <div class="mb-4 pb-4 border-b border-cyan-200">
+                                        <p id="viajeModal" class="font-semibold text-slate-900 mb-2 text-sm">Nombre del Viaje</p>
+                                        <p id="viajerosModal" class="text-xs text-gray-600 mb-3">1 viajero</p>
+                                        <p id="precioViajeModal" class="text-2xl font-bold text-cyan-600">S/. 00.00</p>
                                     </div>
-                                    <div class="subTotal">
-                                        <p id="precioViajeModal">S/. 00.00</p>
+                                    <div class="mb-4">
+                                        <label class="block text-xs font-semibold text-gray-600 mb-2">Código Promocional</label>
+                                        <div class="flex space-x-2">
+                                            <input type="text" id="cupon" class="input-custom text-sm py-2" placeholder="Ingresa tu cupón">
+                                            <button disabled class="px-4 py-2 bg-gray-200 text-gray-500 rounded-xl text-sm font-semibold cursor-not-allowed">Aplicar</button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="espaciador"></div>
-                                <div class="cuponImporte">
-                                    <div class="cupon">
-                                        <label for="cupon">Promo Cupon</label><br>
-                                        <input type="text" name="cupon" id="cupon">
-                                        <button disabled> Aplicar</button>
+                                    <div class="flex justify-between py-3 border-t border-cyan-200">
+                                        <span class="text-gray-600">Subtotal</span>
+                                        <p id="subTotalModal" class="font-semibold text-slate-900">S/. 00.00</p>
                                     </div>
-                                </div>
-                                <div class="espaciador"></div>
-                                <div class="subTotal">
-                                    <p>Subtotal</p>
-                                    <p id="subTotalModal">S/. 00.00</p> 
-                                </div>
-                                <div class="espaciador"></div>
-                                <div class="totalModal">
-                                    <p>Total(Soles)</p>
-                                    <p id="importeModal">S/. 00.00</p>
+                                    <div class="flex justify-between py-4 border-t border-cyan-200 mt-2">
+                                        <span class="font-bold text-gray-700">Total</span>
+                                        <p id="importeModal" class="text-xl font-bold text-cyan-600">S/. 00.00</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        
+                        <div class="mt-8 flex justify-end">
+                            <button onclick="continuar()" class="btn-primary-custom px-8 py-3">
+                                Continuar <svg class="w-5 h-5 inline ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
-                    <div class="btnContinuar">
-                        <button onclick="continuar()"> Continuar</button>
-                    </div>
-                </div>
     
-                <div class="mainContenedorPago">
-                    <div class="mainPago" id="Pago">
-                        <div class="return">
-                            <button onclick="regresarADatos()" aria-label="Regresar a los datos del viajero"><img src="img/iconos/flecha-regreso.png" width="15px" alt="">Regresar</button>
+                    <!-- Payment Section (Hidden by default) -->
+                    <div id="Pago" class="hidden">
+                        <div class="mb-6">
+                            <button onclick="regresarADatos()" class="flex items-center text-cyan-600 hover:text-cyan-700 font-semibold transition-colors duration-300">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                                </svg>
+                                Regresar
+                            </button>
                         </div>
-                        <div class="tajetaDatos">
-                            <h2>OA</h2>
-                        </div>
-                        <div class="detalleYtarjeta">
+                        <div class="text-center py-12">
+                            <div class="w-20 h-20 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="font-poppins font-bold text-xl text-slate-900 mb-2">Método de Pago</h3>
+                            <p class="text-gray-600">Próximamente disponible</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script src="bootstrap-5.3.5-dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/navbar.js"></script>
-    <script src="js/login.js"></script>
-    <script src="js/usuarios.js"></script>
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="js/viaje.js"></script>
+    
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        });
+        // Modal functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.add('hidden');
+            document.body.classList.remove('modal-open');
+            document.body.style.overflow = '';
+        }
+        function switchModal(fromId, toId) {
+            closeModal(fromId);
+            setTimeout(() => {
+                openModal(toId);
+            }, 150);
+        }
+        // Form handlers
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginGmail').value;
+            const password = document.getElementById('loginContrasenia').value;
+            console.log('Login:', email);
+            closeModal('loginModal');
+        }
+        function handleRegistro(e) {
+            e.preventDefault();
+            const email = document.getElementById('usrGmail').value;
+            console.log('Registro:', email);
+            closeModal('registroModal');
+        }
+        // Payment modal functions
+        function abrirModal() {
+            openModal('pagarModal');
+        }
+        
+        function cerrarPago() {
+            closeModal('pagarModal');
+        }
+        
+        function continuar() {
+            document.getElementById('contacto').classList.add('hidden');
+            document.getElementById('Pago').classList.remove('hidden');
+        }
+        
+        function regresarADatos() {
+            document.getElementById('Pago').classList.add('hidden');
+            document.getElementById('contacto').classList.remove('hidden');
+        }
+        // Flatpickr initialization
+        flatpickr('#date', {
+            dateFormat: 'd-m-Y',
+            minDate: 'today',
+            locale: 'es'
+        });
+        // Gallery functions (if not in external file)
+        let currentImageIndexLocal = 0;
+        const imagesLocal = [
+            'img/index/carusel/destino-MacchuPicchu.jpg',
+            'img/index/carusel/destino-colca.jpg',
+            'img/index/carusel/destino-laguna69.jpg',
+            'img/index/carusel/destino-huacachina.jpg'
+        ];
+        function changeImage(index) {
+            currentImageIndexLocal = index;
+            document.getElementById('featured').src = imagesLocal[index];
+            document.querySelector('.gallery-indicator').textContent = `${index + 1} de ${imagesLocal.length}`;
+            
+            // Update thumbnails
+            document.querySelectorAll('.gallery-thumbnail').forEach((thumb, i) => {
+                thumb.classList.toggle('ring-cyan-500', i === index);
+                thumb.classList.toggle('ring-transparent', i !== index);
+            });
+        }
+        function nextImage() {
+            currentImageIndexLocal = (currentImageIndexLocal + 1) % imagesLocal.length;
+            changeImage(currentImageIndexLocal);
+        }
+        function previousImage() {
+            currentImageIndexLocal = (currentImageIndexLocal - 1 + imagesLocal.length) % imagesLocal.length;
+            changeImage(currentImageIndexLocal);
+        }
+        // Close modals on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('[id$="Modal"]').forEach(modal => {
+                    modal.classList.add('hidden');
+                });
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
 </body>
 </html>
