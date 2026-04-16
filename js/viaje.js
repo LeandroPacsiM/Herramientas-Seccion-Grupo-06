@@ -16,33 +16,43 @@ const importeModal = document.getElementById('importeModal');
 let counter = 1;
 
 // Contador de Viajeros
-restaBtn.addEventListener('click', () => {
-  if (parseInt(travelers.value) > 1) {
-    travelers.value = parseInt(travelers.value) - 1;
+if (restaBtn && travelers) {
+  restaBtn.addEventListener('click', () => {
+    if (parseInt(travelers.value) > 1) {
+      travelers.value = parseInt(travelers.value) - 1;
+      updateDisplay();
+      validateForm();
+    }
+  });
+}
+
+if (sumaBtn && travelers) {
+  sumaBtn.addEventListener('click', () => {
+    travelers.value = parseInt(travelers.value) + 1;
     updateDisplay();
     validateForm();
-  }
-});
-
-sumaBtn.addEventListener('click', () => {
-  travelers.value = parseInt(travelers.value) + 1;
-  updateDisplay();
-  validateForm();
-});
+  });
+}
 
 // Date Picker con validación de fecha mínima
-flatpickr("#date", {
-  dateFormat: "d-m-Y",
-  minDate: new Date(),
-  onChange: function() {
-    validateForm();
-    updateDisplay();
-  }
-});
+if (typeof flatpickr === 'function' && dateInput) {
+  flatpickr("#date", {
+    dateFormat: "d-m-Y",
+    minDate: new Date(),
+    onChange: function() {
+      validateForm();
+      updateDisplay();
+    }
+  });
+}
 
 function updateDisplay() {
+  if (!travelers) return;
   counter = parseInt(travelers.value);
-  viajerosDisplay.textContent = counter;
+
+  if (viajerosDisplay) {
+    viajerosDisplay.textContent = counter;
+  }
   
   // Actualizar modal si existe
   if (viajerosModal) {
@@ -59,6 +69,7 @@ function updateDisplay() {
 }
 
 function validateForm() {
+  if (!dateInput || !travelers || !reservarBtn) return;
   const hasDate = dateInput.value.trim() !== "";
   const hasValidTravelers = parseInt(travelers.value) > 0;
   reservarBtn.disabled = !(hasDate && hasValidTravelers);
