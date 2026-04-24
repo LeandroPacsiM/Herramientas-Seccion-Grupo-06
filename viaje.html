@@ -10,29 +10,250 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
-        .headerr{
-            background-image:linear-gradient(rgba(0, 0, 0, 0.378),rgba(6, 6, 6, 0.367)), url('../img/viaje/banner-1.jpg');
-            background-repeat: no-repeat;
-            background-size: cover ;
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .headerr {
+            background-image: url('../img/contacto/bannerContactanos.jpg');
+            background-size: cover;
             background-position: center;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .headerr .container {
+            text-align: center;
+        }
+        .headerr h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .headerr h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+        }
+        .navbar-blur {
+            backdrop-filter: blur(5px);
+            background-color: rgba(255, 255, 255, 0.247);
+        }
+        .card {
+            background: white;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        .card h2 {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .card h3 {
+            color: #3498db;
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+        .btn-warning {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        .btn-warning:hover {
+            transform: scale(1.05);
+        }
+        .btn-outline-warning {
+            color: #f39c12;
+            border-color: #f39c12;
+            border-radius: 20px;
+        }
+        .btn-outline-warning:hover {
+            background: #f39c12;
+            color: white;
+        }
+        .btn-success {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        .btn-success:hover {
+            transform: scale(1.05);
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .row.d-flex.align-items-center {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        .row.d-flex.align-items-center h3 {
+            color: #34495e;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .img-thumbnail {
+            border-radius: 10px;
+        }
+        footer {
+            background: #212529;
+            color: white;
+            padding: 2rem 0;
+        }
+        footer h2 {
+            color: #ffc107;
+        }
+        footer a {
+            color: #adb5bd;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: #ffc107;
         }
     </style>
 </head>
 <body>
-
-    <div class="navbar headerr mb-4">
-        <div class="container d-flex flex-column text-light">
-            <a href="../html/index.html">
-                <img src="../img/llama.png"  width="200px" alt="">
-            </a>
-            <h1> Llama Tours</h1>
-            <h2 id="tituloViaje">Expedición a ....</h2>
-            <a href="buscador.html">
-                <button class="btn btn-warning">
-                    <img src="img/iconos/flecha-regreso.png" alt="nofounded" >Regresar
+    <header>
+        <nav class="navbar navbar-expand-lg fixed-top navbar-blur">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="img/index/header/llama.png" alt="Llama Tours" height="70px">
+                </a>
+                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-            </a> 
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <li class="nav-item"><a href="index.html" class="nav-link text-dark fw-bold">Inicio</a></li>
+                        <li class="nav-item"><a href="buscador.html" class="nav-link text-dark fw-bold">Viajes</a></li>
+                        <li class="nav-item"><a href="contactanos.html" class="nav-link text-dark fw-bold">Contacto</a></li>
+                        <li class="nav-item"><a href="SobreNosotros.html" class="nav-link text-dark fw-bold">Sobre Nosotros</a></li>
+                        <li class="nav-item">
+                            <button class="btn ms-3 fw-bold" style="background-color: rgb(226, 226, 4); color: #000;" data-bs-toggle="modal" data-bs-target="#loginUsuarios">
+                                <i class="bi bi-box-arrow-in-left"></i> Ingresar
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!--FORMULARIO LOGIN/REGISTER-->
+
+    <div class="modal fade" tabindex="-1" id="loginUsuarios">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title fw-bold">Iniciar Sesión</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>                    
+                </div>
+                <div class="modal-body p-0">
+                    <div class="row g-0">
+                        <div class="col-md-6 d-flex align-items-center justify-content-center bg-light p-4">
+                            <img class="img-fluid" src="img/loginAndRegister/llamitaLogin.gif" alt="llama" style="max-width: 180px;">
+                        </div>
+                        <div class="col-md-6 p-5">
+                            <form>
+                                <div class="mb-4">
+                                    <label for="loginGmail" class="form-label fw-semibold mb-2">Correo Electrónico</label>
+                                    <input type="email" class="form-control form-control-lg" id="loginGmail" placeholder="tu@email.com" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="loginContrasenia" class="form-label fw-semibold mb-2">Contraseña</label>
+                                    <input type="password" class="form-control form-control-lg" id="loginContrasenia" placeholder="Tu contraseña" required>
+                                </div>
+                                <div class="mb-4 text-end">
+                                    <a href="#" class="text-decoration-none text-primary small">¿Olvidaste tu contraseña?</a>
+                                </div>
+                                <div class="d-grid">
+                                    <button class="btn btn-primary btn-lg fw-bold" type="submit" data-bs-dismiss="modal">Ingresar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light justify-content-center">
+                    <p class="mb-0 text-center">¿Nuevo usuario? <a href="#" class="text-primary fw-bold text-decoration-none" data-bs-toggle="modal" data-bs-target="#registroUsuarios">Regístrate aquí</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" id="registroUsuarios">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title fw-bold">Registrarse</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>                    
+                </div>
+                <div class="modal-body p-0">
+                    <div class="row g-0">
+                        <div class="col-md-6 d-flex align-items-center justify-content-center bg-light p-4">
+                            <img class="img-fluid" src="img/loginAndRegister/llamitaLogin.gif" alt="llama" style="max-width: 180px;">
+                        </div>
+                        <div class="col-md-6 p-5">
+                            <form>
+                                <div class="mb-4">
+                                    <label for="usrGmail" class="form-label fw-semibold mb-2">Correo Electrónico</label>
+                                    <input type="email" class="form-control form-control-lg" id="usrGmail" placeholder="tu@email.com" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="usrName" class="form-label fw-semibold mb-2">Nombres y Apellidos</label>
+                                    <input type="text" class="form-control form-control-lg" id="usrName" placeholder="Tu nombre completo" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="usrPhone" class="form-label fw-semibold mb-2">Número de Celular</label>
+                                    <input type="tel" class="form-control form-control-lg" id="usrPhone" placeholder="+51 999 999 999" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="usrContrasenia" class="form-label fw-semibold mb-2">Contraseña</label>
+                                    <input type="password" class="form-control form-control-lg" id="usrContrasenia" placeholder="Crea una contraseña segura" required>
+                                </div>
+                                <div class="d-grid">
+                                    <button class="btn btn-success btn-lg fw-bold" type="submit" data-bs-dismiss="modal">Registrarse</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light justify-content-center">
+                    <p class="mb-0 text-center">¿Ya tienes cuenta? <a href="#" class="text-success fw-bold text-decoration-none" data-bs-toggle="modal" data-bs-target="#loginUsuarios">Inicia sesión aquí</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!--FIN LOGIN / REGISTER-->
+
+    <div class="headerr">
+        <div class="container">
+            <h1>¡Prepárate para tu aventura!</h1>
+            <h2 id="tituloViaje">Expedición a ....</h2>
+            <a href="buscador.html" class="btn btn-light btn-lg mt-3">
+                <i class="bi bi-arrow-left me-2"></i>Explorar más viajes
+            </a>
         </div>
     </div>
 
@@ -48,24 +269,24 @@
                     </div>
                 </div>
                 <div class="card flex-column">
-                    <h2 class="fs-1">Detalles del Tours: </h2>
+                    <h2 class="fs-1"><i class="bi bi-info-circle-fill text-primary"></i> Descubre los detalles de tu aventura</h2>
                     <p id="descripcionViaje">Descripción del viaje...</p>
                     <p id="descripcionViaje-2">Descripción 2......</p>
                     <p id="descripcionViaje-3">Descripción 3......</p>
                 </div>
                 <div class="card flex-column">
-                    <h2 class="fs-1">Expedición: </h2>
+                    <h2 class="fs-1"><i class="bi bi-calendar-event-fill text-success"></i> Itinerario de tu viaje</h2>
                     <div class="">
-                        <h3>Día 1</h3>
+                        <h3><i class="bi bi-sunrise text-warning me-2"></i>Día 1</h3>
                         <p id="dia-1">Dia1.......</p>
                     </div>
                     <div class="">
-                        <h3>Día 2</h3>
+                        <h3><i class="bi bi-sunset text-warning me-2"></i>Día 2</h3>
                         <p id="dia-2">dia 2........</p>
                     </div>
                 </div>
                 <div class="card flex-column">
-                    <h2 class="fs-1">Recomendamos llevar:</h2> <br>
+                    <h2 class="fs-1"><i class="bi bi-backpack-fill text-info"></i> ¡No olvides llevar!</h2> <br>
                     <div id="listaEquipaje">
                         <!-- Aquí se insertará la lista -->
                     </div>
@@ -76,21 +297,21 @@
         <div class="col-12 col-md-3">
             <div class="card-group flex-column">
                 <div class="row d-flex align-items-center justify-content-center mb-2 rounded-3 p-2">
-                    <h3>N° de Viajeros</h2>
-                    <div class="d-flex justify-content-center gap-2">
+                    <h3><i class="bi bi-people-fill text-primary me-2"></i>¿Cuántos viajeros?</h3>
+                    <div class="d-flex justify-content-center gap-2 mt-2">
                         <button class="btn btn-outline-warning" id="resta">-</button>
-                        <input class="text-center border-0" style="width: 50px;" type="text" id="valor" value="1" readonly>
+                        <input class="text-center border-0 bg-light" style="width: 60px; border-radius: 10px;" type="text" id="valor" value="1" readonly>
                         <button class="btn btn-outline-warning" id="suma">+</button>
                     </div>
                 </div>
                 <div class="row d-flex align-items-center justify-content-center mb-2 rounded-3 p-2">
-                    <h3>Selecione una fecha:</h3>
-                    <form id="formViaje" action="">
-                        <input type="text" id="date" class="flatpickr-input text-center" placeholder="DD-MM-YYYY" style="width: 100%;" required>
+                    <h3><i class="bi bi-calendar-date text-success me-2"></i>Elige tu fecha ideal</h3>
+                    <form id="formViaje" action="" class="mt-2">
+                        <input type="text" id="date" class="flatpickr-input text-center form-control" placeholder="DD-MM-YYYY" required>
                     </form>
                 </div>
                 <div class="row d-flex align-items-center justify-content-center mb-2 rounded-3 p-2">
-                    <h3>Compruebe su viaje </h3>
+                    <h3><i class="bi bi-receipt text-info me-2"></i>Revisa tu reserva</h3>
                     <div class="card border-0" style="
                             background-image: url(../img/pasaje.png);
                             background-repeat: no-repeat;
@@ -115,95 +336,98 @@
                     </div>
                 </div>
                 <div class="row">
-                    <button id="reservarButton" type="button" onclick="abrirModal()" disabled>Reservar <img src="../img/iconos/candado-cerrado.png" alt=""></button>
+                    <button id="reservarButton" type="button" onclick="abrirModal()" disabled class="btn btn-success btn-lg w-100">
+                        <i class="bi bi-check-circle me-2"></i>¡Reserva tu aventura!
+                        <img src="../img/iconos/candado-cerrado.png" alt="" class="ms-2" style="width: 20px;">
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer class="bg-dark text-center">
-            <div>
-                <img src="../img/llama.png" width="120px" alt="">
-            </div>
-            <div class="card-group">
+    <footer class="bg-dark text-light text-center mt-4">
+        <div>
+            <img src="img/index/header/llama.png" width="120px" alt="">
+        </div>
+        <div class="container">
+            <div class="row g-4">
                 <div class="col-md-6">
-                    <div class="card bg-dark">
+                    <div class="card bg-dark border-0">
                         <div class="card-body text-start">
-                            <h2 class="text-warning">Llama Tours</h2>
+                            <h2 class="text-warning fw-bold">Llama Tours</h2>
                             <p class="text-secondary">Somos una destacada empresa de turismo con 15 años de experiencia en el mercado, especializada en ofrecer diversos viajes guiados al interior del Perú. Reconocida por Tripadvisor con el premio "Travelers' Choice Experiences" en el año 2019 por su excelencia en el servicio al cliente, la empresa se enorgullece de haber sido destacada en múltiples ocasiones por su compromiso con la calidad y la autenticidad.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card bg-dark">
+                    <div class="card bg-dark border-0">
                         <div class="card-body text-start">
-                            <h2 class="text-warning">Links Rapidos</h2>
-                            <ul class="list-group">
-                                <li><a class="link-secondary link-underline-opacity-0" href="index.html">Inicio</a></li>
-                                <li><a class="link-secondary link-underline-opacity-0" href="buscador.html">Viajes</a></li>
-                                <li><a class="link-secondary link-underline-opacity-0" href="contactanos.html">Contacto</a></li>
-                                <li><a class="link-secondary link-underline-opacity-0" href="../html/SobreNosotros.html">Sobre Nosotros</a></li>
+                            <h2 class="text-warning fw-bold">Links Rápidos</h2>
+                            <ul class="list-group list-group-flush bg-transparent">
+                                <li class="list-group-item bg-transparent border-0 p-1"><a class="link-secondary link-underline-opacity-0" href="index.html">Inicio</a></li>
+                                <li class="list-group-item bg-transparent border-0 p-1"><a class="link-secondary link-underline-opacity-0" href="buscador.html">Viajes</a></li>
+                                <li class="list-group-item bg-transparent border-0 p-1"><a class="link-secondary link-underline-opacity-0" href="contactanos.html">Contacto</a></li>
+                                <li class="list-group-item bg-transparent border-0 p-1"><a class="link-secondary link-underline-opacity-0" href="SobreNosotros.html">Sobre Nosotros</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card bg-dark">
+                    <div class="card bg-dark border-0">
                         <div class="card-body text-start">
-                            <h2 class="text-warning">Contactanos</h2>
-                            <ul class="list-group">
-                                <li><a class="link-secondary link-underline-opacity-0" href="error.html"><img src="../img/iconos/telefono-footer.png" width="20px" alt="">+51 980837493</a></li>
-                                <li><a class="link-secondary link-underline-opacity-0" href="error.html"><img src="../img/iconos/correo-footer.png" width="20px" alt="">LlamaTours@viajes.com</a></li>
-                                <li><a class="link-secondary link-underline-opacity-0" href="error.html"><img src="../img/iconos/ubicacion-footer.png" width="20px" alt="">Av. 28 de Julio - La Victoria - Lima</a></li>
+                            <h2 class="text-warning fw-bold">Contáctanos</h2>
+                            <ul class="list-group list-group-flush bg-transparent">
+                                <li class="list-group-item bg-transparent border-0 p-1"><a class="link-secondary link-underline-opacity-0" href="https://wa.me/51900460347" target="_blank"><i class="bi bi-telephone-fill me-2"></i> +51 900460347</a></li>
+                                <li class="list-group-item bg-transparent border-0 p-1"><a class="link-secondary link-underline-opacity-0" href="mailto:LlamaTours@viajes.com"><i class="bi bi-envelope-fill me-2"></i> LlamaTours@viajes.com</a></li>
+                                <li class="list-group-item bg-transparent border-0 p-1"><a class="link-secondary link-underline-opacity-0" href="https://www.google.com/maps?q=Av.+28+de+Julio+-+La+Victoria+-+Lima" target="_blank"><i class="bi bi-geo-alt-fill me-2"></i> Av. 28 de Julio - La Victoria - Lima</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            <p class="text-secondary mb-0">Copyright &copy; 2024 All Rights Reserved by LlamaTours</p>
+        </div>
+        <p class="text-secondary mt-4">Copyright &copy; 2024 All Rights Reserved by LlamaTours</p>
     </footer>
 
 
     <div class="backgroundPago" id="pagar">
         <div class="mainModal">
-
-            <div class="headModal">
+            <div class="headModal bg-primary text-white">
                 <div class="imghead">
-                    <img src="../img/llama.png" width="120px" alt="">
+                    <img src="img/index/header/llama.png" width="100px" alt="LlamaTours">
                 </div>
                 <div class="exitHead">
-                    <button onclick="cerrarPago()"><img src="../img/iconos/cruz.svg" width="15px" alt=""></button>
+                    <button onclick="cerrarPago()" class="btn btn-light btn-sm"><i class="bi bi-x-lg"></i></button>
                 </div>
             </div>
             <div class="espaciador"></div>
-            <div class="mainContenedor" >
-                
+            <div class="mainContenedor">
                 <div class="contenedorDatos" id="contacto">
                     <div class="titulomodal">
-                        <h2>Contacto de Viajero</h2>
+                        <h2 class="text-primary"><i class="bi bi-person-lines-fill me-2"></i>Tu información personal</h2>
                     </div>
                     <div class="contenedor">
                         <div class="mainDatosdeContacto">
                             <div class="datosViajeros">
                                 <form id="formModal" action="#" method="post">
                                     <div class="formDatosViajeros">
-                                        <label for="nombre">Nombres:</label><br>
+                                        <label for="nombre">Tu nombre:</label><br>
                                         <input type="text" id="nombre" name="nombre" required>
                                     </div>
                                     <div class="formDatosViajeros">
-                                        <label for="apellido">Apellidos:</label> <br>
+                                        <label for="apellido">Tus apellidos:</label> <br>
                                         <input type="text" id="apellido" name="apellido" required>
                                     </div>
                                     <div class="formDatosViajeros">
-                                        <label for="correo">Correo Electrónico:</label> <br>
+                                        <label for="correo">Tu email:</label> <br>
                                         <input type="email" id="correo" name="correo" required>
                                     </div>
                                     <div class="formDatosViajeros">
-                                        <label for="wsp">Número de WhatsApp:</label> <br>
+                                        <label for="wsp">Tu WhatsApp:</label> <br>
                                         <input type="tel" id="wsp" name="wsp" required>
                                     </div>
                                     <div class="formDatosViajeros">
-                                        <label for="fecha-nacimiento">Fecha de Nacimiento:</label> <br>
+                                        <label for="fecha-nacimiento">Tu fecha de nacimiento:</label> <br>
                                         <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" required>
                                     </div>
                                 </form>
@@ -224,8 +448,8 @@
                                 <div class="espaciador"></div>
                                 <div class="cuponImporte">
                                     <div class="cupon">
-                                        <label for="">Promo Cupon</label><br>
-                                        <input type="xd" name="cupon" id="">
+                                        <label for="">¿Tienes un cupón de descuento?</label><br>
+                                        <input type="text" name="cupon" id="">
                                         <button disabled> Aplicar</button>
                                     </div>
                                 </div>
@@ -243,14 +467,14 @@
                         </div>
                     </div>
                     <div class="btnContinuar">
-                        <button onclick="continuar()"> Continuar</button>
+                        <button onclick="continuar()" class="btn btn-primary btn-lg w-100"><i class="bi bi-arrow-right me-2"></i>Siguiente paso</button>
                     </div>
                 </div>
     
                 <div class="mainContenedorPago">
                     <div class="mainPago" id="Pago">
                         <div class="return">
-                            <button onclick="regresarADatos()"><img src="../img/flecha-pequena-izquierda.png" width="15px" alt="">Regresar</button>
+                            <button onclick="regresarADatos()" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-2"></i>Volver a datos</button>
                         </div>
                         <div class="tajetaDatos">
                             <h2>OA</h2>
