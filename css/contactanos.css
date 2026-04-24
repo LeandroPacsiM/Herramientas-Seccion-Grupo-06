@@ -1,7 +1,7 @@
 .fondo{
-    background-image: url('../img/contacto/bannerContactanos.jpg'); 
-    background-size: cover; 
-    background-position: center center; 
+    background-image: url('../img/contacto/bannerContactanos.jpg');
+    background-size: cover;
+    background-position: center center;
     height: 400px;
 }
 
@@ -9,4 +9,45 @@
 .navbar-blur {
     backdrop-filter: blur(5px);
     background-color: rgba(255, 255, 255, 0.247);
+}
+
+/* Estilos para las cards de contacto */
+.contact-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.contact-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.contact-card .card-body {
+    padding: 2rem;
+}
+
+/* Estilos para el formulario */
+.form-control-lg {
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control-lg:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #0d6efd, #6610f2);
+    border: none;
+    border-radius: 25px;
+    padding: 12px 30px;
+    font-weight: 600;
+    transition: transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    background: linear-gradient(45deg, #6610f2, #0d6efd);
 }
