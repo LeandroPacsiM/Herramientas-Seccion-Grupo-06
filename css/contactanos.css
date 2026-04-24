@@ -51,3 +51,56 @@
     transform: scale(1.05);
     background: linear-gradient(45deg, #6610f2, #0d6efd);
 }
+
+.btn-success {
+    background: linear-gradient(45deg, #198754, #20c997);
+    border: none;
+    border-radius: 25px;
+    padding: 12px 30px;
+    font-weight: 600;
+    transition: transform 0.2s ease;
+}
+
+.btn-success:hover {
+    transform: scale(1.05);
+    background: linear-gradient(45deg, #20c997, #198754);
+}
+
+/* Estilos para modales */
+.modal-content {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.modal-header {
+    border: none;
+    padding: 1.5rem 2rem;
+}
+
+.modal-body {
+    border: none;
+}
+
+.modal-footer {
+    border: none;
+    padding: 1.5rem 2rem;
+}
+
+.form-control-lg {
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+}
+
+.form-control-lg:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.form-label {
+    color: #495057;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}

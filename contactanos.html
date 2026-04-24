@@ -42,58 +42,88 @@
 
     <!--FORMULARIO LOGIN/REGISTER-->
 
-    <form class="modal fade border border-secondary rounded" tabindex="-1" id="loginUsuarios">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">dsaasdasdasd Sesión</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>                    
+    <div class="modal fade" tabindex="-1" id="loginUsuarios">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title fw-bold">Iniciar Sesión</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>                    
                 </div>
-                <div class="modal-body d-flex">
-                    <form>
-                        <div class="d-flex flex-column align-items-center justify-content-center">
-                            <input type="email" class="form-control mb-2" id="loginGmail" placeholder="Correo Electronico" required>
-                            <input type="password" class="form-control" id="loginContrasenia" class="" placeholder="Password" required>
-                            <a href="#">Olvidé mi contraseña</a>
-                            <button class="btn btn-primary" type="submit" data-bs-dismiss="modal">Ingresar</button>
+                <div class="modal-body p-0">
+                    <div class="row g-0">
+                        <div class="col-md-6 d-flex align-items-center justify-content-center bg-light p-4">
+                            <img class="img-fluid" src="img/loginAndRegister/llamitaLogin.gif" alt="llama" style="max-width: 180px;">
                         </div>
-                        <img class="w-50" src="img/loginAndRegister/llamitaLogin.gif" alt="llama">
-                    </form>
+                        <div class="col-md-6 p-5">
+                            <form>
+                                <div class="mb-4">
+                                    <label for="loginGmail" class="form-label fw-semibold mb-2">Correo Electrónico</label>
+                                    <input type="email" class="form-control form-control-lg" id="loginGmail" placeholder="tu@email.com" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="loginContrasenia" class="form-label fw-semibold mb-2">Contraseña</label>
+                                    <input type="password" class="form-control form-control-lg" id="loginContrasenia" placeholder="Tu contraseña" required>
+                                </div>
+                                <div class="mb-4 text-end">
+                                    <a href="#" class="text-decoration-none text-primary small">¿Olvidaste tu contraseña?</a>
+                                </div>
+                                <div class="d-grid">
+                                    <button class="btn btn-primary btn-lg fw-bold" type="submit" data-bs-dismiss="modal">Ingresar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <label class="form-label">¿Nuevo usuario?</label>
-                    <a role="button" data-bs-toggle="modal" data-bs-target="#registroUsuarios">Regístrate</a>
+                <div class="modal-footer bg-light justify-content-center">
+                    <p class="mb-0 text-center">¿Nuevo usuario? <a href="#" class="text-primary fw-bold text-decoration-none" data-bs-toggle="modal" data-bs-target="#registroUsuarios">Regístrate aquí</a></p>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 
-    <form class="modal fade border border-secondary rounded" tabindex="-1" id="registroUsuarios">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Iniciar Sesión</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>                    
+    <div class="modal fade" tabindex="-1" id="registroUsuarios">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title fw-bold">Registrarse</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>                    
                 </div>
-                <div class="modal-body d-flex">
-                    <form>
-                        <div class="d-flex flex-column align-items-center justify-content-center">
-                            <input type="text" class="form-control mb-2" id="usrGmail" placeholder="Correo Electrónico">
-                            <input type="text" class="form-control mb-2" id="usrName" placeholder="Nombres y Apellidos">
-                            <input type="text" class="form-control mb-2" id="usrPhone" placeholder="Numero de Celular">
-                            <input type="password" class="form-control mb-2"id="usrContrasenia" placeholder="Ingrese su contraseña">
-                            <button class="btn btn-primary" type="submit" data-bs-dismiss="modal" >Registrarse</button>
+                <div class="modal-body p-0">
+                    <div class="row g-0">
+                        <div class="col-md-6 d-flex align-items-center justify-content-center bg-light p-4">
+                            <img class="img-fluid" src="img/loginAndRegister/llamitaLogin.gif" alt="llama" style="max-width: 180px;">
                         </div>
-                        <img class="w-50" src="img/loginAndRegister/llamitaLogin.gif" alt="llama">
-                    </form>
+                        <div class="col-md-6 p-5">
+                            <form>
+                                <div class="mb-4">
+                                    <label for="usrGmail" class="form-label fw-semibold mb-2">Correo Electrónico</label>
+                                    <input type="email" class="form-control form-control-lg" id="usrGmail" placeholder="tu@email.com" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="usrName" class="form-label fw-semibold mb-2">Nombres y Apellidos</label>
+                                    <input type="text" class="form-control form-control-lg" id="usrName" placeholder="Tu nombre completo" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="usrPhone" class="form-label fw-semibold mb-2">Número de Celular</label>
+                                    <input type="tel" class="form-control form-control-lg" id="usrPhone" placeholder="+51 999 999 999" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="usrContrasenia" class="form-label fw-semibold mb-2">Contraseña</label>
+                                    <input type="password" class="form-control form-control-lg" id="usrContrasenia" placeholder="Crea una contraseña segura" required>
+                                </div>
+                                <div class="d-grid">
+                                    <button class="btn btn-success btn-lg fw-bold" type="submit" data-bs-dismiss="modal">Registrarse</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <label class="form-label">¿Ya registrado?</label>
-                    <a role="button" data-bs-toggle="modal" data-bs-target="#loginUsuarios">Ya soy usuario</a>
+                <div class="modal-footer bg-light justify-content-center">
+                    <p class="mb-0 text-center">¿Ya tienes cuenta? <a href="#" class="text-success fw-bold text-decoration-none" data-bs-toggle="modal" data-bs-target="#loginUsuarios">Inicia sesión aquí</a></p>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
     
     <!--FIN LOGIN / REGISTER-->
 
