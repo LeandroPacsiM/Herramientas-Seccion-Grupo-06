@@ -1,2 +1,26 @@
-#IDE
 .vscode/
+.github/
+AGENTS.md
+
+# Node / build
+/node_modules/
+/dist/
+/build/
+
+# Env / secrets
+.env
+.env.*
+
+# OS / editor / logs
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log
+
+# Caches / coverage
+.cache/
+.nyc_output/
+coverage/
+@A@@
+# IDEs
+.idea/
