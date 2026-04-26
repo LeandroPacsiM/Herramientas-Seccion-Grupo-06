@@ -97,8 +97,11 @@
       *, *::before, *::after {
         box-sizing: border-box;
       }
-      html, body {
-        overflow-x: hidden;
+      html {
+        overflow-x: clip;
+        max-width: 100%;
+      }
+      body {
         max-width: 100%;
       }
       header {
@@ -281,16 +284,71 @@
         color: #8a7515 !important;
       }
       #reviewsDots [data-dot].bg-primary {
-        background-color: #e2e204 !important;
+        background-color: rgb(226, 226, 4) !important;
       }
       .theme-toggle {
         background: linear-gradient(135deg, var(--llama-brand), #facc15);
         color: #0f172a;
       }
+      .gallery-nav-btn {
+        border: 1px solid rgba(255, 255, 255, 0.997);   
+        color: var(--llama-brand);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+      }
+      html.dark .gallery-nav-btn {
+        background-color: rgba(14, 12, 25, 0.1) !important;
+        color: #f8f9ff !important;
+        border-color: rgba(255, 255, 255, 0.22) !important;
+      }
+      html.dark .gallery-nav-btn:hover {
+        background-color: rgba(226, 226, 4,0.3) !important;
+        color: #ffffff !important;
+      }
+      html:not(.dark) .gallery-nav-btn {
+        background-color: rgba(18, 6, 6, 0.1) !important;
+        border-color: rgba(255, 255, 255, 0.26) !important;
+      }
+      html:not(.dark) .gallery-nav-btn:hover {
+        background-color: rgba(226, 226, 4,0.3) !important;
+        color: #ffffff !important;
+      }
+      .gallery-nav-btn:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.52), 0 8px 18px rgba(51, 23, 190, 0.35);
+      }
+      .gallery-nav-btn:active {
+        transform: scale(0.96);
+      }
     </style>
+    <!-- FlyonUI (CSS + JS) via unpkg; feature-detection init applied -->
+    <link rel="stylesheet" href="https://unpkg.com/flyonui@2.4.1/flyonui.css">
+    <script defer src="https://unpkg.com/flyonui@2.4.1/flyonui.js"></script>
+    <script>
+      (function() {
+        function tryInitFlyon() {
+          try {
+            if (window.FlyonUI && typeof window.FlyonUI.init === 'function') {
+              window.FlyonUI.init();
+              return true;
+            }
+          } catch (e) {
+            console.warn('FlyonUI init failed:', e);
+          }
+          return false;
+        }
+
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+          tryInitFlyon();
+        } else {
+          document.addEventListener('DOMContentLoaded', tryInitFlyon);
+        }
+      })();
+    </script>
   </head>
   <body
-    class="bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden"
+    class="bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container"
   >
     <!-- Top Navigation -->
     <header
@@ -448,54 +506,47 @@
             <div id="equipajeListaContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
           </div>
         </div>
-        <!-- Experiences Gallery - Bento Grid Style -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
-          <div
-            class="md:col-span-8 aspect-[16/9] md:aspect-[4/3] rounded-2xl overflow-hidden relative group"
-          >
-            <img
-              id="galleryMainImage"
-              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              data-alt="colorful glacial lake reflecting a massive hanging glacier under a deep blue sky"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAK2sO9ENX262lO4zdabKkzFKaJ2H9unJOgIX7LurQu7nejnn6VV87xZ_jkpGqGXzycMqP27aMRaJgdBq3Nn7W5imUUoaA1RGtTm8ab1Bazo_iN2reWKaCN_Iq34azT7AB_mnNWJmYcV8HvPSGVQ5gCf1Lxfpc2H5r9F67KSo_sCRfjzv8yFnIrJIV3C6BpQ2ZGCPZcek4GfbF80L3zJkjSONw5y5UFOUPeEZuvqOsb9eCgm7dqj1Wy06HYjTo0YIg-PUhOTjo-n4g"
-            />
-            <div
-              class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"
-            ></div>
-            <p class="absolute bottom-6 left-6 text-white font-bold">
-              Lagunas Turquesas
-            </p>
-          </div>
-          <div class="md:col-span-4 grid grid-cols-2 md:grid-cols-1 gap-4">
-            <div class="aspect-[4/3] md:aspect-auto md:h-full rounded-2xl overflow-hidden relative group">
-              <img
-                id="galleryImage2"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                data-alt="night sky over andean basecamp with thousands of stars and the milky way clearly visible"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8hLWkivbk9_mGFclsn48wQdcNVA1ViKbrxBW6klo0QbEZfNMjYaHCBUQlyjik9WbLnWGOgLqh2YHXjBkt79UVfpyRC2xYihXlvNCUc0e3fGZtgyK8FPYLdsI4WxdETjPc_FbzkmACbjCEliOmSWezsXJPt8H6YakW4kut-zdGd4lsM34Qs-u5pAKy1yMyPPMrq32qgQDCeh5gXuDfcYvNePchjcaf8pGIL8lfFXjOv_55XXi_yYjgmjCGWmkrw977Zq8U7PsZK5s"
-              />
-              <p class="absolute bottom-4 left-4 text-white text-xs font-bold">
-                Observacion de Estrellas
-              </p>
+        <!-- Experiences Gallery - Carousel horizontal con miniaturas -->
+        <div id="horizontal-thumbnails" data-carousel='{ "loadingClasses": "opacity-0" }' class="relative w-full bg-surface-container rounded-3xl p-4 shadow-xl" aria-label="Galería de experiencias">
+          <div class="carousel flex flex-col gap-y-4">
+            <div class="relative overflow-hidden rounded-2xl border border-[rgba(250,204,21,0.2)]">
+              <div class="carousel-body h-64 sm:h-80 lg:h-96 opacity-0 transition-opacity duration-300">
+                <figure class="carousel-slide w-full h-full">
+                  <img id="galleryMainImage" class="w-full h-full object-cover" data-alt="colorful glacial lake reflecting a massive hanging glacier under a deep blue sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAK2sO9ENX262lO4zdabKkzFKaJ2H9unJOgIX7LurQu7nejnn6VV87xZ_jkpGqGXzycMqP27aMRaJgdBq3Nn7W5imUUoaA1RGtTm8ab1Bazo_iN2reWKaCN_Iq34azT7AB_mnNWJmYcV8HvPSGVQ5gCf1Lxfpc2H5r9F67KSo_sCRfjzv8yFnIrJIV3C6BpQ2ZGCPZcek4GfbF80L3zJkjSONw5y5UFOUPeEZuvqOsb9eCgm7dqj1Wy06HYjTo0YIg-PUhOTjo-n4g" alt="Lagunas Turquesas" />
+                </figure>
+                <figure class="carousel-slide w-full h-full">
+                  <img id="galleryImage2" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8hLWkivbk9_mGFclsn48wQdcNVA1ViKbrxBW6klo0QbEZfNMjYaHCBUQlyjik9WbLnWGOgLqh2YHXjBkt79UVfpyRC2xYihXlvNCUc0e3fGZtgyK8FPYLdsI4WxdETjPc_FbzkmACbjCEliOmSWezsXJPt8H6YakW4kut-zdGd4lsM34Qs-u5pAKy1yMyPPMrq32qgQDCeh5gXuDfcYvNePchjcaf8pGIL8lfFXjOv_55XXi_yYjgmjCGWmkrw977Zq8U7PsZK5s" alt="Observacion de Estrellas" />
+                </figure>
+                <figure class="carousel-slide w-full h-full">
+                  <img id="galleryImage3" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAAmVdoKAu99e9HXYoue0fBybxgPEwfDXkR_Hz_02MVObiXpBHo6rjCG3J2ULbNOZQrDBm_iVUSYwXh1G0Hjimj1194kt7j-ajLpvcr3b_KasQgaWVlwk9qGx0okzg53E9CTM9vedF47EyQsZTbJE2L4Ea9DNdW7SpC88oZEto3COMQ8j2XqfAAjMuC81UVydeIOkdo41NE-xkEMiLw0dttLEiw16oUv2zfM789JBWVkfAMj6RR-UbNWvcgZiNZXF56ofomkLcRw0" alt="Campamentos de Lujo" />
+                </figure>
+              </div>
+
+              <button type="button" class="carousel-prev gallery-nav-btn absolute start-4 top-1/2 -translate-y-1/2 size-10 flex items-center justify-center rounded-full transition-all" aria-label="Anterior">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                  <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+
+              <button type="button" class="carousel-next gallery-nav-btn absolute end-4 top-1/2 -translate-y-1/2 size-10 flex items-center justify-center rounded-full transition-all" aria-label="Siguiente">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                  <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
             </div>
-            <div class="aspect-[4/3] md:aspect-auto md:h-full rounded-2xl overflow-hidden relative group">
-              <img
-                id="galleryImage3"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                data-alt="luxury canvas bell tent with warm interior lighting set against a backdrop of snowy mountains"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAAmVdoKAu99e9HXYoue0fBybxgPEwfDXkR_Hz_02MVObiXpBHo6rjCG3J2ULbNOZQrDBm_iVUSYwXh1G0Hjimj1194kt7j-ajLpvcr3b_KasQgaWVlwk9qGx0okzg53E9CTM9vedF47EyQsZTbJE2L4Ea9DNdW7SpC88oZEto3COMQ8j2XqfAAjMuC81UVydeIOkdo41NE-xkEMiLw0dttLEiw16oUv2zfM789JBWVkfAMj6RR-UbNWvcgZiNZXF56ofomkLcRw0"
-              />
-              <p class="absolute bottom-4 left-4 text-white text-xs font-bold">
-                Campamentos de Lujo
-              </p>
+
+            <div class="carousel-pagination flex flex-row gap-3 w-full h-20 sm:h-24 md:h-28" aria-label="Miniaturas de imágenes">
+              <img id="thumb1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAK2sO9ENX262lO4zdabKkzFKaJ2H9unJOgIX7LurQu7nejnn6VV87xZ_jkpGqGXzycMqP27aMRaJgdBq3Nn7W5imUUoaA1RGtTm8ab1Bazo_iN2reWKaCN_Iq34azT7AB_mnNWJmYcV8HvPSGVQ5gCf1Lxfpc2H5r9F67KSo_sCRfjzv8yFnIrJIV3C6BpQ2ZGCPZcek4GfbF80L3zJkjSONw5y5UFOUPeEZuvqOsb9eCgm7dqj1Wy06HYjTo0YIg-PUhOTjo-n4g" class="carousel-pagination-item carousel-active:opacity-100 carousel-active:border-[var(--llama-brand)] border-2 border-transparent grow object-cover opacity-45 rounded-xl cursor-pointer transition-all hover:opacity-80" alt="Lagunas Turquesas" />
+              <img id="thumb2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8hLWkivbk9_mGFclsn48wQdcNVA1ViKbrxBW6klo0QbEZfNMjYaHCBUQlyjik9WbLnWGOgLqh2YHXjBkt79UVfpyRC2xYihXlvNCUc0e3fGZtgyK8FPYLdsI4WxdETjPc_FbzkmACbjCEliOmSWezsXJPt8H6YakW4kut-zdGd4lsM34Qs-u5pAKy1yMyPPMrq32qgQDCeh5gXuDfcYvNePchjcaf8pGIL8lfFXjOv_55XXi_yYjgmjCGWmkrw977Zq8U7PsZK5s" class="carousel-pagination-item carousel-active:opacity-100 carousel-active:border-[var(--llama-brand)] border-2 border-transparent grow object-cover opacity-45 rounded-xl cursor-pointer transition-all hover:opacity-80" alt="Observacion de Estrellas" />
+              <img id="thumb3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAAmVdoKAu99e9HXYoue0fBybxgPEwfDXkR_Hz_02MVObiXpBHo6rjCG3J2ULbNOZQrDBm_iVUSYwXh1G0Hjimj1194kt7j-ajLpvcr3b_KasQgaWVlwk9qGx0okzg53E9CTM9vedF47EyQsZTbJE2L4Ea9DNdW7SpC88oZEto3COMQ8j2XqfAAjMuC81UVydeIOkdo41NE-xkEMiLw0dttLEiw16oUv2zfM789JBWVkfAMj6RR-UbNWvcgZiNZXF56ofomkLcRw0" class="carousel-pagination-item carousel-active:opacity-100 carousel-active:border-[var(--llama-brand)] border-2 border-transparent grow object-cover opacity-45 rounded-xl cursor-pointer transition-all hover:opacity-80" alt="Campamentos de Lujo" />
             </div>
           </div>
         </div>
       </section>
       <!-- Right 1/3: Fixed Side Panel -->
-      <aside class="w-full lg:w-1/3 px-4 sm:px-6 lg:px-0 max-w-full">
+      <aside class="w-full lg:w-1/3 px-4 sm:px-6 lg:px-0 max-w-full lg:sticky lg:top-24 self-start">
         <div
-          class="flex flex-col w-full h-fit p-6 rounded-2xl lg:m-4 lg:sticky lg:top-24 bg-white/40 dark:bg-slate-900/40 backdrop-blur-lg shadow-xl shadow-indigo-500/10 space-y-8"
+          class="flex flex-col w-full h-fit p-6 rounded-2xl lg:m-4 bg-white/40 dark:bg-slate-900/40 backdrop-blur-lg shadow-xl shadow-indigo-500/10 space-y-8"
         >
           <div>
             <h2 id="sidePanelTitle" class="text-indigo-400 font-poppins font-bold text-2xl">
@@ -538,25 +589,7 @@
                 >$3,450</span
               >
             </div>
-            <div class="space-y-3 pt-4">
-              <div class="flex items-center justify-between text-sm">
-                <span class="text-slate-400">Proxima salida</span>
-                <span class="text-indigo-300 font-semibold">14 Sep, 2024</span>
-              </div>
-              <div class="flex items-center justify-between text-sm">
-                <span class="text-slate-400">Tamano del grupo</span>
-                <span class="text-indigo-300 font-semibold"
-                  >Max. 6 viajeros</span
-                >
-              </div>
-              <div class="flex items-center justify-between text-sm">
-                <span class="text-slate-400">Disponibilidad</span>
-                <span
-                  class="text-electric-cyan text-xs font-bold bg-tertiary-container/20 px-2 py-0.5 rounded text-tertiary-container"
-                  >2 cupos disponibles</span
-                >
-              </div>
-            </div>
+            <!-- Booking details removed as requested -->
             <button
               id="sidePanelButton"
               class="w-full py-4 bg-gradient-to-br from-indigo-400 to-cyan-400 text-white rounded-xl font-bold font-poppins shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all"
@@ -564,23 +597,7 @@
               Reservar Cupo
             </button>
           </div>
-          <div
-            class="flex items-center space-x-3 p-4 bg-surface-container-lowest/50 rounded-xl"
-          >
-            <img
-              class="w-10 h-10 rounded-full object-cover grayscale"
-              data-alt="professional male expedition leader in technical outdoor gear with mountains in background"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKTz59lEf7jXT6Gr6eAWp-okoHopWyU4JjLzS_MM0I-RVRa4HbMRtChaXBXgNbFq8IDPhJP26LTti--mbGrsn641_MD574eFbBId3YKbCpgpnl_5q3iwM1Jc3L__Ptir5uTSmFmC7VZqdZX9cqwxr2Ow_9Wx8sy-SohV_IXrdd2XOwXEg3ksHXuQv-mHe8bpkrzygoNz5nn65YroR6nhgFxcrz7WD7RLPWyWaP8ozNaD0FFxFOXXtEIV52w9RBqpMnnTV5LyW6PaY"
-            />
-            <div>
-              <p
-                class="text-[10px] text-slate-500 font-bold uppercase tracking-widest"
-              >
-                Guia Experto
-              </p>
-              <p class="text-slate-900 dark:text-white text-sm font-semibold">Alejandro Silva</p>
-            </div>
-          </div>
+          <!-- Guide block removed by request -->
         </div>
       </aside>
     </main>
@@ -1283,6 +1300,7 @@
         goToIndex(initialIndex, 'auto');
         startAutoPlay();
       })();
+
     </script>
   </body>
 </html>
