@@ -1,51 +1,78 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #131412;
-  --foreground: #f9f7ea;
-  
+  /* LlamaTours Identity */
   --llama-brand: #e2e204;
   --llama-brand-soft: #f4e788;
   --llama-brand-deep: #b49a1f;
-  
-  --surface: #1b1812;
-  --surface-container: #2e2a22;
-  
+
+  /* Shadcn Overrides (Light Mode - Fallback) */
+  --background: #ffffff;
+  --foreground: #131412;
+  --card: #ffffff;
+  --card-foreground: #131412;
+  --popover: #ffffff;
+  --popover-foreground: #131412;
   --primary: #cbd0ff;
+  --primary-foreground: #1f296d;
   --secondary: #98cdef;
-  --tertiary: #8ce2d9;
+  --secondary-foreground: #131412;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #f1f5f9;
+  --accent-foreground: #131412;
+  --destructive: #ef4444;
+  --destructive-foreground: #f8fafc;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #cbd0ff;
+  --radius: 1rem;
+}
+
+.dark {
+  /* LlamaTours Identity (Same in Dark) */
+  --llama-brand: #e2e204;
+
+  /* Shadcn Overrides (Dark Mode - Primary) */
+  --background: #131412;
+  --foreground: #f9f7ea;
+  --card: #1b1812;
+  --card-foreground: #f9f7ea;
+  --popover: #1b1812;
+  --popover-foreground: #f9f7ea;
+  --primary: #e2e204;
+  /* Botón principal color llama */
+  --primary-foreground: #131412;
+  --secondary: #2e2a22;
+  --secondary-foreground: #f9f7ea;
+  --muted: #2e2a22;
+  --muted-foreground: #94a3b8;
+  --accent: #2e2a22;
+  --accent-foreground: #f9f7ea;
+  --destructive: #7f1d1d;
+  --destructive-foreground: #f9f7ea;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: #e2e204;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  
   --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
-  --color-tertiary: var(--tertiary);
-  
+  --color-secondary-foreground: var(--secondary-foreground);
   --color-brand: var(--llama-brand);
   --color-brand-soft: var(--llama-brand-soft);
   --color-brand-deep: var(--llama-brand-deep);
-  
-  --color-surface: var(--surface);
-  --color-surface-container: var(--surface-container);
-  
-  --font-poppins: var(--font-poppins);
-  --font-inter: var(--font-inter);
-  --font-jakarta: var(--font-jakarta);
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-inter), sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-poppins), sans-serif;
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
 }
 
 .glass-panel {
