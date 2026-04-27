@@ -56,7 +56,7 @@ export default function TripsPage() {
               nativeButton={false}
               className="border-white/10 hover:bg-brand hover:text-black"
               render={
-                <Link href="/viaje/ausangate" className="flex items-center gap-2">
+                <Link href="/reserva/ausangate" className="flex items-center gap-2">
                   Ver detalle <ArrowRight size={16} />
                 </Link>
               }
