@@ -73,7 +73,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/5 py-8 px-4 sm:px-6 lg:px-12 max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
-        <p>© 2024 LlamaTours. La Expedición Curada.</p>
+        <p>© 2026 LlamaTours. Creando experiencias inolvidables.</p>
         <div className="flex space-x-6">
           <Link href="#" className="hover:text-white">Privacidad</Link>
           <Link href="#" className="hover:text-white">Términos</Link>
