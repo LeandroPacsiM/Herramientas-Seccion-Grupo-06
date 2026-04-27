@@ -35,7 +35,7 @@ export default function Footer() {
 
         {/* Explorar */}
         <div className="space-y-6 text-left max-w-[220px]">
-          <h4 className="text-brand-soft font-poppins font-bold text-lg">Explorar</h4>
+          <h4 className="text-brand font-poppins font-bold text-lg">Explorar</h4>
           <ul className="space-y-3">
             <li><Link href="/" className="hover:text-white transition-colors">Inicio</Link></li>
             <li><Link href="/viajes" className="hover:text-white transition-colors">Buscador de Viajes</Link></li>
@@ -46,7 +46,7 @@ export default function Footer() {
 
         {/* Contacto */}
         <div className="space-y-6 text-left max-w-[260px]">
-          <h4 className="text-brand-soft font-poppins font-bold text-lg">Contáctanos</h4>
+          <h4 className="text-brand font-poppins font-bold text-lg">Contáctanos</h4>
           <ul className="space-y-4">
             <li className="flex items-start space-x-3">
               <Phone size={18} className="text-brand mt-1 flex-shrink-0" />
