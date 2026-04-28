@@ -1,0 +1,136 @@
+{
+  "destinos": [
+    {
+      "id": 1,
+      "codigoDestino": "banos-inca-cajamarca",
+      "nombre": "Baños del Inca",
+      "departamento": "Cajamarca",
+      "descripcionCorta": "Relájate en las históricas aguas termales donde descansaba el Inca Atahualpa.",
+      "precio": 150,
+      "moneda": "PEN",
+      "imagenes": {
+        "card": "/img/detinos/Cajamarca/bañosdelinca.jpg",
+        "hero": "/img/detinos/Cajamarca/banosdelinca/banosdelinca1.jpg"
+      },
+      "stats": {
+        "altitud": "2,650m",
+        "dificultad": "Fácil",
+        "duracionDias": 1
+      },
+      "disponibilidad": [
+        {
+          "fechaSalida": "2026-05-01",
+          "stockDisponible": 20
+        },
+        {
+          "fechaSalida": "2026-05-15",
+          "stockDisponible": 15
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "codigoDestino": "canon-colca-arequipa",
+      "nombre": "Cañón del Colca",
+      "departamento": "Arequipa",
+      "descripcionCorta": "Descubre uno de los cañones más profundos del mundo y el majestuoso vuelo del cóndor.",
+      "precio": 350,
+      "moneda": "PEN",
+      "imagenes": {
+        "card": "/img/detinos/Arequipa/colca.jpg",
+        "hero": "/img/detinos/Arequipa/Colca/colca1.jpg"
+      },
+      "stats": {
+        "altitud": "3,400m",
+        "dificultad": "Moderado",
+        "duracionDias": 2
+      },
+      "disponibilidad": [
+        {
+          "fechaSalida": "2026-05-10",
+          "stockDisponible": 8
+        },
+        {
+          "fechaSalida": "2026-05-20",
+          "stockDisponible": 0
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "codigoDestino": "chan-chan-la-libertad",
+      "nombre": "Ciudadela Chan Chan",
+      "departamento": "La Libertad",
+      "descripcionCorta": "Explora la ciudad de barro más grande de América antigua.",
+      "precio": 120,
+      "moneda": "PEN",
+      "imagenes": {
+        "card": "/img/detinos/La Libertad/ChanChan.jpg",
+        "hero": "/img/detinos/La Libertad/chanchan/chanchan1.jpg"
+      },
+      "stats": {
+        "altitud": "34m",
+        "dificultad": "Fácil",
+        "duracionDias": 1
+      },
+      "disponibilidad": [
+        {
+          "fechaSalida": "2026-05-05",
+          "stockDisponible": 30
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "codigoDestino": "ciudad-ayacucho-ayacucho",
+      "nombre": "Ciudad de Ayacucho",
+      "departamento": "Ayacucho",
+      "descripcionCorta": "Recorre las 33 iglesias y sumérgete en la historia colonial e independentista.",
+      "precio": 180,
+      "moneda": "PEN",
+      "imagenes": {
+        "card": "/img/detinos/Ayacucho/huamanga.jpg",
+        "hero": "/img/detinos/Ayacucho/ciudaddeayacucho/ciudaddeayacucho1.jpg"
+      },
+      "stats": {
+        "altitud": "2,746m",
+        "dificultad": "Fácil",
+        "duracionDias": 1
+      },
+      "disponibilidad": [
+        {
+          "fechaSalida": "2026-05-12",
+          "stockDisponible": 10
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "codigoDestino": "huacachina-ica",
+      "nombre": "Oasis de Huacachina",
+      "departamento": "Ica",
+      "descripcionCorta": "Aventura en los tubulares y sandboard en las dunas doradas del oasis.",
+      "precio": 100,
+      "moneda": "PEN",
+      "imagenes": {
+        "card": "/img/detinos/Ica/huacachina.jpg",
+        "hero": "/img/detinos/Ica/huacachina/huacachina1.jpg"
+      },
+      "stats": {
+        "altitud": "403m",
+        "dificultad": "Fácil",
+        "duracionDias": 1
+      },
+      "disponibilidad": [
+        {
+          "fechaSalida": "2026-05-08",
+          "stockDisponible": 25
+        },
+        {
+          "fechaSalida": "2026-05-18",
+          "stockDisponible": 25
+        }
+      ]
+    }
+  ]
+}
