@@ -1,68 +1,105 @@
-import Link from "next/link";
-import { Search, Filter, MapPin, Clock, ArrowRight } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+'use client';
 
-export default function TripsPage() {
+import { useState } from 'react';
+import { Search } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import PeruMap from './components/PeruMap';
+import DestinoCard from './components/DestinoCard';
+
+import data from '@/lib/data/destinos.json';
+
+export default function BuscadorPage() {
+  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredDestinos = data.destinos.filter((destino) => {
+    const matchesRegion = selectedRegion ? destino.departamento === selectedRegion : true;
+    const matchesSearch = destino.nombre.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      destino.descripcionCorta.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesRegion && matchesSearch;
+  });
+
+  const handleRegionClick = (region: string) => {
+    setSelectedRegion(prev => prev === region ? null : region);
+  };
+
   return (
-    <main className="flex-1 py-32 px-4 sm:px-6 lg:px-12 max-w-[1600px] mx-auto">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-        <div>
-          <p className="text-brand font-bold tracking-widest uppercase text-sm mb-4">Catálogo</p>
-          <h1 className="text-4xl sm:text-6xl font-poppins font-extrabold text-white">
-            Encuentra tu <span className="text-brand">destino</span>
-          </h1>
-        </div>
+    <main className="flex flex-col w-full bg-[#202124] min-h-screen">
 
-        <div className="relative w-full md:w-96">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
-          <Input
-            placeholder="Buscar expedición..."
-            className="rounded-full pl-12 bg-surface-container border-white/5 h-12"
+      <div className="w-full relative min-h-[600px] grid grid-cols-1 place-items-center py-12 overflow-hidden bg-[url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-no-repeat ">
+
+
+        <div className="absolute inset-0 bg-black opacity-40" />
+
+
+        <div className="w-full py-8 px-4 flex flex-col items-center justify-center">
+          <h2 className="text-white text-2xl font-poppins font-semibold mb-4">Busca tu destino</h2>
+          <div className="relative w-full max-w-4xl flex items-center">
+            <Input
+              placeholder="Elige el mejor destino para viajar..."
+              className="w-full bg-white text-slate-900 h-12 pl-4 pr-12 rounded-none rounded-l-md border-0"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <Button
+              className="h-12 rounded-none rounded-r-md bg-blue-600 hover:bg-blue-700 px-6 text-white"
+              onClick={() => { }}
+            >
+              <Search size={20} />
+            </Button>
+          </div>
+        </div>
+        <div className="relative z-10 w-full max-w-[800px] drop-shadow-2xl">
+          <PeruMap
+            selectedRegion={selectedRegion}
+            onRegionClick={handleRegionClick}
           />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="w-full max-w-5xl mx-auto py-16 px-4">
+        <div className="mb-8 text-center">
+          <h2 className="text-3xl font-poppins font-bold text-white">
+            {selectedRegion ? `Lugares turísticos en ${selectedRegion}` : 'Todos los Destinos'}
+          </h2>
+          <p className="text-slate-400 mt-2">
+            {filteredDestinos.length} {filteredDestinos.length === 1 ? 'resultado encontrado' : 'resultados encontrados'}
+          </p>
+        </div>
 
-        <Card className="glass-panel border-white/5 overflow-hidden group rounded-3xl">
-          <CardHeader className="p-0">
-            <div className="aspect-[4/3] bg-surface-container relative overflow-hidden">
-              <div className="absolute top-4 right-4 z-10">
-                <span className="bg-brand text-black px-3 py-1 rounded-full text-xs font-bold shadow-lg">
-                  Experto
-                </span>
+        {filteredDestinos.length > 0 ? (
+          <div className="flex flex-col gap-6">
+            {filteredDestinos.map((destino) => (
+              <DestinoCard key={destino.id} destino={destino} />
+            ))}
+          </div>
+        ) : (
+          <Card className="glass-panel border-white/5 flex flex-col items-center justify-center min-h-[300px] text-center p-12 bg-surface-container/30">
+            <CardContent className="flex flex-col items-center border-none shadow-none pt-6">
+              <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mb-4">
+                <Search size={24} className="text-slate-500" />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-0" />
-            </div>
-          </CardHeader>
-          <CardContent className="p-8 space-y-4">
-            <div className="flex items-center gap-4 text-xs font-bold text-slate-400 uppercase tracking-widest">
-              <span className="flex items-center gap-1"><MapPin size={14} className="text-brand" /> Andes</span>
-              <span className="flex items-center gap-1"><Clock size={14} className="text-brand" /> 8 Días</span>
-            </div>
-            <h3 className="text-2xl font-poppins font-bold text-white group-hover:text-brand transition-colors">
-              Ausangate Trek
-            </h3>
-            <p className="text-slate-400 line-clamp-2 leading-relaxed">
-              Una expedición mística por los glaciares sagrados de los Andes. Cruza pasos de montaña a más de 5,000 metros.
-            </p>
-          </CardContent>
-          <CardFooter className="p-8 pt-0 flex items-center justify-between">
-            <span className="text-2xl font-poppins font-bold text-brand">$3,450</span>
-            <Button
-              variant="outline"
-              nativeButton={false}
-              className="border-white/10 hover:bg-brand hover:text-black"
-              render={
-                <Link href="/reserva/ausangate" className="flex items-center gap-2">
-                  Ver detalle <ArrowRight size={16} />
-                </Link>
-              }
-            />
-          </CardFooter>
-        </Card>
+              <h3 className="text-xl font-poppins font-bold text-white mb-2">No hay destinos</h3>
+              <p className="text-slate-400 max-w-md mx-auto text-sm">
+                No encontramos expediciones para los filtros seleccionados. Intenta buscar otra región o cambia tu palabra clave.
+              </p>
+              {(selectedRegion || searchQuery) && (
+                <Button
+                  variant="outline"
+                  className="mt-6 border-white/10 text-white hover:text-black"
+                  onClick={() => {
+                    setSelectedRegion(null);
+                    setSearchQuery('');
+                  }}
+                >
+                  Limpiar filtros
+                </Button>
+              )}
+            </CardContent>
+          </Card>
+        )}
       </div>
     </main>
   );
