@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LlamaTOURS
 
-## Getting Started
+Aplicación web de agencia de viajes y expediciones construida con React, TypeScript, Vite, Tailwind CSS v4 y shadcn/ui.
 
-First, run the development server:
+## Requisitos
+
+- [Node.js](https://nodejs.org/) >= 18
+- [pnpm](https://pnpm.io/) >= 9
+
+## Instalación
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Desarrollo
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Abre [http://localhost:5173](http://localhost:5173) en el navegador.
 
-## Learn More
+## Build
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+pnpm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Comando | Descripción |
+|---------|-------------|
+| `pnpm run dev` | Inicia el servidor de desarrollo Vite |
+| `pnpm run build` | Compila el proyecto para producción |
 
-## Deploy on Vercel
+## Backend
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+La app espera una API REST en `http://localhost:8080` por defecto. Para cambiar la URL o activar datos mock, editar `.env`:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```env
+VITE_API_BASE_URL=http://localhost:8080
+VITE_USE_MOCK_DATA=false
+```
+
+## Arquitectura
+
+```
+src/
+├── app/              # Layout, routing, componentes compartidos y UI primitives
+│   ├── components/
+│   │   ├── layout/   # Navbar, Footer, AdminLayout
+│   │   ├── shared/   # ProtectedRoute, Loading, Error
+│   │   └── ui/       # shadcn/ui components
+│   └── routes.tsx    # Definición de rutas
+├── context/          # AuthContext
+├── features/         # Módulos por dominio
+│   ├── admin/        # Panel de administración
+│   ├── auth/         # Autenticación (login, registro)
+│   ├── bookings/     # Reservas
+│   ├── contact/      # Contacto
+│   ├── expeditions/  # Expediciones / viajes
+│   └── home/         # Páginas principales
+├── lib/
+│   ├── api/          # Cliente HTTP (real y mock)
+│   └── constants.ts  # Constantes de configuración
+├── styles/           # Estilos globales
+└── assets/           # Recursos estáticos
+```
+
+Cada feature contiene sus propios `types/`, `pages/`, `components/` y `services/`.
+
+## Tecnologías
+
+- **React 18** con TypeScript
+- **Vite 6** como bundler
+- **Tailwind CSS v4** para estilos
+- **shadcn/ui** (Radix UI + Tailwind) para componentes de interfaz
+- **React Router v7** para navegación
+- **Recharts** para gráficos
+- **date-fns** para manejo de fechas

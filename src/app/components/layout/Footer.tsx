@@ -1,0 +1,70 @@
+import { Mail, Phone, MapPin } from "lucide-react";
+import { FaFacebookF, FaYoutube, FaInstagram } from "react-icons/fa";
+
+export default function Footer() {
+  return (
+    <footer className="bg-black text-slate-200 w-full mt-auto">
+      <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 justify-items-center">
+
+        <div className="space-y-6 text-center">
+          <div className="text-brand font-bold uppercase tracking-widest text-2xl flex items-center justify-center gap-2">
+            <span className="text-3xl">🦙</span>
+            <span>LlamaTours</span>
+          </div>
+
+          <p className="text-slate-300 text-lg leading-relaxed">
+            Creamos experiencias de aventura y elegancia en gran altitud a través de los picos más impresionantes del mundo.
+          </p>
+
+          <div className="flex justify-center space-x-4">
+            <a href="#" className="p-2 bg-white/5 rounded-full hover:bg-brand/20 transition-colors text-brand">
+              <FaInstagram size={20} />
+            </a>
+            <a href="#" className="p-2 bg-white/5 rounded-full hover:bg-brand/20 transition-colors text-brand">
+              <FaYoutube size={20} />
+            </a>
+            <a href="#" className="p-2 bg-white/5 rounded-full hover:bg-brand/20 transition-colors text-brand">
+              <FaFacebookF size={20} />
+            </a>
+          </div>
+        </div>
+
+        <div className="space-y-6 text-left max-w-[220px]">
+          <h4 className="text-brand font-bold text-lg">Explorar</h4>
+          <ul className="space-y-3">
+            <li><a href="#" className="hover:text-white transition-colors">Inicio</a></li>
+            <li><a href="#viajes" className="hover:text-white transition-colors">Buscador de Viajes</a></li>
+            <li><a href="#nosotros" className="hover:text-white transition-colors">Sobre Nosotros</a></li>
+            <li><a href="#contacto" className="hover:text-white transition-colors">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div className="space-y-6 text-left max-w-[260px]">
+          <h4 className="text-brand font-bold text-lg">Contáctanos</h4>
+          <ul className="space-y-4">
+            <li className="flex items-start space-x-3">
+              <Phone size={18} className="text-brand mt-1 flex-shrink-0" />
+              <span>+51 900 460 347</span>
+            </li>
+            <li className="flex items-start space-x-3">
+              <Mail size={18} className="text-brand mt-1 flex-shrink-0" />
+              <span>contacto@llamatours.com</span>
+            </li>
+            <li className="flex items-start space-x-3">
+              <MapPin size={18} className="text-brand mt-1 flex-shrink-0" />
+              <span>Av. 28 de Julio, La Victoria, Lima - Perú</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div className="border-t border-white/10 py-8 px-4 sm:px-6 lg:px-12 max-w-[1600px] mx-auto flex justify-center items-center text-sm text-slate-400">
+        <p className="text-center">
+          © 2026 LlamaTours. Creando experiencias inolvidables.
+        </p>
+      </div>
+
+    </footer>
+  );
+}
