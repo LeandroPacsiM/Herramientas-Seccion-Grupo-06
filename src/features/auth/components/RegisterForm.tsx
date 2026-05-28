@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 import { Mail, Lock, User, UserPlus } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { authApi } from "@/features/auth/services/authApi";
@@ -134,9 +134,9 @@ export default function RegisterForm() {
       <div className="text-center text-sm text-slate-300">
         <p>
           ¿Ya tienes cuenta?{" "}
-          <a href="/login" className="text-brand hover:text-brand-soft hover:underline font-semibold">
+          <Link to="/login" className="text-brand hover:text-brand-soft hover:underline font-semibold">
             Inicia sesión aquí
-          </a>
+          </Link>
         </p>
       </div>
     </form>

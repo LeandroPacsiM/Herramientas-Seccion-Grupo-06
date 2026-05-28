@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useParams, Link, useNavigate } from "react-router";
 import {
   MapPin, Clock, Users, ChevronLeft, ChevronRight,
   Calendar, Flame, Leaf, Zap, CheckCircle, Minus, Plus, LogIn, AlertCircle
@@ -48,6 +48,7 @@ export default function ExpeditionDetailPage() {
   const [booking, setBooking] = useState<Booking | null>(null);
   const [bookingLoading, setBookingLoading] = useState(false);
   const [bookingError, setBookingError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     api.get<Expedition[]>("/api/expeditions").then((list) => {
@@ -71,7 +72,7 @@ export default function ExpeditionDetailPage() {
       <main className="flex-1 flex flex-col items-center justify-center py-32 px-4 gap-6">
         <p className="text-6xl">🦙</p>
         <h1 className="text-2xl font-bold text-foreground">Expedición no encontrada</h1>
-        <a href="/viajes"><Button variant="outline">Ver catálogo</Button></a>
+        <Link to="/viajes"><Button variant="outline">Ver catálogo</Button></Link>
       </main>
     );
   }
@@ -87,7 +88,7 @@ export default function ExpeditionDetailPage() {
 
   const handleReservar = async () => {
     if (!isAuthenticated) {
-      window.location.href = `/login?redirect=/viajes/${slug}`;
+      navigate(`/login?redirect=/viajes/${slug}`);
       return;
     }
     if (!selectedAvailability) return;
@@ -115,13 +116,13 @@ export default function ExpeditionDetailPage() {
   return (
     <main className="flex-1 pt-24 pb-20">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12 mb-6">
-        <a
-          href="/viajes"
+        <Link
+          to="/viajes"
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-brand transition-colors"
         >
           <ChevronLeft size={16} />
           Volver al catálogo
-        </a>
+        </Link>
       </div>
 
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -302,9 +303,9 @@ export default function ExpeditionDetailPage() {
                     <p>👥 {booking.peopleCount} {booking.peopleCount === 1 ? "persona" : "personas"}</p>
                     <p>💰 ${(expedition.price * booking.peopleCount).toFixed(0)} USD total</p>
                   </div>
-                  <a href="/mis-reservas" className="block mt-2">
+                  <Link to="/mis-reservas" className="block mt-2">
                     <Button variant="outline" className="w-full text-xs h-8">Ver mis reservas</Button>
-                  </a>
+                  </Link>
                 </div>
               ) : !isAuthenticated ? (
                 <div className="space-y-3">
@@ -312,12 +313,12 @@ export default function ExpeditionDetailPage() {
                     <LogIn size={15} className="text-brand flex-shrink-0 mt-0.5" />
                     Inicia sesión para completar tu reserva
                   </div>
-                  <a href={`/login?redirect=/viajes/${slug}`}>
+                  <Link to={`/login?redirect=/viajes/${slug}`}>
                     <Button className="w-full font-bold h-11">
                       <LogIn size={16} className="mr-2" />
                       Iniciar sesión para reservar
                     </Button>
-                  </a>
+                  </Link>
                 </div>
               ) : (
                 <Button
@@ -342,9 +343,9 @@ export default function ExpeditionDetailPage() {
 
             <div className="bg-card border border-border rounded-2xl p-5 text-center space-y-3">
               <p className="text-sm text-muted-foreground">¿Quieres una expedición personalizada?</p>
-              <a href="/contacto" className="block">
+              <Link to="/contacto" className="block">
                 <Button variant="outline" className="w-full">Contactar un guía</Button>
-              </a>
+              </Link>
             </div>
 
           </div>

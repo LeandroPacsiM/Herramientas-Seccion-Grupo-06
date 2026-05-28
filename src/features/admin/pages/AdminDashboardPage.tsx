@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 import { Map, Users, CalendarCheck, TrendingUp } from "lucide-react";
 import AdminLayout from "@/app/components/layout/AdminLayout";
 import { api } from "@/lib/api";
@@ -117,8 +118,8 @@ export default function AdminDashboardPage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <a
-            href="/admin/expediciones"
+          <Link
+            to="/admin/expediciones"
             className="bg-brand/5 border border-brand/20 hover:border-brand/40 rounded-2xl p-6 flex items-center gap-4 transition-colors group"
           >
             <div className="w-12 h-12 bg-brand/10 rounded-xl flex items-center justify-center text-brand">
@@ -128,9 +129,9 @@ export default function AdminDashboardPage() {
               <p className="text-foreground font-semibold group-hover:text-brand transition-colors">Gestionar Expediciones</p>
               <p className="text-muted-foreground text-sm">Crear, editar y eliminar</p>
             </div>
-          </a>
-          <a
-            href="/viajes"
+          </Link>
+          <Link
+            to="/viajes"
             className="bg-card border border-border hover:border-brand/30 rounded-2xl p-6 flex items-center gap-4 transition-colors group"
           >
             <div className="w-12 h-12 bg-accent rounded-xl flex items-center justify-center text-muted-foreground">
@@ -140,7 +141,7 @@ export default function AdminDashboardPage() {
               <p className="text-foreground font-semibold group-hover:text-brand transition-colors">Ver Catálogo Público</p>
               <p className="text-muted-foreground text-sm">Vista del cliente</p>
             </div>
-          </a>
+          </Link>
         </div>
       </div>
     </AdminLayout>

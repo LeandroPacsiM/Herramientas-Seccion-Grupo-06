@@ -25,7 +25,7 @@ function Layout() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '')}>
       <AuthProvider>
         <div className="min-h-screen flex flex-col dark bg-background text-foreground">
           <Layout />

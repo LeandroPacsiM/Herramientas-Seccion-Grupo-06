@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 import { Mail, Lock, LogIn } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { authApi } from "@/features/auth/services/authApi";
@@ -95,9 +95,9 @@ export default function LoginForm() {
       <div className="text-center text-sm text-slate-300">
         <p>
           ¿No tienes cuenta?{" "}
-          <a href="/register" className="text-brand hover:text-brand-soft hover:underline font-semibold">
+          <Link to="/register" className="text-brand hover:text-brand-soft hover:underline font-semibold">
             Regístrate aquí
-          </a>
+          </Link>
         </p>
       </div>
 

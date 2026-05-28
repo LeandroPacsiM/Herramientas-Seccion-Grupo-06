@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router";
 import { Mail, Phone, MapPin, Send, CheckCircle, User, MessageSquare } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
@@ -193,9 +194,9 @@ export default function ContactoPage() {
           <div className="bg-card border border-border rounded-2xl p-6 space-y-3">
             <p className="text-foreground font-semibold text-sm">¿Listo para explorar?</p>
             <p className="text-muted-foreground text-sm">Revisa nuestro catálogo de expediciones y encuentra tu aventura ideal.</p>
-            <a href="/viajes">
+            <Link to="/viajes">
               <Button variant="outline" className="w-full">Ver expediciones</Button>
-            </a>
+            </Link>
           </div>
         </div>
 

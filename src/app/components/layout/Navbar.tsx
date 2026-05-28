@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Link, useNavigate } from "react-router";
 import { LogIn, LogOut, Menu, Sun, User as UserIcon, Shield, CalendarCheck, Lock } from "lucide-react";
 import { Button } from "../ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet";
@@ -34,9 +35,10 @@ export default function Navbar() {
     { name: "Sobre Nosotros", href: "/nosotros" },
   ];
 
+  const navigate = useNavigate();
   const handleLogout = () => {
     logout();
-    window.location.href = "/";
+    navigate("/");
   };
 
   return (
@@ -49,28 +51,28 @@ export default function Navbar() {
     >
       <nav className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12 py-3 flex items-center justify-between">
         {/* Logo */}
-        <a href="/" className="flex-shrink-0 transition-transform hover:scale-105 flex items-center gap-2">
+        <Link to="/" className="flex-shrink-0 transition-transform hover:scale-105 flex items-center gap-2">
           <div className="w-[70px] h-[70px] bg-brand/10 rounded-full flex items-center justify-center">
             <span className="text-4xl">🦙</span>
           </div>
-        </a>
+        </Link>
 
         {/* Desktop nav links */}
         <div className="hidden md:flex items-center space-x-8 font-semibold text-sm">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} className="text-foreground/80 hover:text-brand transition-colors">
+            <Link key={link.href} to={link.href} className="text-foreground/80 hover:text-brand transition-colors">
               {link.name}
-            </a>
+            </Link>
           ))}
 
           {/* Mis Reservas — solo para usuarios no-admin */}
           {!isAdmin && (
             <div className="relative" ref={popoverRef}>
               {isAuthenticated ? (
-                <a href="/mis-reservas" className="flex items-center gap-1.5 text-foreground/80 hover:text-brand transition-colors">
+                <Link to="/mis-reservas" className="flex items-center gap-1.5 text-foreground/80 hover:text-brand transition-colors">
                   <CalendarCheck size={15} />
                   Mis Reservas
-                </a>
+                </Link>
               ) : (
                 <>
                   <button
@@ -91,12 +93,12 @@ export default function Navbar() {
                           Debes iniciar sesión para acceder a tus reservas.
                         </p>
                       </div>
-                      <a href="/login?redirect=/mis-reservas" onClick={() => setReservasPopover(false)}>
+                      <Link to="/login?redirect=/mis-reservas" onClick={() => setReservasPopover(false)}>
                         <Button className="w-full h-8 text-xs font-bold">
                           <LogIn size={13} className="mr-1.5" />
                           Iniciar sesión
                         </Button>
-                      </a>
+                      </Link>
                     </div>
                   )}
                 </>
@@ -114,15 +116,15 @@ export default function Navbar() {
           {isAuthenticated ? (
             <>
               {isAdmin ? (
-                <a href="/admin" className="hidden sm:flex items-center gap-2 text-sm text-brand hover:text-brand-soft transition-colors">
+                <Link to="/admin" className="hidden sm:flex items-center gap-2 text-sm text-brand hover:text-brand-soft transition-colors">
                   <Shield size={16} />
                   <span className="font-semibold">Admin</span>
-                </a>
+                </Link>
               ) : (
-                <a href="/mis-reservas" className="hidden sm:flex items-center gap-2 text-sm text-foreground/80 hover:text-brand transition-colors">
+                <Link to="/mis-reservas" className="hidden sm:flex items-center gap-2 text-sm text-foreground/80 hover:text-brand transition-colors">
                   <UserIcon size={16} />
                   <span className="font-semibold">{user?.name}</span>
-                </a>
+                </Link>
               )}
               <Button onClick={handleLogout} variant="outline" className="hidden sm:flex font-bold border-white/10">
                 <LogOut size={16} className="mr-2" />
@@ -130,12 +132,12 @@ export default function Navbar() {
               </Button>
             </>
           ) : (
-            <a href="/login">
+            <Link to="/login">
               <Button variant="default" className="hidden sm:flex font-bold shadow-lg shadow-brand/10">
                 <LogIn size={16} className="mr-2" />
                 Ingresar
               </Button>
-            </a>
+            </Link>
           )}
 
           {/* Mobile menu */}
@@ -151,18 +153,18 @@ export default function Navbar() {
               </SheetHeader>
               <div className="flex flex-col space-y-4 mt-8">
                 {navLinks.map((link) => (
-                  <a key={link.href} href={link.href} className="text-lg font-medium text-foreground hover:text-brand">
+                  <Link key={link.href} to={link.href} className="text-lg font-medium text-foreground hover:text-brand">
                     {link.name}
-                  </a>
+                  </Link>
                 ))}
 
                 {/* Mis Reservas mobile — solo no-admin */}
                 {!isAdmin && (
                   isAuthenticated ? (
-                    <a href="/mis-reservas" className="text-lg font-medium text-foreground hover:text-brand flex items-center gap-2">
+                    <Link to="/mis-reservas" className="text-lg font-medium text-foreground hover:text-brand flex items-center gap-2">
                       <CalendarCheck size={18} />
                       Mis Reservas
-                    </a>
+                    </Link>
                   ) : (
                     <div className="flex flex-col gap-2">
                       <div className="flex items-center gap-2 text-foreground/40">
@@ -182,10 +184,10 @@ export default function Navbar() {
                 {isAuthenticated ? (
                   <>
                     {isAdmin && (
-                      <a href="/admin" className="text-lg font-medium text-brand hover:text-brand-soft flex items-center gap-2">
+                      <Link to="/admin" className="text-lg font-medium text-brand hover:text-brand-soft flex items-center gap-2">
                         <Shield size={18} />
                         Panel Admin
-                      </a>
+                      </Link>
                     )}
                     <p className="text-sm text-muted-foreground">Sesión: {user?.name}</p>
                     <Button onClick={handleLogout} variant="outline" className="w-full font-bold border-white/10">
@@ -195,15 +197,15 @@ export default function Navbar() {
                   </>
                 ) : (
                   <>
-                    <a href="/login">
+                    <Link to="/login">
                       <Button className="w-full font-bold">
                         <LogIn size={16} className="mr-2" />
                         Ingresar
                       </Button>
-                    </a>
-                    <a href="/register" className="text-center text-sm text-brand hover:underline">
+                    </Link>
+                    <Link to="/register" className="text-center text-sm text-brand hover:underline">
                       ¿No tienes cuenta? Regístrate
-                    </a>
+                    </Link>
                   </>
                 )}
               </div>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 import { CalendarCheck, Users, X, CheckCircle, Clock } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import Loading from "@/app/components/shared/Loading";
@@ -67,9 +68,9 @@ export default function MisReservasPage() {
           <p className="text-5xl">🦙</p>
           <p className="text-foreground font-semibold">Aún no tienes reservas</p>
           <p className="text-muted-foreground">Explora el catálogo y reserva tu próxima aventura.</p>
-          <a href="/viajes">
+          <Link to="/viajes">
             <Button className="mt-2 font-bold">Ver expediciones</Button>
-          </a>
+          </Link>
         </div>
       ) : (
         <div className="space-y-8">

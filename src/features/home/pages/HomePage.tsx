@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { ArrowRight, Star, MapPin, Calendar } from "lucide-react";
 
 export default function HomePage() {
@@ -21,19 +22,19 @@ export default function HomePage() {
             <span className="text-brand">Inolvidable</span>
           </h1>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
-            <a
-              href="/viajes"
+            <Link
+              to="/viajes"
               className="bg-brand hover:bg-brand-soft text-black px-8 py-4 rounded-md font-bold transition-all flex items-center group"
             >
               Explorar Viajes
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
-            </a>
-            <a
-              href="/contacto"
+            </Link>
+            <Link
+              to="/contacto"
               className="glass-panel text-white border border-white/20 px-8 py-4 rounded-md font-bold hover:bg-white/10 transition-all"
             >
               Contactar un Guía
-            </a>
+            </Link>
           </div>
         </div>
 
