@@ -7,11 +7,15 @@ dist
 *.log
 .DS_Store
 Thumbs.db
-.vscode/settings.json
+# IDEs
+.vscode/
+.idea/
 
-# Next.js legacy (old project)
-.next/
-next-env.d.ts
+# Editor temporals
+*.swp
+*.swo
+*~
+
 *.tsbuildinfo
 
 
