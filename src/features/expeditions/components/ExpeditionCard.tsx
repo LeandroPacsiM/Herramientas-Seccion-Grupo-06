@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { MapPin, Clock, Users, ChevronRight, Flame, Leaf, Zap } from "lucide-react";
 import type { Expedition } from "../types";
 
@@ -20,8 +21,8 @@ export default function ExpeditionCard({ expedition }: ExpeditionCardProps) {
   const spotsPercent = totalSpots > 0 ? (availableSpots / totalSpots) * 100 : 0;
 
   return (
-    <a
-      href={`/viajes/${expedition.slug}`}
+    <Link
+      to={`/viajes/${expedition.slug}`}
       className="group block bg-card border border-border rounded-2xl overflow-hidden hover:border-brand/40 transition-all duration-300 hover:shadow-xl hover:shadow-brand/5 hover:-translate-y-1"
     >
       <div className="relative h-52 overflow-hidden bg-muted">
@@ -94,6 +95,6 @@ export default function ExpeditionCard({ expedition }: ExpeditionCardProps) {
           </span>
         </div>
       </div>
-    </a>
+    </Link>
   );
 }
