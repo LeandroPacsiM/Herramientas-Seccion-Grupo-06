@@ -48,7 +48,7 @@ const mockExpeditions: Expedition[] = [
   },
   {
     id: 2,
-    name: "Montaña de 7 Coloresss",
+    name: "Montaña de 7 Colores",
     slug: "montana-7-colores",
     description: "Vinicunca, la montaña arcoíris más famosa del mundo. Trek de un día a 5,200 msnm para contemplar las franjas naturales de colores creadas por minerales.",
     price: 89.99,
