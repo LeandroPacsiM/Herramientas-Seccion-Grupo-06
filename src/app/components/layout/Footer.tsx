@@ -32,10 +32,10 @@ export default function Footer() {
         <div className="space-y-6 text-left max-w-[220px]">
           <h4 className="text-brand font-bold text-lg">Explorar</h4>
           <ul className="space-y-3">
-            <li><a href="#" className="hover:text-white transition-colors">Inicio</a></li>
-            <li><a href="#viajes" className="hover:text-white transition-colors">Buscador de Viajes</a></li>
-            <li><a href="#nosotros" className="hover:text-white transition-colors">Sobre Nosotros</a></li>
-            <li><a href="#contacto" className="hover:text-white transition-colors">Contacto</a></li>
+            <li><a href="" className="hover:text-white transition-colors">Inicio</a></li>
+            <li><a href="viajes" className="hover:text-white transition-colors">Buscador de Viajes</a></li>
+            <li><a href="nosotros" className="hover:text-white transition-colors">Sobre Nosotros</a></li>
+            <li><a href="contacto" className="hover:text-white transition-colors">Contacto</a></li>
           </ul>
         </div>
 
