@@ -88,7 +88,7 @@ const mockExpeditions: Expedition[] = [
       { id: 13, dayNumber: 7, title: "Retorno a Cusco", description: "Caminata final hacia Tinki. Transfer de regreso a Cusco." }
     ],
     images: [
-      { id: 7, url: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=1080", imageOrder: 1 },
+      { id: 7, url: "https://www.iterraperu.com/images/packages/ausangate-trek-5-days.jpg", imageOrder: 1 },
       { id: 8, url: "https://images.unsplash.com/photo-1582161095006-7c4edf743cd9?w=1080", imageOrder: 2 },
       { id: 9, url: "https://images.unsplash.com/photo-1637580981046-6e14709be202?w=1080", imageOrder: 3 }
     ],
@@ -165,7 +165,7 @@ const mockExpeditions: Expedition[] = [
       { id: 29, dayNumber: 1, title: "Laguna 69", description: "Salida desde Huaraz hacia Cebollapampa. Caminata de 3 horas hasta Laguna 69. Retorno y regreso a Huaraz." }
     ],
     images: [
-      { id: 14, url: "https://images.unsplash.com/photo-1614586125858-e695dd97d1b6?w=1080", imageOrder: 1 }
+      { id: 14, url: "https://bushop.com/peru/wp-content/uploads/sites/10/laguna69-featured-1_1.jpg", imageOrder: 1 }
     ],
     availabilities: [
       { id: 13, startDate: "2026-06-06", endDate: "2026-06-06", capacity: 25, availableSpots: 18 },
