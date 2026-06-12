@@ -1,0 +1,125 @@
+/* ♿ Accessibility Styles */
+
+:root {
+  /* Font size variables for text scaling */
+  --accessibility-font-size-base: 16px;
+  --accessibility-text-scale: 1;
+  --accessibility-line-spacing: 1.5;
+
+  /* OpenDyslexic font import (loaded in fonts.css) */
+  --accessibility-dyslexic-font: "OpenDyslexic", sans-serif;
+
+  /* Default color variables (inherits from theme) */
+  --accessibility-text-color: var(--foreground, #000000);
+  --accessibility-bg-color: var(--background, #ffffff);
+}
+
+/* Line Spacing Modes */
+.accessibility-line-spacing-relaxed {
+  --accessibility-line-spacing: 1.8;
+}
+
+.accessibility-line-spacing-spacious {
+  --accessibility-line-spacing: 2.2;
+}
+
+/* High Contrast Mode */
+.accessibility-high-contrast {
+  --accessibility-text-color: #000000;
+  --accessibility-bg-color: #ffffff;
+}
+
+.accessibility-high-contrast body {
+  background-color: white;
+  color: black;
+  border-color: black;
+}
+
+.accessibility-high-contrast button,
+.accessibility-high-contrast a {
+  border: 2px solid black;
+}
+
+.accessibility-high-contrast input,
+.accessibility-high-contrast textarea,
+.accessibility-high-contrast select {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+}
+
+/* Inverted Contrast Mode */
+.accessibility-inverted-contrast {
+  background-color: #000000;
+  color: #ffff00;
+  filter: invert(1);
+}
+
+.accessibility-inverted-contrast img {
+  filter: invert(1);
+}
+
+/* Dyslexic Friendly Font */
+.accessibility-dyslexic-font,
+.accessibility-dyslexic-font * {
+  font-family: var(--accessibility-dyslexic-font);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1.8;
+}
+
+/* Reading Mask (handled by React component ReadingMask.tsx) */
+
+/* Large Cursor - Flecha agrandada estilo Windows */
+.accessibility-large-cursor {
+  cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDQwIDQ4Ij48cGF0aCBkPSJNNSAyIEw1IDM2IEwxMiAyOCBMMTkgNDIgTDI0IDQwIEwxNyAyNiBMMzEgMjYgTDUgMloiIGZpbGw9IndoaXRlIiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==") 5 2, auto;
+}
+
+.accessibility-large-cursor button,
+.accessibility-large-cursor a {
+  cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDQwIDQ4Ij48cGF0aCBkPSJNNSAyIEw1IDM2IEwxMiAyOCBMMTkgNDIgTDI0IDQwIEwxNyAyNiBMMzEgMjYgTDUgMloiIGZpbGw9IndoaXRlIiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==") 5 2, pointer;
+}
+
+/* Text Scaling (scales fonts based on --accessibility-text-scale) */
+.accessibility-scalable {
+  font-size: calc(1rem * var(--accessibility-text-scale));
+}
+
+h1.accessibility-scalable {
+  font-size: calc(2rem * var(--accessibility-text-scale));
+}
+
+h2.accessibility-scalable {
+  font-size: calc(1.5rem * var(--accessibility-text-scale));
+}
+
+h3.accessibility-scalable {
+  font-size: calc(1.25rem * var(--accessibility-text-scale));
+}
+
+p.accessibility-scalable,
+span.accessibility-scalable,
+button.accessibility-scalable,
+a.accessibility-scalable {
+  font-size: calc(1rem * var(--accessibility-text-scale));
+}
+
+/* Global text scaling with CSS custom property */
+body {
+  font-size: var(--accessibility-font-size-base);
+  line-height: var(--accessibility-line-spacing);
+}
+
+/* Focus styles for better keyboard navigation */
+:focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.accessibility-high-contrast :focus-visible {
+  outline: 3px solid black;
+}
+
+.accessibility-inverted-contrast :focus-visible {
+  outline: 3px solid #ffff00;
+}
