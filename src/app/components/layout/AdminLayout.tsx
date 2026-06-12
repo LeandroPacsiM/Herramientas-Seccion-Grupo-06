@@ -29,7 +29,7 @@ export default function AdminLayout({ children, current }: AdminLayoutProps) {
         {/* Logo */}
         <div className="px-6 py-5 border-b border-border">
           <Link to="/" className="flex items-center gap-2 group">
-            <img src="/assets/img/icons/llama.png" alt="LlamaTOURS" className="h-9 w-9 object-contain" />
+            <img src={`${import.meta.env.BASE_URL}assets/img/icons/llama.png`} alt="LlamaTOURS" className="h-9 w-9 object-contain" />
             <div>
               <p className="text-foreground font-bold leading-none">LlamaTours</p>
               <p className="text-brand text-xs font-semibold">Panel Admin</p>

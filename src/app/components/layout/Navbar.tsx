@@ -54,7 +54,7 @@ export default function Navbar() {
       <nav className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex-shrink-0 flex items-center gap-2">
-          <img src="/assets/img/icons/llama.png" alt="LlamaTOURS" className="h-24 w-24 object-contain" />
+          <img src={`${import.meta.env.BASE_URL}assets/img/icons/llama.png`} alt="LlamaTOURS" className="h-24 w-24 object-contain" />
         </Link>
 
         {/* Desktop nav links */}
@@ -158,7 +158,7 @@ export default function Navbar() {
             <SheetContent side="right" className="bg-background border-border p-0 flex flex-col">
               {/* Brand header */}
               <div className="bg-background border-b border-border px-5 py-5 flex items-center justify-center">
-                <img src="/assets/img/icons/llama.png" alt="LlamaTOURS" className="h-12 w-12 object-contain" />
+                <img src={`${import.meta.env.BASE_URL}assets/img/icons/llama.png`} alt="LlamaTOURS" className="h-12 w-12 object-contain" />
               </div>
 
               {/* Navigation */}
