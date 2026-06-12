@@ -8,7 +8,7 @@ export default function Footer() {
 
         <div className="space-y-6 text-center">
           <div className="text-brand font-bold uppercase tracking-widest text-2xl flex items-center justify-center gap-2">
-            <img src="/assets/img/icons/llama.png" alt="LlamaTOURS" className="h-10 w-10 object-contain" />
+            <img src={`${import.meta.env.BASE_URL}assets/img/icons/llama.png`} alt="LlamaTOURS" className="h-10 w-10 object-contain" />
             <span>LlamaTours</span>
           </div>
 
