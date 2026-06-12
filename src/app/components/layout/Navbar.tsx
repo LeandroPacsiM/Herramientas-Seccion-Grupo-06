@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router";
-import { LogIn, LogOut, Menu, Sun, User as UserIcon, Shield, CalendarCheck, Lock } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { LogIn, LogOut, Menu, User as UserIcon, Shield, CalendarCheck, Lock } from "lucide-react";
 import { Button } from "../ui/button";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { useAuth } from "@/context/AuthContext";
 
 export default function Navbar() {
+  const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [reservasPopover, setReservasPopover] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
@@ -51,10 +53,8 @@ export default function Navbar() {
     >
       <nav className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12 py-3 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex-shrink-0 transition-transform hover:scale-105 flex items-center gap-2">
-          <div className="w-[70px] h-[70px] bg-brand/10 rounded-full flex items-center justify-center">
-            <span className="text-4xl">🦙</span>
-          </div>
+        <Link to="/" className="flex-shrink-0 flex items-center gap-2">
+          <img src="/assets/img/icons/llama.png" alt="LlamaTOURS" className="h-24 w-24 object-contain" />
         </Link>
 
         {/* Desktop nav links */}
@@ -109,8 +109,16 @@ export default function Navbar() {
 
         {/* Right actions */}
         <div className="flex items-center space-x-3">
-          <Button variant="ghost" size="icon" className="text-brand rounded-full">
-            <Sun size={20} />
+          <Button
+            variant="ghost"
+            size="icon"
+            className="bg-primary text-primary-foreground rounded-full hover:bg-primary/90"
+            onClick={() => window.dispatchEvent(new CustomEvent("toggle-accessibility"))}
+            aria-label={t("accessibility.openAccessibility")}
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4,8 L11,8 L11,14 L7,21 M20,8 L13,8 L13,14 L17,21 M12,5 C12.55,5 13,4.55 13,4 C13,3.45 12.55,3 12,3 C11.45,3 11,3.45 11,4 C11,4.55 11.45,5 12,5 Z M11,8 L13,8 L13,13 L11,13 L11,8 Z" />
+            </svg>
           </Button>
 
           {isAuthenticated ? (
@@ -147,32 +155,44 @@ export default function Navbar() {
                 <Menu size={24} />
               </Button>
             </SheetTrigger>
-            <SheetContent side="top" className="bg-background border-border">
-              <SheetHeader>
-                <SheetTitle className="text-brand font-bold">LlamaTours</SheetTitle>
-              </SheetHeader>
-              <div className="flex flex-col space-y-4 mt-8">
+            <SheetContent side="right" className="bg-background border-border p-0 flex flex-col">
+              {/* Brand header */}
+              <div className="bg-background border-b border-border px-5 py-5 flex items-center justify-center">
+                <img src="/assets/img/icons/llama.png" alt="LlamaTOURS" className="h-12 w-12 object-contain" />
+              </div>
+
+              {/* Navigation */}
+              <div className="flex-1 overflow-y-auto px-4 py-5 space-y-2">
                 {navLinks.map((link) => (
-                  <Link key={link.href} to={link.href} className="text-lg font-medium text-foreground hover:text-brand">
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    className="flex items-center gap-3 px-4 py-3.5 bg-card border border-border rounded-xl hover:border-primary hover:bg-primary/5 transition-all shadow-sm text-foreground font-medium text-sm"
+                  >
                     {link.name}
                   </Link>
                 ))}
 
+                <hr className="border-border my-3" />
+
                 {/* Mis Reservas mobile — solo no-admin */}
                 {!isAdmin && (
                   isAuthenticated ? (
-                    <Link to="/mis-reservas" className="text-lg font-medium text-foreground hover:text-brand flex items-center gap-2">
-                      <CalendarCheck size={18} />
+                    <Link
+                      to="/mis-reservas"
+                      className="flex items-center gap-3 px-4 py-3.5 bg-card border border-border rounded-xl hover:border-primary hover:bg-primary/5 transition-all shadow-sm text-foreground font-medium text-sm"
+                    >
+                      <CalendarCheck size={18} className="text-brand" />
                       Mis Reservas
                     </Link>
                   ) : (
-                    <div className="flex flex-col gap-2">
-                      <div className="flex items-center gap-2 text-foreground/40">
+                    <div className="bg-card border border-border rounded-xl p-4 space-y-3 shadow-sm">
+                      <div className="flex items-center gap-2 text-muted-foreground">
                         <CalendarCheck size={18} />
-                        <span className="text-lg font-medium">Mis Reservas</span>
+                        <span className="font-medium text-sm">Mis Reservas</span>
                       </div>
-                      <div className="flex items-center gap-2 bg-brand/5 border border-brand/20 rounded-xl px-3 py-2">
-                        <Lock size={13} className="text-brand flex-shrink-0" />
+                      <div className="flex items-start gap-2 bg-brand/5 border border-brand/20 rounded-lg px-3 py-2">
+                        <Lock size={13} className="text-brand flex-shrink-0 mt-0.5" />
                         <p className="text-xs text-muted-foreground">
                           Inicia sesión para ver tus reservas.
                         </p>
@@ -180,17 +200,23 @@ export default function Navbar() {
                     </div>
                   )
                 )}
+              </div>
 
+              {/* Auth section */}
+              <div className="px-4 py-4 bg-muted border-t border-border space-y-3">
                 {isAuthenticated ? (
                   <>
                     {isAdmin && (
-                      <Link to="/admin" className="text-lg font-medium text-brand hover:text-brand-soft flex items-center gap-2">
+                      <Link
+                        to="/admin"
+                        className="flex items-center gap-3 px-4 py-3 bg-card border border-border rounded-xl hover:border-primary hover:bg-primary/5 transition-all shadow-sm text-brand font-medium text-sm"
+                      >
                         <Shield size={18} />
                         Panel Admin
                       </Link>
                     )}
-                    <p className="text-sm text-muted-foreground">Sesión: {user?.name}</p>
-                    <Button onClick={handleLogout} variant="outline" className="w-full font-bold border-white/10">
+                    <p className="text-xs text-muted-foreground px-1">Sesión: {user?.name}</p>
+                    <Button onClick={handleLogout} variant="outline" className="w-full font-bold">
                       <LogOut size={16} className="mr-2" />
                       Cerrar Sesión
                     </Button>
@@ -203,7 +229,7 @@ export default function Navbar() {
                         Ingresar
                       </Button>
                     </Link>
-                    <Link to="/register" className="text-center text-sm text-brand hover:underline">
+                    <Link to="/register" className="block text-center text-sm text-brand hover:underline">
                       ¿No tienes cuenta? Regístrate
                     </Link>
                   </>
