@@ -21,6 +21,8 @@ const EMPTY_FORM = {
   durationDays: "",
   difficulty: "MODERATE" as "EASY" | "MODERATE" | "HARD",
   location: "",
+  latitude: "",
+  longitude: "",
   itineraries: [{ dayNumber: 1, title: "", description: "" }],
   images: [{ url: "", imageOrder: 1 }],
   availabilities: [{ startDate: "", endDate: "", capacity: "" }],
@@ -44,6 +46,8 @@ export default function ExpeditionFormModal({ expedition, onClose, onSaved }: Ex
         durationDays: String(expedition.durationDays),
         difficulty: expedition.difficulty,
         location: expedition.location,
+        latitude: expedition.latitude ? String(expedition.latitude) : "",
+        longitude: expedition.longitude ? String(expedition.longitude) : "",
         itineraries: expedition.itineraries.map((it) => ({
           dayNumber: it.dayNumber,
           title: it.title,
@@ -99,6 +103,8 @@ export default function ExpeditionFormModal({ expedition, onClose, onSaved }: Ex
       durationDays: parseInt(form.durationDays),
       difficulty: form.difficulty,
       location: form.location,
+      latitude: form.latitude ? parseFloat(form.latitude) : undefined,
+      longitude: form.longitude ? parseFloat(form.longitude) : undefined,
       itineraries: form.itineraries,
       images: form.images.filter((img) => img.url.trim()),
       availabilities: form.availabilities
@@ -173,6 +179,14 @@ export default function ExpeditionFormModal({ expedition, onClose, onSaved }: Ex
             <div className="space-y-1.5">
               <Label>Ubicación *</Label>
               <Input value={form.location} onChange={(e) => set("location", e.target.value)} required placeholder="Cusco, Perú" />
+            </div>
+            <div className="space-y-1.5">
+              <Label>Latitud</Label>
+              <Input type="number" step="any" value={form.latitude} onChange={(e) => set("latitude", e.target.value)} placeholder="-13.1631" />
+            </div>
+            <div className="space-y-1.5">
+              <Label>Longitud</Label>
+              <Input type="number" step="any" value={form.longitude} onChange={(e) => set("longitude", e.target.value)} placeholder="-72.5450" />
             </div>
           </div>
 

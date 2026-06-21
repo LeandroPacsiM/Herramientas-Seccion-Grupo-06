@@ -1,11 +1,12 @@
 import { useState, useEffect, useMemo } from "react";
-import { Search, SlidersHorizontal, X } from "lucide-react";
+import { Search, SlidersHorizontal, X, Map as MapIcon } from "lucide-react";
 import { Input } from "@/app/components/ui/input";
 import { Button } from "@/app/components/ui/button";
 import Loading from "@/app/components/shared/Loading";
 import { api } from "@/lib/api";
 import type { Expedition } from "../types";
 import ExpeditionCard from "../components/ExpeditionCard";
+import ExpeditionMap from "../components/ExpeditionMap";
 
 type Difficulty = "ALL" | "EASY" | "MODERATE" | "HARD";
 type SortOption = "price-asc" | "price-desc" | "duration-asc" | "duration-desc";
@@ -34,6 +35,8 @@ export default function ViajesPage() {
   const [location, setLocation] = useState("ALL");
   const [sort, setSort] = useState<SortOption>("price-asc");
   const [showFilters, setShowFilters] = useState(false);
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [showMapOnMobile, setShowMapOnMobile] = useState(false);
 
   useEffect(() => {
     api
@@ -178,43 +181,99 @@ export default function ViajesPage() {
         )}
       </div>
 
-      {!loading && !error && (
-        <p className="text-muted-foreground text-sm mb-8">
-          {filtered.length === 0
-            ? "No se encontraron expediciones"
-            : `${filtered.length} expedición${filtered.length !== 1 ? "es" : ""} disponible${filtered.length !== 1 ? "s" : ""}`}
-        </p>
-      )}
+      <div className="flex flex-col lg:flex-row gap-8 items-start relative w-full">
+        {/* Left Side: Cards and filters / loading states */}
+        <div className={`w-full lg:w-7/12 xl:w-8/12 ${showMapOnMobile ? "hidden" : "block"} lg:block`}>
+          {!loading && !error && (
+            <p className="text-muted-foreground text-sm mb-6">
+              {filtered.length === 0
+                ? "No se encontraron expediciones"
+                : `${filtered.length} expedición${filtered.length !== 1 ? "es" : ""} disponible${filtered.length !== 1 ? "s" : ""}`}
+            </p>
+          )}
 
-      {loading ? (
-        <div className="flex justify-center py-24">
-          <Loading />
+          {loading ? (
+            <div className="flex justify-center py-24">
+              <Loading />
+            </div>
+          ) : error ? (
+            <div className="glass-panel p-12 rounded-2xl text-center">
+              <p className="text-red-400">{error}</p>
+              <Button variant="outline" className="mt-4" onClick={() => window.location.reload()}>
+                Reintentar
+              </Button>
+            </div>
+          ) : filtered.length === 0 ? (
+            <div className="glass-panel p-16 rounded-2xl text-center space-y-4">
+              <p className="text-5xl">🦙</p>
+              <p className="text-foreground font-semibold">Sin resultados</p>
+              <p className="text-muted-foreground">
+                Ninguna expedición coincide con tu búsqueda. Intenta con otros filtros.
+              </p>
+              <Button variant="outline" onClick={clearFilters} className="mt-2">
+                Ver todas las expediciones
+              </Button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+              {filtered.map((expedition) => (
+                <div
+                  key={expedition.id}
+                  id={`expedition-card-${expedition.id}`}
+                  onMouseEnter={() => setHoveredId(expedition.id)}
+                  onMouseLeave={() => setHoveredId(null)}
+                  className="transition-transform duration-200 hover:-translate-y-1"
+                >
+                  <ExpeditionCard expedition={expedition} />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-      ) : error ? (
-        <div className="glass-panel p-12 rounded-2xl text-center">
-          <p className="text-red-400">{error}</p>
-          <Button variant="outline" className="mt-4" onClick={() => window.location.reload()}>
-            Reintentar
-          </Button>
-        </div>
-      ) : filtered.length === 0 ? (
-        <div className="glass-panel p-16 rounded-2xl text-center space-y-4">
-          <p className="text-5xl">🦙</p>
-          <p className="text-foreground font-semibold">Sin resultados</p>
-          <p className="text-muted-foreground">
-            Ninguna expedición coincide con tu búsqueda. Intenta con otros filtros.
-          </p>
-          <Button variant="outline" onClick={clearFilters} className="mt-2">
-            Ver todas las expediciones
-          </Button>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filtered.map((expedition) => (
-            <ExpeditionCard key={expedition.id} expedition={expedition} />
-          ))}
-        </div>
-      )}
+
+        {/* Right Side: Map (shown side-by-side on desktop, toggled on mobile) */}
+        {!loading && !error && filtered.length > 0 && (
+          <>
+            {/* Desktop sticky map */}
+            <div className="hidden lg:block lg:w-5/12 xl:w-4/12 sticky top-28 h-[calc(100vh-160px)] min-h-[500px] rounded-2xl overflow-hidden border border-border shadow-xl">
+              <ExpeditionMap
+                expeditions={filtered}
+                hoveredId={hoveredId}
+                onMarkerClick={(id) => {
+                  const el = document.getElementById(`expedition-card-${id}`);
+                  if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+                }}
+              />
+            </div>
+
+            {/* Mobile/Tablet full screen toggle map */}
+            <div className={`lg:hidden w-full h-[calc(100vh-280px)] rounded-2xl overflow-hidden border border-border shadow-lg ${showMapOnMobile ? "block" : "hidden"}`}>
+              <ExpeditionMap
+                expeditions={filtered}
+                hoveredId={hoveredId}
+              />
+            </div>
+
+            {/* Floating button for mobile devices */}
+            <button
+              onClick={() => setShowMapOnMobile(!showMapOnMobile)}
+              className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40 bg-foreground text-background font-bold px-6 py-3.5 rounded-full shadow-2xl flex items-center gap-2 hover:scale-105 active:scale-95 transition-all text-sm cursor-pointer"
+            >
+              {showMapOnMobile ? (
+                <>
+                  <SlidersHorizontal size={16} />
+                  Ver Lista
+                </>
+              ) : (
+                <>
+                  <MapIcon size={16} />
+                  Ver Mapa
+                </>
+              )}
+            </button>
+          </>
+        )}
+      </div>
     </main>
   );
 }

@@ -6,10 +6,10 @@ export default function RegisterPage() {
       <div className="max-w-md mx-auto">
         <div className="text-center mb-8">
           <p className="text-brand font-bold tracking-widest uppercase text-sm mb-4">Únete</p>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground mb-4">
             Crea tu <span className="text-brand">Cuenta</span>
           </h1>
-          <p className="text-slate-300">
+          <p className="text-muted-foreground">
             Regístrate para reservar expediciones y acceder a ofertas exclusivas.
           </p>
         </div>

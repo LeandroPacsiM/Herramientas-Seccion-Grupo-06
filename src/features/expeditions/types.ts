@@ -31,4 +31,6 @@ export interface Expedition {
   itineraries: Itinerary[];
   images: Image[];
   availabilities: Availability[];
+  latitude?: number;
+  longitude?: number;
 }

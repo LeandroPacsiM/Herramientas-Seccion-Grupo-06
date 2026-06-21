@@ -92,7 +92,7 @@ export default function LoginForm() {
         )}
       </Button>
 
-      <div className="text-center text-sm text-slate-300">
+      <div className="text-center text-sm text-muted-foreground">
         <p>
           ¿No tienes cuenta?{" "}
           <Link to="/register" className="text-brand hover:text-brand-soft hover:underline font-semibold">
@@ -102,9 +102,9 @@ export default function LoginForm() {
       </div>
 
       {/* Helper para pruebas */}
-      <div className="mt-8 p-4 bg-slate-900/80 rounded-lg border border-slate-700">
-        <p className="text-xs text-slate-200 mb-2 font-semibold">Credenciales de prueba:</p>
-        <div className="space-y-1 text-xs text-slate-300">
+      <div className="mt-8 p-4 bg-muted/50 rounded-lg border border-border">
+        <p className="text-xs text-foreground mb-2 font-semibold">Credenciales de prueba:</p>
+        <div className="space-y-1 text-xs text-muted-foreground">
           <p><strong className="text-brand">Usuario:</strong> user@llamatours.com / password123</p>
           <p><strong className="text-brand">Admin:</strong> admin@llamatours.com / admin123</p>
         </div>
