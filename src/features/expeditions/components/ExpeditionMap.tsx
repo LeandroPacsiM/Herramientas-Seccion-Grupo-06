@@ -92,7 +92,7 @@ export default function ExpeditionMap({ expeditions, hoveredId, onMarkerClick }:
           </div>
           <a href="${import.meta.env.BASE_URL}viajes/${exp.slug}" 
              class="block text-center bg-primary text-primary-foreground text-xs py-1.5 rounded-lg font-bold hover:opacity-90 transition-all mt-2 cursor-pointer shadow-sm" 
-             style="text-decoration: none; color: white;">
+             style="text-decoration: none; color: var(--primary-foreground) !important;">
             Ver Detalles
           </a>
         </div>

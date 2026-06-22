@@ -4,9 +4,9 @@
   --font-size: 16px;
 
   /* LlamaTours Brand Colors */
-  --brand: #b45309;
-  --brand-soft: #fde68a;
-  --brand-deep: #78350f;
+  --brand: #eeff00;
+  --brand-soft: #f5fd8a;
+  --brand-deep: #76780f;
 
   --background: #ffffff;
   --foreground: #131412;
@@ -14,8 +14,8 @@
   --card-foreground: #131412;
   --popover: #ffffff;
   --popover-foreground: #131412;
-  --primary: #b45309;
-  --primary-foreground: #ffffff;
+  --primary: #fffb00;
+  --primary-foreground: #131412;
   --secondary: #98cdef;
   --secondary-foreground: #131412;
   --muted: #f1f5f9;
@@ -202,4 +202,29 @@
     font-weight: var(--font-weight-normal);
     line-height: 1.5;
   }
+}
+
+.text-brand {
+  color: var(--brand) !important;
+  text-shadow: 
+    -1px -1px 0 #131412,  
+     1px -1px 0 #131412,
+    -1px  1px 0 #131412,
+     1px  1px 0 #131412;
+}
+.dark .text-brand {
+  color: var(--brand) !important;
+  text-shadow: none !important;
+}
+.text-primary {
+  color: var(--primary) !important;
+  text-shadow: 
+    -1px -1px 0 #131412,  
+     1px -1px 0 #131412,
+    -1px  1px 0 #131412,
+     1px  1px 0 #131412;
+}
+.dark .text-primary {
+  color: var(--primary) !important;
+  text-shadow: none !important;
 }
