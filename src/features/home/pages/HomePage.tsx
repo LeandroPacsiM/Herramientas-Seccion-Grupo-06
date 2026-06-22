@@ -43,28 +43,28 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24 bg-slate-900/50 border-y border-white/5">
+      <section className="py-24 bg-muted/30 border-y border-border">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12 grid grid-cols-1 md:grid-cols-3 gap-12">
           <div className="flex flex-col items-center text-center space-y-4">
             <div className="p-4 bg-brand/10 rounded-full text-brand">
               <Star size={32} />
             </div>
-            <h3 className="text-2xl font-bold text-white">Experiencias Premium</h3>
-            <p className="text-slate-300">Seleccionamos los mejores destinos y servicios para una expedición sin preocupaciones.</p>
+            <h3 className="text-2xl font-bold text-foreground">Experiencias Premium</h3>
+            <p className="text-muted-foreground">Seleccionamos los mejores destinos y servicios para una expedición sin preocupaciones.</p>
           </div>
           <div className="flex flex-col items-center text-center space-y-4">
             <div className="p-4 bg-brand/10 rounded-full text-brand">
               <MapPin size={32} />
             </div>
-            <h3 className="text-2xl font-bold text-white">Rutas Exclusivas</h3>
-            <p className="text-slate-300">Acceso a zonas remotas y campamentos de lujo en el corazón de la cordillera.</p>
+            <h3 className="text-2xl font-bold text-foreground">Rutas Exclusivas</h3>
+            <p className="text-muted-foreground">Acceso a zonas remotas y campamentos de lujo en el corazón de la cordillera.</p>
           </div>
           <div className="flex flex-col items-center text-center space-y-4">
             <div className="p-4 bg-brand/10 rounded-full text-brand">
               <Calendar size={32} />
             </div>
-            <h3 className="text-2xl font-bold text-white">Fechas Flexibles</h3>
-            <p className="text-slate-300">Nos adaptamos a tu calendario para que vivas tu aventura cuando lo desees.</p>
+            <h3 className="text-2xl font-bold text-foreground">Fechas Flexibles</h3>
+            <p className="text-muted-foreground">Nos adaptamos a tu calendario para que vivas tu aventura cuando lo desees.</p>
           </div>
         </div>
       </section>

@@ -18,8 +18,7 @@ const mockUsers: User[] = [
     role: "ADMIN"
   }
 ];
-
-const mockExpeditions: Expedition[] = [
+const mockExpeditions: Expedition[] = [
   {
     id: 1,
     name: "Camino Inca Clásico",
@@ -29,6 +28,8 @@ const mockExpeditions: Expedition[] = [
     durationDays: 4,
     difficulty: "MODERATE",
     location: "Cusco, Perú",
+    latitude: -13.1631,
+    longitude: -72.5450,
     itineraries: [
       { id: 1, dayNumber: 1, title: "Inicio del Camino", description: "Salida desde Cusco hacia el km 82. Caminata de 12 km hasta Wayllabamba. Acampada en valle." },
       { id: 2, dayNumber: 2, title: "Paso de la Mujer Muerta", description: "Ascenso al punto más alto (4,215 msnm). Descenso hacia el valle de Pacaymayo." },
@@ -55,6 +56,8 @@ const mockExpeditions: Expedition[] = [
     durationDays: 1,
     difficulty: "MODERATE",
     location: "Cusco, Perú",
+    latitude: -13.8697,
+    longitude: -71.3028,
     itineraries: [
       { id: 5, dayNumber: 1, title: "Ascenso a la Montaña Arcoíris", description: "Salida 4 AM desde Cusco. Desayuno en ruta. Caminata de 2-3 horas hasta la cumbre. Retorno y almuerzo en Cusipata." }
     ],
@@ -78,6 +81,8 @@ const mockExpeditions: Expedition[] = [
     durationDays: 7,
     difficulty: "HARD",
     location: "Cusco, Perú",
+    latitude: -13.7842,
+    longitude: -71.2290,
     itineraries: [
       { id: 7, dayNumber: 1, title: "Tinki - Upis", description: "Transfer a Tinki. Inicio del trek hacia Upis (4,400 msnm). Primera noche de acampada." },
       { id: 8, dayNumber: 2, title: "Upis - Arapa Pass", description: "Ascenso al paso Arapa (4,850 msnm). Vista de glaciares. Descenso a campamento Ausangate Cocha." },
@@ -106,6 +111,8 @@ const mockExpeditions: Expedition[] = [
     durationDays: 5,
     difficulty: "MODERATE",
     location: "Cusco, Perú",
+    latitude: -13.3344,
+    longitude: -72.5714,
     itineraries: [
       { id: 14, dayNumber: 1, title: "Soraypampa", description: "Transfer a Mollepata. Caminata hasta Soraypampa (3,900 msnm). Vista del nevado Salkantay y Humantay." },
       { id: 15, dayNumber: 2, title: "Paso Salkantay", description: "Ascenso al paso Salkantay (4,650 msnm), punto más alto del trek. Descenso hacia Chaullay." },
@@ -131,6 +138,8 @@ const mockExpeditions: Expedition[] = [
     durationDays: 10,
     difficulty: "HARD",
     location: "Huaraz, Perú",
+    latitude: -10.2678,
+    longitude: -76.9061,
     itineraries: [
       { id: 19, dayNumber: 1, title: "Llamac - Cuartelhuain", description: "Inicio del circuito desde Llamac. Primera acampada a 4,200 msnm." },
       { id: 20, dayNumber: 2, title: "Paso Cacananpunta", description: "Cruce del primer paso a 4,700 msnm. Vistas del nevado Yerupajá." },
@@ -161,6 +170,8 @@ const mockExpeditions: Expedition[] = [
     durationDays: 1,
     difficulty: "MODERATE",
     location: "Huaraz, Perú",
+    latitude: -9.0069,
+    longitude: -77.6186,
     itineraries: [
       { id: 29, dayNumber: 1, title: "Laguna 69", description: "Salida desde Huaraz hacia Cebollapampa. Caminata de 3 horas hasta Laguna 69. Retorno y regreso a Huaraz." }
     ],
@@ -182,6 +193,8 @@ const mockExpeditions: Expedition[] = [
     durationDays: 4,
     difficulty: "HARD",
     location: "Cusco, Perú",
+    latitude: -13.3919,
+    longitude: -72.8732,
     itineraries: [
       { id: 30, dayNumber: 1, title: "Cachora - Chiquisca", description: "Transfer a Cachora. Descenso al río Apurímac. Acampada en Chiquisca." },
       { id: 31, dayNumber: 2, title: "Choquequirao", description: "Ascenso empinado hasta las ruinas de Choquequirao. Tour guiado por la ciudadela." },
@@ -206,6 +219,8 @@ const mockExpeditions: Expedition[] = [
     durationDays: 1,
     difficulty: "EASY",
     location: "Huaraz, Perú",
+    latitude: -9.8792,
+    longitude: -77.1978,
     itineraries: [
       { id: 34, dayNumber: 1, title: "Glaciar Pastoruri", description: "Salida desde Huaraz. Paradas en bosque de Puyas Raimondi y aguas gasificadas. Caminata corta al glaciar. Retorno." }
     ],
@@ -228,6 +243,8 @@ const mockExpeditions: Expedition[] = [
     durationDays: 3,
     difficulty: "MODERATE",
     location: "Cusco, Perú",
+    latitude: -13.1292,
+    longitude: -72.0394,
     itineraries: [
       { id: 35, dayNumber: 1, title: "Lares - Huacahuasi", description: "Transfer a Lares. Baño en aguas termales. Caminata hasta la comunidad de Huacahuasi." },
       { id: 36, dayNumber: 2, title: "Paso Ipsaycocha", description: "Cruce del paso Ipsaycocha (4,500 msnm). Descenso a la comunidad de Patacancha." },
@@ -251,6 +268,8 @@ const mockExpeditions: Expedition[] = [
     durationDays: 4,
     difficulty: "MODERATE",
     location: "Huaraz, Perú",
+    latitude: -8.8872,
+    longitude: -77.6167,
     itineraries: [
       { id: 38, dayNumber: 1, title: "Cashapampa - Llamacorral", description: "Inicio del trek desde Cashapampa. Caminata por la Quebrada Santa Cruz hasta Llamacorral." },
       { id: 39, dayNumber: 2, title: "Laguna Ichiccocha", description: "Caminata hasta la laguna Ichiccocha. Vistas del Alpamayo y Taulliraju." },

@@ -6,10 +6,10 @@ export default function LoginPage() {
       <div className="max-w-md mx-auto">
         <div className="text-center mb-8">
           <p className="text-brand font-bold tracking-widest uppercase text-sm mb-4">Bienvenido</p>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground mb-4">
             Inicia <span className="text-brand">Sesión</span>
           </h1>
-          <p className="text-slate-300">
+          <p className="text-muted-foreground">
             Accede a tu cuenta para gestionar tus reservas y descubrir nuevas aventuras.
           </p>
         </div>

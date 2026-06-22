@@ -19,7 +19,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Cierra el popover al hacer click fuera
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (popoverRef.current && !popoverRef.current.contains(e.target as Node)) {
@@ -47,7 +46,7 @@ export default function Navbar() {
     <header
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${
         isScrolled
-          ? "bg-background/80 backdrop-blur-xl shadow-lg border-b border-border"
+          ? "bg-background/5 backdrop-blur-xs shadow-lg border-b-0 border-border"
           : "bg-transparent"
       }`}
     >
@@ -58,9 +57,9 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop nav links */}
-        <div className="hidden md:flex items-center space-x-8 font-semibold text-sm">
+        <div className="hidden md:flex items-center space-x-8 font-bold text-lg">
           {navLinks.map((link) => (
-            <Link key={link.href} to={link.href} className="text-foreground/80 hover:text-brand transition-colors">
+            <Link key={link.href} to={link.href} className="text-foreground hover:text-brand transition-colors">
               {link.name}
             </Link>
           ))}
@@ -112,7 +111,7 @@ export default function Navbar() {
           <Button
             variant="ghost"
             size="icon"
-            className="bg-primary text-primary-foreground rounded-full hover:bg-primary/90"
+            className="bg-primary text-foreground rounded-full hover:bg-primary/90"
             onClick={() => window.dispatchEvent(new CustomEvent("toggle-accessibility"))}
             aria-label={t("accessibility.openAccessibility")}
           >
@@ -134,14 +133,14 @@ export default function Navbar() {
                   <span className="font-semibold">{user?.name}</span>
                 </Link>
               )}
-              <Button onClick={handleLogout} variant="outline" className="hidden sm:flex font-bold border-white/10">
+              <Button onClick={handleLogout} variant="outline" className="hidden sm:flex font-bold border-background/10">
                 <LogOut size={16} className="mr-2" />
                 Salir
               </Button>
             </>
           ) : (
             <Link to="/login">
-              <Button variant="default" className="hidden sm:flex font-bold shadow-lg shadow-brand/10">
+              <Button variant="default" className="hidden sm:flex font-bold shadow-lg shadow-brand/10 text-foreground">
                 <LogIn size={16} className="mr-2" />
                 Ingresar
               </Button>

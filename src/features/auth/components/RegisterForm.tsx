@@ -131,7 +131,7 @@ export default function RegisterForm() {
         )}
       </Button>
 
-      <div className="text-center text-sm text-slate-300">
+      <div className="text-center text-sm text-muted-foreground">
         <p>
           ¿Ya tienes cuenta?{" "}
           <Link to="/login" className="text-brand hover:text-brand-soft hover:underline font-semibold">

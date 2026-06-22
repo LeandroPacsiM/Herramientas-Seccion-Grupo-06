@@ -7,11 +7,11 @@ export default function NosotrosPage() {
           Sobre Nosotros
         </p>
 
-        <h1 className="text-4xl sm:text-6xl font-extrabold text-white mb-8">
+        <h1 className="text-4xl sm:text-6xl font-extrabold text-foreground mb-8">
           Pasión por la <span className="text-brand">montaña</span>
         </h1>
 
-        <div className="prose prose-invert prose-lg max-w-none text-slate-300 text-justify space-y-6">
+        <div className="prose dark:prose-invert prose-lg max-w-none text-muted-foreground text-justify space-y-6">
 
           <p>
             LlamaTours nació con la idea de compartir la belleza inexplorada de los Andes con el mundo,
