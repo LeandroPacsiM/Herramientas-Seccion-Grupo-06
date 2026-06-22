@@ -8,4 +8,8 @@ export interface Booking {
   availabilityId: number;
   startDate: string;
   endDate: string;
+  createdAt?: string;
+  updatedAt?: string;
+  totalAmount?: number;
+  paymentId?: string;
 }

@@ -84,7 +84,9 @@ export default function ExpeditionDetailPage() {
   const diffKey = expedition.difficulty === "EASY" ? "Easy" : expedition.difficulty === "MODERATE" ? "Moderate" : "Hard";
   const diffLabel = t(`viajes.difficulty${diffKey}`);
 
-  const availableAvailabilities = expedition.availabilities.filter((a) => a.availableSpots > 0);
+  const sortedAvailabilities = [...expedition.availabilities].sort(
+    (a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+  );
   const selected = expedition.availabilities.find((a) => a.id === selectedAvailability);
   const maxPeople = selected?.availableSpots ?? 1;
   const totalPrice = expedition.price * peopleCount;
@@ -230,37 +232,54 @@ export default function ExpeditionDetailPage() {
                 {t("expeditionDetail.bookTitle")}
               </h2>
 
-              {availableAvailabilities.length === 0 ? (
+              {sortedAvailabilities.length === 0 ? (
                 <p className="text-sm text-muted-foreground">{t("expeditionDetail.noAvailability")}</p>
               ) : (
                 <div className="space-y-2">
                   <p className="text-sm text-muted-foreground">{t("expeditionDetail.selectDate")}</p>
-                  {availableAvailabilities.map((av) => (
-                    <button
-                      key={av.id}
-                      onClick={() => setSelectedAvailability(av.id === selectedAvailability ? null : av.id)}
-                      className={`w-full text-left rounded-xl border p-3.5 transition-all ${
-                        selectedAvailability === av.id
-                          ? "border-brand bg-brand/5"
-                          : "border-border hover:border-brand/40 bg-background"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-foreground text-sm font-medium">
-                          {formatDate(av.startDate)}
-                          {av.startDate !== av.endDate && (
-                            <span className="text-muted-foreground font-normal"> → {formatDate(av.endDate)}</span>
-                          )}
-                        </span>
-                        {selectedAvailability === av.id && <CheckCircle size={15} className="text-brand" />}
-                      </div>
-                      <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                        <Users size={11} />
-                        {t("expeditionDetail.spotsLeft", { available: av.availableSpots, capacity: av.capacity, count: av.availableSpots })}
-                      </div>
-                      <SpotsBar availability={av} />
-                    </button>
-                  ))}
+                  {sortedAvailabilities.map((av) => {
+                    const isExpired = new Date(av.startDate) < new Date(new Date().setHours(0, 0, 0, 0));
+                    const isSoldOut = av.availableSpots <= 0;
+                    const isDisabled = isExpired || isSoldOut;
+
+                    let statusLabel = "";
+                    if (isExpired) {
+                      statusLabel = ` - ${t("expeditionDetail.expiredStatus")}`;
+                    } else if (isSoldOut) {
+                      statusLabel = ` - ${t("expeditionDetail.soldOutStatus")}`;
+                    }
+
+                    return (
+                      <button
+                        key={av.id}
+                        disabled={isDisabled}
+                        onClick={() => setSelectedAvailability(av.id === selectedAvailability ? null : av.id)}
+                        className={`w-full text-left rounded-xl border p-3.5 transition-all ${
+                          isDisabled
+                            ? "opacity-50 cursor-not-allowed border-border bg-muted/20"
+                            : selectedAvailability === av.id
+                              ? "border-brand bg-brand/5 cursor-pointer"
+                              : "border-border hover:border-brand/40 bg-background cursor-pointer"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between mb-1">
+                          <span className={`text-sm font-medium ${isDisabled ? "text-muted-foreground line-through" : "text-foreground"}`}>
+                            {formatDate(av.startDate)}
+                            {av.startDate !== av.endDate && (
+                              <span className="text-muted-foreground font-normal"> → {formatDate(av.endDate)}</span>
+                            )}
+                            {statusLabel && <span className="text-red-400 font-semibold ml-2 text-xs">{statusLabel}</span>}
+                          </span>
+                          {selectedAvailability === av.id && <CheckCircle size={15} className="text-brand" />}
+                        </div>
+                        <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                          <Users size={11} />
+                          {t("expeditionDetail.spotsLeft", { available: av.availableSpots, capacity: av.capacity, count: av.availableSpots })}
+                        </div>
+                        <SpotsBar availability={av} />
+                      </button>
+                    );
+                  })}
                 </div>
               )}
 

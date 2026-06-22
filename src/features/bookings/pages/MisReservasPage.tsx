@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
-import { CalendarCheck, Users, X, CheckCircle, Clock } from "lucide-react";
+import { CalendarCheck, Users, X, CheckCircle, Clock, CreditCard, DollarSign, Calendar } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import Loading from "@/app/components/shared/Loading";
 import { api } from "@/lib/api";
@@ -31,6 +31,7 @@ export default function MisReservasPage() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
   const [cancellingId, setCancellingId] = useState<number | null>(null);
+  const [payingId, setPayingId] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const formatDate = (dateStr: string) => {
@@ -65,6 +66,21 @@ export default function MisReservasPage() {
       setError(e.message || t("bookings.cancelError", "Error al cancelar"));
     } finally {
       setCancellingId(null);
+    }
+  };
+
+  const handlePay = async (id: number) => {
+    setPayingId(id);
+    try {
+      const fakePaymentId = `PAY-${Math.random().toString(36).substring(2, 11).toUpperCase()}`;
+      await api.post(`/api/bookings/${id}/pay?paymentId=${fakePaymentId}`);
+      setBookings((prev) =>
+        prev.map((b) => (b.id === id ? { ...b, status: "CONFIRMED" as const, paymentId: fakePaymentId } : b))
+      );
+    } catch (e: any) {
+      setError(e.message || t("bookings.payError", "Error al procesar el pago"));
+    } finally {
+      setPayingId(null);
     }
   };
 
@@ -107,6 +123,7 @@ export default function MisReservasPage() {
                   ? t("bookings.confirmedStatus")
                   : t("bookings.pendingStatus");
                 const isCancelling = cancellingId === booking.id;
+                const isPaying = payingId === booking.id;
 
                 return (
                   <div key={booking.id} className="bg-card border border-border rounded-2xl overflow-hidden flex flex-col sm:flex-row">
@@ -119,7 +136,7 @@ export default function MisReservasPage() {
                             {statusLabel}
                           </span>
                         </div>
-                        <div className="flex flex-wrap gap-4 text-sm text-muted-foreground pt-1">
+                        <div className="flex flex-wrap gap-4 text-sm text-muted-foreground pt-1 items-center">
                           <span className="flex items-center gap-1.5">
                             <CalendarCheck size={14} className="text-brand" />
                             {formatDate(booking.startDate)}
@@ -131,16 +148,43 @@ export default function MisReservasPage() {
                               ? t("bookings.person_one", { count: 1 })
                               : t("bookings.person_other", { count: booking.peopleCount })}
                           </span>
+                          {booking.totalAmount && (
+                            <span className="flex items-center gap-1 font-semibold text-foreground bg-brand/5 px-2.5 py-0.5 rounded border border-brand/20">
+                              <DollarSign size={13} className="text-brand -mr-0.5" />
+                              {booking.totalAmount.toFixed(2)} USD
+                            </span>
+                          )}
+                          {booking.createdAt && (
+                            <span className="flex items-center gap-1.5 text-xs">
+                              <Calendar size={14} className="text-brand" />
+                              {t("bookings.bookingDate")}: {formatDate(booking.createdAt)}
+                            </span>
+                          )}
+                          {booking.paymentId && (
+                            <span className="flex items-center gap-1.5 text-xs bg-muted-foreground/10 px-2.5 py-0.5 rounded text-foreground font-mono">
+                              <CreditCard size={12} className="text-brand" />
+                              {t("bookings.paymentId")}: {booking.paymentId}
+                            </span>
+                          )}
                         </div>
                       </div>
 
                       {booking.status !== "CANCELLED" && (
-                        <div className="flex justify-end">
+                        <div className="flex justify-end gap-3">
+                          {booking.status === "PENDING" && (
+                            <Button
+                              className="text-sm font-bold bg-brand text-black hover:bg-brand/80"
+                              onClick={() => handlePay(booking.id)}
+                              disabled={payingId !== null || isCancelling}
+                            >
+                              {isPaying ? t("bookings.paying") : t("bookings.payNowButton")}
+                            </Button>
+                          )}
                           <Button
                             variant="outline"
                             className="text-sm border-red-500/20 text-red-400 hover:bg-red-500/10 hover:border-red-500/40"
                             onClick={() => handleCancel(booking.id)}
-                            disabled={isCancelling}
+                            disabled={isCancelling || payingId !== null}
                           >
                             {isCancelling ? t("bookings.cancelling") : t("bookings.cancelButton")}
                           </Button>
@@ -165,11 +209,21 @@ export default function MisReservasPage() {
                   <div key={booking.id} className="bg-card border border-border rounded-2xl p-5 flex items-center justify-between gap-4 opacity-60">
                     <div>
                       <p className="text-foreground font-medium">{getTranslatedName(booking)}</p>
-                      <p className="text-muted-foreground text-sm mt-0.5">
-                        {formatDate(booking.startDate)} · {booking.peopleCount === 1
-                          ? t("bookings.person_one", { count: 1 })
-                          : t("bookings.person_other", { count: booking.peopleCount })}
-                      </p>
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-muted-foreground text-sm mt-0.5">
+                        <span>{formatDate(booking.startDate)}</span>
+                        <span>·</span>
+                        <span>
+                          {booking.peopleCount === 1
+                            ? t("bookings.person_one", { count: 1 })
+                            : t("bookings.person_other", { count: booking.peopleCount })}
+                        </span>
+                        {booking.totalAmount && (
+                          <>
+                            <span>·</span>
+                            <span className="font-semibold text-foreground">${booking.totalAmount.toFixed(2)} USD</span>
+                          </>
+                        )}
+                      </div>
                     </div>
                     <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full ${statusClass}`}>
                       <StatusIcon size={12} />
@@ -185,3 +239,4 @@ export default function MisReservasPage() {
     </main>
   );
 }
+
