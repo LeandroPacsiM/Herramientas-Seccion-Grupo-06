@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router";
+import { useTranslation } from "react-i18next";
 import { Mail, Lock, User, UserPlus } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { authApi } from "@/features/auth/services/authApi";
@@ -8,6 +9,7 @@ import { Input } from "@/app/components/ui/input";
 import { Label } from "@/app/components/ui/label";
 
 export default function RegisterForm() {
+  const { t } = useTranslation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,12 +25,12 @@ export default function RegisterForm() {
     setError("");
 
     if (password !== confirmPassword) {
-      setError("Las contraseñas no coinciden");
+      setError(t("auth.passwordMismatch"));
       return;
     }
 
     if (password.length < 6) {
-      setError("La contraseña debe tener al menos 6 caracteres");
+      setError(t("auth.passwordLength"));
       return;
     }
 
@@ -39,7 +41,7 @@ export default function RegisterForm() {
       login(response.token, response.email, response.name, response.role);
       navigate("/");
     } catch (err: any) {
-      setError(err.message || "Error al registrarse");
+      setError(err.message || t("auth.registerError", "Error al registrarse"));
     } finally {
       setLoading(false);
     }
@@ -54,7 +56,7 @@ export default function RegisterForm() {
       )}
 
       <div className="space-y-2">
-        <Label htmlFor="name">Nombre completo</Label>
+        <Label htmlFor="name">{t("auth.nameLabel")}</Label>
         <div className="relative">
           <User className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
           <Input
@@ -70,7 +72,7 @@ export default function RegisterForm() {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="email">Email</Label>
+        <Label htmlFor="email">{t("auth.emailLabel")}</Label>
         <div className="relative">
           <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
           <Input
@@ -86,7 +88,7 @@ export default function RegisterForm() {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="password">Contraseña</Label>
+        <Label htmlFor="password">{t("auth.passwordLabel")}</Label>
         <div className="relative">
           <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
           <Input
@@ -102,7 +104,7 @@ export default function RegisterForm() {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="confirmPassword">Confirmar contraseña</Label>
+        <Label htmlFor="confirmPassword">{t("auth.confirmPasswordLabel")}</Label>
         <div className="relative">
           <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
           <Input
@@ -121,21 +123,21 @@ export default function RegisterForm() {
         {loading ? (
           <>
             <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin mr-2" />
-            Registrando...
+            {t("auth.registering")}
           </>
         ) : (
           <>
             <UserPlus size={18} className="mr-2" />
-            Crear Cuenta
+            {t("auth.registerButton")}
           </>
         )}
       </Button>
 
-      <div className="text-center text-sm text-slate-300">
+      <div className="text-center text-sm text-muted-foreground">
         <p>
-          ¿Ya tienes cuenta?{" "}
+          {t("auth.hasAccount")}{" "}
           <Link to="/login" className="text-brand hover:text-brand-soft hover:underline font-semibold">
-            Inicia sesión aquí
+            {t("auth.loginHere")}
           </Link>
         </p>
       </div>

@@ -9,6 +9,7 @@ interface AccessibilitySettings {
   largeCursor: boolean;
   lineSpacing: "normal" | "relaxed" | "spacious";
   language: "es" | "en" | "qu";
+  darkMode: boolean;
 }
 
 interface AccessibilityContextType extends AccessibilitySettings {
@@ -19,6 +20,7 @@ interface AccessibilityContextType extends AccessibilitySettings {
   setLargeCursor: (enabled: boolean) => void;
   setLineSpacing: (spacing: "normal" | "relaxed" | "spacious") => void;
   setLanguage: (lang: "es" | "en" | "qu") => void;
+  setDarkMode: (enabled: boolean) => void;
   applyProfile: (profile: "default" | "lowVision" | "tdah" | "dyslexia") => void;
   resetSettings: () => void;
 }
@@ -31,6 +33,7 @@ const DEFAULT_SETTINGS: AccessibilitySettings = {
   largeCursor: false,
   lineSpacing: "normal",
   language: "es",
+  darkMode: false,
 };
 
 const STORAGE_KEY = "accessibility-settings";
@@ -63,6 +66,13 @@ export const AccessibilityProvider = ({ children }: { children: ReactNode }) => 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
     applyAccessibilityStyles(settings);
   }, [settings, mounted]);
+
+  // Sincronizar el idioma con i18next
+  useEffect(() => {
+    if (settings.language) {
+      i18n.changeLanguage(settings.language);
+    }
+  }, [settings.language]);
 
   const updateSetting = useCallback(
     (key: keyof AccessibilitySettings, value: any) => {
@@ -102,8 +112,10 @@ export const AccessibilityProvider = ({ children }: { children: ReactNode }) => 
 
   const setLanguage = (lang: "es" | "en" | "qu") => {
     updateSetting("language", lang);
-    // Sincronizar con i18next
-    i18n.changeLanguage(lang);
+  };
+
+  const setDarkMode = (enabled: boolean) => {
+    updateSetting("darkMode", enabled);
   };
 
   const applyProfile = (profile: "default" | "lowVision" | "tdah" | "dyslexia") => {
@@ -144,6 +156,7 @@ export const AccessibilityProvider = ({ children }: { children: ReactNode }) => 
     setLargeCursor,
     setLineSpacing,
     setLanguage,
+    setDarkMode,
     applyProfile,
     resetSettings,
   };
@@ -212,4 +225,11 @@ function applyAccessibilityStyles(settings: AccessibilitySettings) {
 
   // Idioma (para soporte futuro de i18next)
   root.setAttribute("lang", settings.language);
+
+  // Modo Oscuro (Nocturno)
+  if (settings.darkMode) {
+    root.classList.add("dark");
+  } else {
+    root.classList.remove("dark");
+  }
 }

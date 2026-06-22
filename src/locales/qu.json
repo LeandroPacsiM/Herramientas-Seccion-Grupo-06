@@ -27,11 +27,14 @@
     "off": "Mana",
     "moreOptions": "Askha akllaykuna",
     "lessOptions": "Pisi akllaykuna",
-    "profile": "Perfil",
-    "selectProfile": "Akllay huk perfil...",
+    "profile": "Rimapina",
+    "selectProfile": "Akllay rimapinata...",
     "cursorLabel": "Sutiyachiq",
-    "dyslexicLabel": "Dislexia amigable",
-    "lineSpacing": "Chawpi sayay"
+    "dyslexicLabel": "Dislexia allichaq",
+    "lineSpacing": "Chawpi sayay",
+    "darkMode": "Tuta Kamay",
+    "activated": "Churasqa",
+    "desactivated": "Mana Churasqa"
   },
   "common": {
     "close": "Suklata",
@@ -40,5 +43,298 @@
     "reset": "Chiqap",
     "save": "Watuchiy",
     "cancel": "Liquichiy"
+  },
+  "navbar": {
+    "home": "Qallariy",
+    "expeditions": "Puriykuna",
+    "contact": "Willanakuy",
+    "about": "Ñoqanchikmanta",
+    "bookings": "Hallchasqaykuna",
+    "loginRequired": "Yaykunaykim tiyan hallchasqaykikunata qawanaykipaq.",
+    "loginButton": "Yaykuy",
+    "login": "Yaykuy",
+    "logout": "Lluqsiy",
+    "admin": "Kamachiq",
+    "adminPanel": "Kamachiq Pampa",
+    "noAccount": "¿Mana qillqasqachu kanki? Qillqakuy"
+  },
+  "footer": {
+    "tagline": "Andes suyupi sumaq puriykunata paqarichinchik, lliw pachamama qawarinapaq.",
+    "explore": "Maskay",
+    "contactUs": "Willawayku",
+    "address": "Av. 28 de Julio, La Victoria, Lima - Perú",
+    "copyright": "© 2026 LlamaTours. Wiñay yuyaykunata paqarichispa."
+  },
+  "home": {
+    "subtitle": "Andes suyupi qapaq puriykuna",
+    "titlePart1": "Sumaq",
+    "titlePart2": "Puriy",
+    "exploreButton": "Puriykunata qaway",
+    "contactGuide": "Pusaqwan rimay",
+    "premiumTitle": "Allin Puriykuna",
+    "premiumDesc": "Sumaq suyukunata akllanchik mana llakikunaykipaq.",
+    "exclusiveTitle": "Sapaq Ñankuna",
+    "exclusiveDesc": "Karurara suyukunaman yaykuy, qapaq karpakunapi puñuypas.",
+    "flexibleTitle": "Munay P'unchawkuna",
+    "flexibleDesc": "Qampa p'unchawniykiman hinam churanakunchik."
+  },
+  "nosotros": {
+    "subtitle": "Ñoqanchikmanta",
+    "titlePart1": "Urqukunata",
+    "titlePart2": "munakuspa",
+    "p1": "LlamaTours paqarimurqa Andes suyupa sumaq kayninta mundowan rakinakuyta munaspa, sumaq puriykunawan, yachaykunawan. Iñinchik puriyqa manam puriyllachu, aswanqa pachamama, runakuna, sapa suyupa willakuyninkunawan tinkunakuy.",
+    "p2": "Llaqtamanta allin pusaqkunam kanku, urqukunata munakuqkuna, allin amachasqa, chiqap puriykunata qunankupaq. Sapa ñan, sapa puriy, sapa imapas allin qawarisqam kachkan.",
+    "p3": "Puriykunata, sumaq puñuykunata tinkuchiyku, chaymi lliw puriqkuna, qallariqkunas, urqukunapi puriyta atinku allin yachaqkunawan khuska.",
+    "p4": "LlamaTours wasipiqa manam puriyllatachu kamachiyku: wiñay yuyaykunata paqarichiyku, pachamama amachayta, sumaq turismotapas mastariyku sapa chakinchikwan."
+  },
+  "viajes": {
+    "catalog": "Puriykuna",
+    "titlePart1": "Suyuykita",
+    "titlePart2": "tariy",
+    "searchPlaceholder": "Puriyta maskay...",
+    "allDifficulties": "Lliw",
+    "difficultyEasy": "Pisi sasa",
+    "difficultyModerate": "Chawpi sasa",
+    "difficultyHard": "Sasa",
+    "allZones": "Lliw suyukuna",
+    "sortLabel": "Allinchay",
+    "priceAsc": "Chanin: pisimanta achkaman",
+    "priceDesc": "Chanin: achkamanta pisiman",
+    "durationAsc": "P'unchaw: pisi",
+    "durationDesc": "P'unchaw: achka",
+    "clearFilters": "Filtrokuna pichay",
+    "noExpeditions": "Mana tariykunachu kan",
+    "expeditionCount_one": "1 puriy kapun",
+    "expeditionCount_other": "{{count}} puriykuna kapun",
+    "retry": "Kaqmanta ruway",
+    "noResults": "Mana imapas kanchu",
+    "noResultsDesc": "Mana qampa maskasqaykiman hina tarinchikchu. Hukta maskay.",
+    "viewAll": "Lliw puriykunata qaway",
+    "viewList": "Listata qaway",
+    "viewMap": "Mapata qaway"
+  },
+  "expeditionCard": {
+    "days_one": "1 p'unchaw",
+    "days_other": "{{count}} p'unchawkuna",
+    "spots_one": "1 cupo kapun",
+    "spots_other": "{{count}} cupokuna kapun",
+    "noSpots": "Mana disponibilidad kanchu",
+    "from": "Munaspa",
+    "viewDetail": "Qaway"
+  },
+  "expeditionDetail": {
+    "back": "Kutiy puriykunaman",
+    "itinerary": "Puriy Ñan",
+    "pricePerPerson": "Chanin sapa runapaq",
+    "allIncluded": "Lliw churashqa · Allin pusaqwan",
+    "bookTitle": "Puriyta hallchay",
+    "noAvailability": "Mana disponibilidad kanchu.",
+    "selectDate": "P'unchawta akllay",
+    "spotsLeft_one": "1 de {{capacity}} libre kapun",
+    "spotsLeft_other": "{{available}} de {{capacity}} libre kapun",
+    "peopleCount": "Runakuna",
+    "maxPeople_one": "máx. 1 runa",
+    "maxPeople_other": "máx. {{count}} runakuna",
+    "total": "Lliw chanin",
+    "bookingSuccess": "¡Hallchasqaña kachkan!",
+    "viewBookings": "Hallchasqayta qaway",
+    "loginToBookDesc": "Yaykunaykim tiyan puriyta hallchanaykipaq",
+    "loginToBookButton": "Yaykuy hallchanaykipaq",
+    "bookingLoading": "Hallchachkan...",
+    "bookButton": "Hallchay · ${{price}} USD",
+    "selectDateAndPeople": "Akllay p'unchawta runakunatapas",
+    "cancelPolicy": "Mana chanin qispichinapaq 7 p'unchaw ñawpaqta",
+    "customExpedition": "¿Sapaq puriyta munankichu?",
+    "contactGuide": "Pusaqwan rimay",
+    "expiredStatus": "Mana disponible / Pasasqa",
+    "soldOutStatus": "Tukusqa"
+  },
+  "contacto": {
+    "subtitle": "Willanakuy",
+    "titlePart1": "Hukllachasqa",
+    "titlePart2": "rimillasun",
+    "desc": "¿Tapukuykuna kapasunkichu urqukunamanta? Uyariykuniku.",
+    "sentSuccess": "¡Willay apachisqa!",
+    "sentDesc": "Añaychayki rimaykuwasqaykimanta, {{name}}. Kutichisaykiku {{email}} nisqaman 24 horapi.",
+    "sendAnother": "Huk willayta apachiy",
+    "fullName": "Suti *",
+    "email": "Correo *",
+    "message": "Willay *",
+    "messagePlaceholder": "Willawayku munasqaykimanta, p'unchawkunamanta, runakunamantapas...",
+    "sending": "Apachichkan...",
+    "sendMessage": "Apachiy willayta",
+    "contactInfo": "Willakuy",
+    "phone": "Telefono",
+    "office": "Oficina",
+    "address": "Av. 28 de Julio, La Victoria\nLima, Perú",
+    "hours": "Llamana Horakuna",
+    "weekdays": "Lunes – Viernes",
+    "saturday": "Sábado",
+    "sunday": "Domingo",
+    "closed": "Wichq'asqa",
+    "ready": "¿Listo maskanapaq?",
+    "readyDesc": "Puriykunata qaway qampa allinnikipaq.",
+    "viewExpeditions": "Qaway puriykunata"
+  },
+  "auth": {
+    "welcome": "Allin hamuy",
+    "loginTitlePart1": "",
+    "loginTitlePart2": "Yaykuy",
+    "loginDesc": "Yaykuy qampa cuentaykiman hallchasqaykikunata qawanaykipaq.",
+    "join": "Kuskachakuy",
+    "registerTitlePart1": "Cuentata",
+    "registerTitlePart2": "paqarichiy",
+    "registerDesc": "Qillqakuy puriykunata hallchanaykipaq, sapaq chaninkunapaqpas.",
+    "emailLabel": "Email",
+    "passwordLabel": "Contraseña",
+    "confirmPasswordLabel": "Kaqmanta Contraseña",
+    "nameLabel": "Suti",
+    "loggingIn": "Yaykuchkan...",
+    "loginButton": "Yaykuy",
+    "noAccount": "¿Mana cuentayuki kaspachu?",
+    "registerHere": "Qillqakuy kaypi",
+    "testCredentials": "Test Credentials:",
+    "userLabel": "Puriq",
+    "adminLabel": "Kamachiq",
+    "passwordMismatch": "Contraseñakuna manam kaqllachu",
+    "passwordLength": "Contraseña 6 caracteryuq kananta tiyan",
+    "registering": "Qillqachkan...",
+    "registerButton": "Cuentata paqarichiy",
+    "hasAccount": "¿Cuentayuq kankiña?",
+    "loginHere": "Yaykuy kaypi"
+  },
+  "bookings": {
+    "myAccount": "Cuentay",
+    "title": "Hallchasqaykuna",
+    "noBookings": "Manam hallchasqaykikuna kanchu",
+    "noBookingsDesc": "Puriykunata qawaspa maskay huk puriyta.",
+    "viewExpeditions": "Puriykunata qaway",
+    "upcoming": "Hamuq ({{count}})",
+    "cancelled": "Tunasqa ({{count}})",
+    "confirmedStatus": "Confirmasqa",
+    "pendingStatus": "Suyachkan",
+    "cancelledStatus": "Tunasqa",
+    "cancelling": "Tuchkan...",
+    "cancelButton": "Tupachiy / Cancelay",
+    "person_one": "1 runa",
+    "person_other": "{{count}} runakuna",
+    "totalPrice": "Lliw chanin",
+    "paymentId": "Pago ID",
+    "bookingDate": "Hallchasqa p'unchaw",
+    "payNowButton": "Pagar kunan",
+    "paying": "Pagota ruwachkan...",
+    "paymentSuccess": "¡Pago allin ruwasqa!"
+  },
+  "expeditions": {
+    "camino-inca-clasico": {
+      "name": "Inca Ñan Clásico",
+      "location": "Cusco, Perú",
+      "description": "Sudaméricapi aswan riqsisqa puriy. Tawa p'unchaw puriy andino suyukunata, inca raqaykunata, phuyu sach'a-sach'akunatapas chimpaspa, Machu Picchu llaqtaman chayanapaq.",
+      "itinerary": {
+        "1": { "title": "Puriy Qallariy", "description": "Cuscota saqispa km 82 nisqaman richkanchik. Wayllabambaman 12 km puriy. Vallepi acampay." },
+        "2": { "title": "Wañusqa Warmi Paso", "description": "Aswan hanaqman wichay (4,215 msnm). Pacaymayo valleman kutiy." },
+        "3": { "title": "Raqaykuna Phuyu Sach'a-Sach'apas", "description": "Runkurakayta, Sayacmarcata, Phuyupatamarcatapas qaway. Wiñay Waynaman kutiy." },
+        "4": { "title": "Machu Picchu", "description": "Inti Punkuman tempranolla richkanchik. Machu Picchuta rikuspa guided puriy." }
+      }
+    },
+    "montana-7-colores": {
+      "name": "Qanchis Coloryuq Urqu",
+      "location": "Cusco, Perú",
+      "description": "Vinicunca, pachapa aswan riqsisqa qanchis coloryuq urqun. Huk p'unchaw puriy 5,200 msnm, mineralmanta colorkunata qawanapaq.",
+      "itinerary": {
+        "1": { "title": "Qanchis Coloryuq Urquman Wichay", "description": "4 AM Cusco saqispa richkanchik. Ñanpi desaynay. Cumbreman 2-3 hora puriy. Cusipatapi almuerzo." }
+      }
+    },
+    "ausangate-trek": {
+      "name": "Ausangate Puriy",
+      "location": "Cusco, Perú",
+      "description": "Ausangate Apu (6,384 msnm) muyuriqpi sumaq puriy. Qanchis p'unchaw puriy rit'i urqukunata, turquesa quchakunata, andino llaqtakunatapas chimpaspa.",
+      "itinerary": {
+        "1": { "title": "Tinki - Upis", "description": "Tinkiman chaspam. Upis (4,400 msnm) nisqaman richkanchik. Qallariy acampay." },
+        "2": { "title": "Upis - Arapa Paso", "description": "Arapa pasoman (4,850 msnm) wichay. Glaciarkunata qaway. Ausangate Cocha campamentoman kutiy." },
+        "3": { "title": "Ausangate Cocha - Palomani Paso", "description": "Palomani pasoman (5,200 msnm) wichay. Ausangate rit'i urqupa sumaq qawariynin." },
+        "4": { "title": "Sibinacocha Qucha", "description": "Aswan hatun quchaman puriy. Llaqta uywakunata qaway." },
+        "5": { "title": "Jampa Paso", "description": "Jampa pasoman (5,100 msnm) chimpaspa. Pacachantapa q'uñi yakunkunaman kutiy." },
+        "6": { "title": "Pacchanta Llaqta", "description": "Q'uñi yakupi samariychik. Llaqta runakunawan rimay." },
+        "7": { "title": "Cuscoman Kutiy", "description": "Tinkiman final puriy. Cuscoman kutiy transferwan." }
+      }
+    },
+    "salkantay-trek": {
+      "name": "Salkantay Puriy",
+      "location": "Cusco, Perú",
+      "description": "Machu Picchuman huk sapaq ñan Salkantay rit'i urquntinta (6,271 msnm). Pichqa p'unchaw puriy rit'i urqukunata, selva altatapas raqaykunatapas rikuspa.",
+      "itinerary": {
+        "1": { "title": "Soraypampa", "description": "Mollepataman richkanchik. Soraypampaman (3,900 msnm) puriy. Salkantay Humantaypas rit'i urqukuna qaway." },
+        "2": { "title": "Salkantay Paso", "description": "Salkantay pasoman (4,650 msnm) wichay. Chaullayman kutiy." },
+        "3": { "title": "Yunka", "description": "Sach'a-sach'akunaman yaykuy. Santa Teresaman phuyu sach'antinta puriy." },
+        "4": { "title": "Aguas Calientes", "description": "Tren ñankunata Aguas Calientesman puriy. Machu Picchu llaqtapa chakinpi puñuy." },
+        "5": { "title": "Machu Picchu", "description": "Machu Picchu guided qaway. Cusco trenpi kutiy." }
+      }
+    },
+    "huayhuash-circuit": {
+      "name": "Huayhuash Muyuriq Puriy",
+      "location": "Huaraz, Perú",
+      "description": "Perú suyupi aswan sumaq puriy circuiton. Chunka p'unchaw Cordillera Huayhuash muyuriqpi 6,000 msnm rit'i urqukunata qawaspa.",
+      "itinerary": {
+        "1": { "title": "Llamac - Cuartelhuain", "description": "Llamacmanta puriy qallariy. 4,200 msnmpi qallariy acampay." },
+        "2": { "title": "Cacananpunta Paso", "description": "4,700 msnm pasota chimpaspa. Yerupajá rit'i urqu qaway." },
+        "3": { "title": "Mitucocha Qucha", "description": "Mitucocha quchaman puriy. Qucha patanpi campamento." },
+        "4": { "title": "Carhuac Paso", "description": "Carhuac pasoman (4,650 msnm) wichay. Siulá Yerupajápas qawariyninkuna." },
+        "5": { "title": "Huayhuash", "description": "Huayhuash rit'i urqupa campamento basen. Aclimatacion p'unchaw." },
+        "6": { "title": "San Antonio Paso", "description": "San Antonio pasoman (5,000 msnm) wichay. Huanacpatay valleman kutiy." },
+        "7": { "title": "Jahuacocha Qucha", "description": "Circuitopa aswan sumaq quchanman puriy." },
+        "8": { "title": "Tapush Paso", "description": "Tapush pasoman (4,750 msnm) chimpaspa. Jirishancata qaway." },
+        "9": { "title": "Cajatambo", "description": "Cajatambo llaqtaman kutiy." },
+        "10": { "title": "Huarazman Kutiy", "description": "Huarazman kutiy transferwan. Puriy tukuy." }
+      }
+    },
+    "laguna-69": {
+      "name": "Laguna 69",
+      "location": "Huaraz, Perú",
+      "description": "Huk p'unchaw puriy Cordillera Blancapa sumaq turquesa quchanman, 4,600 msnmpi rit'i urqukunapa chakinpi.",
+      "itinerary": {
+        "1": { "title": "Laguna 69", "description": "Huarazmanta Cebollapampaman richkanchik. Laguna 69man 3 hora puriy. Huarazman kutiy." }
+      }
+    },
+    "choquequirao-trek": {
+      "name": "Choquequirao Puriy",
+      "location": "Cusco, Perú",
+      "description": "Machu Picchupa 'sacred sister' nisqa. Tawa p'unchaw puriy pisi runayuq inca llaqtaman, condorkuna muyuriqpi.",
+      "itinerary": {
+        "1": { "title": "Cachora - Chiquisca", "description": "Cachoraman richkanchik. Apurímac mayuman kutiy. Chiquiscapi acampay." },
+        "2": { "title": "Choquequirao", "description": "Choquequirao raqaykunaman wichay. Sumaq llaqtapi guided puriy." },
+        "3": { "title": "Qaway", "description": "Kaqlla terrasa plazakunata condorkunatapas qaway." },
+        "4": { "title": "Kutiy", "description": "Cachoraman kutiy. Cuscoman transfer." }
+      }
+    },
+    "glaciar-pastoruri": {
+      "name": "Pastoruri Rit'i",
+      "location": "Huaraz, Perú",
+      "description": "Huk p'unchaw puriy Pastoruri rit'i urquman Cordillera Blancapi. Pachamamapa changesninmanta riqsisqa sumaq rit'i pampa.",
+      "itinerary": {
+        "1": { "title": "Pastoruri Rit'i Urqu", "description": "Huarazmanta lloqsispa richkanchik. Puya Raimondi sach'akunata, q'uñi yakukunatapas qawaspa. Pastoruri rit'iman puriy. Kutiy." }
+      }
+    },
+    "lares-trek": {
+      "name": "Lares Puriy",
+      "location": "Cusco, Perú",
+      "description": "Kinsa p'unchaw puriy andino tradicional llaqtakunanta. Away yachaqkunawan khuska, q'uñi yakupi puñuy, Verónica rit'itapas qaway.",
+      "itinerary": {
+        "1": { "title": "Lares - Huacahuasi", "description": "Laresman transfer. Q'uñi yakupi armakuy. Huacahuasi llaqtaman puriy." },
+        "2": { "title": "Ipsaycocha Paso", "description": "Ipsaycocha pasoman (4,500 msnm) wichay. Patacancha llaqtaman kutiy." },
+        "3": { "title": "Ollantaytambo - Machu Picchu", "description": "Ollantaytamboman kutiy. Aguas Calientesman trenpi, Machu Picchutapas qaway." }
+      }
+    },
+    "santa-cruz-trek": {
+      "name": "Santa Cruz Puriy",
+      "location": "Huaraz, Perú",
+      "description": "Cordillera Blancapi aswan riqsisqa puriy. Tawa p'unchaw vallekunata, turquesa quchakunata, Punta Unión (4,750 msnm) pasotapas chimpaspa.",
+      "itinerary": {
+        "1": { "title": "Cashapampa - Llamacorral", "description": "Cashapampamanta puriy qallariy. Santa Cruz Quebradanta Llamacorralman puriy." },
+        "2": { "title": "Ichiccocha Qucha", "description": "Ichiccocha quchaman puriy. Alpamayo Taullirajupas rit'ikuna qaway." },
+        "3": { "title": "Punta Unión Paso", "description": "Punta Unión pasoman (4,750 msnm) wichay. Lliw rit'ikuna qawariy. Taullipampaman kutiy." },
+        "4": { "title": "Vaquería", "description": "Huaripampa quebrada ñanta Vaqueríaman kutiy. Huarazman transfer." }
+      }
+    }
   }
 }

@@ -1,16 +1,19 @@
 import RegisterForm from "../components/RegisterForm";
+import { useTranslation } from "react-i18next";
 
 export default function RegisterPage() {
+  const { t } = useTranslation();
+
   return (
     <main className="flex-1 py-32 px-4 sm:px-6 lg:px-12 max-w-[1600px] mx-auto">
       <div className="max-w-md mx-auto">
         <div className="text-center mb-8">
-          <p className="text-brand font-bold tracking-widest uppercase text-sm mb-4">Únete</p>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4">
-            Crea tu <span className="text-brand">Cuenta</span>
+          <p className="text-brand font-bold tracking-widest uppercase text-sm mb-4">{t("auth.join")}</p>
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground mb-4">
+            {t("auth.registerTitlePart1")} <span className="text-brand">{t("auth.registerTitlePart2")}</span>
           </h1>
-          <p className="text-slate-300">
-            Regístrate para reservar expediciones y acceder a ofertas exclusivas.
+          <p className="text-muted-foreground">
+            {t("auth.registerDesc")}
           </p>
         </div>
 
