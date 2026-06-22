@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router";
+import { useTranslation } from "react-i18next";
 import { Mail, Lock, LogIn } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { authApi } from "@/features/auth/services/authApi";
@@ -8,6 +9,7 @@ import { Input } from "@/app/components/ui/input";
 import { Label } from "@/app/components/ui/label";
 
 export default function LoginForm() {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -32,7 +34,7 @@ export default function LoginForm() {
         navigate(userData.role === "ADMIN" ? "/admin" : "/mis-reservas");
       }
     } catch (err: any) {
-      setError(err.message || "Error al iniciar sesión");
+      setError(err.message || t("auth.loginError", "Error al iniciar sesión"));
     } finally {
       setLoading(false);
     }
@@ -47,7 +49,7 @@ export default function LoginForm() {
       )}
 
       <div className="space-y-2">
-        <Label htmlFor="email">Email</Label>
+        <Label htmlFor="email">{t("auth.emailLabel")}</Label>
         <div className="relative">
           <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
           <Input
@@ -63,7 +65,7 @@ export default function LoginForm() {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="password">Contraseña</Label>
+        <Label htmlFor="password">{t("auth.passwordLabel")}</Label>
         <div className="relative">
           <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
           <Input
@@ -82,31 +84,31 @@ export default function LoginForm() {
         {loading ? (
           <>
             <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin mr-2" />
-            Iniciando sesión...
+            {t("auth.loggingIn")}
           </>
         ) : (
           <>
             <LogIn size={18} className="mr-2" />
-            Iniciar Sesión
+            {t("auth.loginButton")}
           </>
         )}
       </Button>
 
       <div className="text-center text-sm text-muted-foreground">
         <p>
-          ¿No tienes cuenta?{" "}
+          {t("auth.noAccount")}{" "}
           <Link to="/register" className="text-brand hover:text-brand-soft hover:underline font-semibold">
-            Regístrate aquí
+            {t("auth.registerHere")}
           </Link>
         </p>
       </div>
 
       {/* Helper para pruebas */}
       <div className="mt-8 p-4 bg-muted/50 rounded-lg border border-border">
-        <p className="text-xs text-foreground mb-2 font-semibold">Credenciales de prueba:</p>
+        <p className="text-xs text-foreground mb-2 font-semibold">{t("auth.testCredentials")}</p>
         <div className="space-y-1 text-xs text-muted-foreground">
-          <p><strong className="text-brand">Usuario:</strong> user@llamatours.com / password123</p>
-          <p><strong className="text-brand">Admin:</strong> admin@llamatours.com / admin123</p>
+          <p><strong className="text-brand">{t("auth.userLabel")}:</strong> user@llamatours.com / password123</p>
+          <p><strong className="text-brand">{t("auth.adminLabel")}:</strong> admin@llamatours.com / admin123</p>
         </div>
       </div>
     </form>

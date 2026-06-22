@@ -67,6 +67,13 @@ export const AccessibilityProvider = ({ children }: { children: ReactNode }) => 
     applyAccessibilityStyles(settings);
   }, [settings, mounted]);
 
+  // Sincronizar el idioma con i18next
+  useEffect(() => {
+    if (settings.language) {
+      i18n.changeLanguage(settings.language);
+    }
+  }, [settings.language]);
+
   const updateSetting = useCallback(
     (key: keyof AccessibilitySettings, value: any) => {
       setSettings((prev) => ({
@@ -105,8 +112,6 @@ export const AccessibilityProvider = ({ children }: { children: ReactNode }) => 
 
   const setLanguage = (lang: "es" | "en" | "qu") => {
     updateSetting("language", lang);
-    // Sincronizar con i18next
-    i18n.changeLanguage(lang);
   };
 
   const setDarkMode = (enabled: boolean) => {

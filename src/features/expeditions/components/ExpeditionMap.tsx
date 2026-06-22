@@ -17,6 +17,65 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 });
 
+const DEPARTMENT_COORDINATES: Record<string, { latitude: number; longitude: number }> = {
+  cusco: { latitude: -13.5226, longitude: -71.9673 },
+  ancash: { latitude: -9.5278, longitude: -77.5278 },
+  lima: { latitude: -12.0464, longitude: -77.0428 },
+  arequipa: { latitude: -16.4090, longitude: -71.5375 },
+  puno: { latitude: -15.8402, longitude: -70.0219 },
+  amazonas: { latitude: -6.2294, longitude: -77.8690 },
+  ica: { latitude: -14.0678, longitude: -75.7286 },
+  loreto: { latitude: -3.7437, longitude: -73.2516 },
+  san_martin: { latitude: -6.4851, longitude: -76.3727 },
+  pasco: { latitude: -10.6675, longitude: -76.2561 },
+  junin: { latitude: -11.1583, longitude: -75.9931 },
+  ayacucho: { latitude: -13.1588, longitude: -74.2239 },
+  apurimac: { latitude: -13.6339, longitude: -72.8814 },
+  huancavelica: { latitude: -12.7825, longitude: -74.9727 },
+  huanuco: { latitude: -9.9306, longitude: -76.2422 },
+  la_libertad: { latitude: -8.1160, longitude: -79.0300 },
+  lambayeque: { latitude: -6.7011, longitude: -79.9061 },
+  piura: { latitude: -5.1945, longitude: -80.6300 },
+  tumbes: { latitude: -3.5669, longitude: -80.4514 },
+  cajamarca: { latitude: -7.1638, longitude: -78.5003 },
+  moquegua: { latitude: -17.1983, longitude: -70.9356 },
+  tacna: { latitude: -18.0169, longitude: -70.2502 },
+  madre_de_dios: { latitude: -12.5933, longitude: -69.1891 },
+  ucayali: { latitude: -8.3791, longitude: -74.5539 },
+  peru: { latitude: -9.19, longitude: -75.0152 },
+};
+
+function getDepartmentKey(location: string): string {
+  const norm = (location || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  
+  if (norm.includes("cusco")) return "cusco";
+  if (norm.includes("huaraz") || norm.includes("ancash")) return "ancash";
+  if (norm.includes("lima")) return "lima";
+  if (norm.includes("arequipa")) return "arequipa";
+  if (norm.includes("puno")) return "puno";
+  if (norm.includes("amazonas") || norm.includes("chachapoyas")) return "amazonas";
+  if (norm.includes("ica")) return "ica";
+  if (norm.includes("loreto") || norm.includes("iquitos")) return "loreto";
+  if (norm.includes("san martin") || norm.includes("tarapoto") || norm.includes("moyobamba")) return "san_martin";
+  if (norm.includes("pasco")) return "pasco";
+  if (norm.includes("junin") || norm.includes("huancayo")) return "junin";
+  if (norm.includes("ayacucho")) return "ayacucho";
+  if (norm.includes("apurimac") || norm.includes("abancay")) return "apurimac";
+  if (norm.includes("huancavelica")) return "huancavelica";
+  if (norm.includes("huanuco")) return "huanuco";
+  if (norm.includes("la libertad") || norm.includes("trujillo")) return "la_libertad";
+  if (norm.includes("lambayeque") || norm.includes("chiclayo")) return "lambayeque";
+  if (norm.includes("piura")) return "piura";
+  if (norm.includes("tumbes")) return "tumbes";
+  if (norm.includes("cajamarca")) return "cajamarca";
+  if (norm.includes("moquegua")) return "moquegua";
+  if (norm.includes("tacna")) return "tacna";
+  if (norm.includes("madre de dios") || norm.includes("puerto maldonado")) return "madre_de_dios";
+  if (norm.includes("ucayali") || norm.includes("pucallpa")) return "ucayali";
+  
+  return "peru";
+}
+
 interface ExpeditionMapProps {
   expeditions: Expedition[];
   hoveredId: number | null;
@@ -72,9 +131,15 @@ export default function ExpeditionMap({ expeditions, hoveredId, onMarkerClick }:
     const markerList: L.Marker[] = [];
 
     expeditions.forEach((exp) => {
-      if (exp.latitude === undefined || exp.longitude === undefined) return;
+      const deptKey = getDepartmentKey(exp.location || "");
+      const baseCoords = DEPARTMENT_COORDINATES[deptKey] || DEPARTMENT_COORDINATES.peru;
 
-      // Custom HTML popup content styled with Tailwind classes
+      const idNum = exp.id || 0;
+      const angle = (idNum * 137.5) * (Math.PI / 180);
+      const radius = 0.12 + (idNum % 5) * 0.06;
+      const lat = baseCoords.latitude + radius * Math.sin(angle);
+      const lng = baseCoords.longitude + radius * Math.cos(angle);
+
       const popupContent = `
         <div class="p-1 space-y-2 max-w-[220px]">
           ${
@@ -98,7 +163,7 @@ export default function ExpeditionMap({ expeditions, hoveredId, onMarkerClick }:
         </div>
       `;
 
-      const marker = L.marker([exp.latitude, exp.longitude], {
+      const marker = L.marker([lat, lng], {
         title: exp.name,
       });
 

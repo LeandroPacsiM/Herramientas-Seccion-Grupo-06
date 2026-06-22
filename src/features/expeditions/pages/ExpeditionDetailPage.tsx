@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 import {
   MapPin, Clock, Users, ChevronLeft, ChevronRight,
   Calendar, Flame, Leaf, Zap, CheckCircle, Minus, Plus, LogIn, AlertCircle
@@ -12,18 +13,10 @@ import type { Booking } from "@/features/bookings/types";
 import type { Expedition, Availability } from "@/features/expeditions/types";
 
 const DIFFICULTY_CONFIG = {
-  EASY: { label: "Fácil", icon: Leaf, className: "bg-emerald-500/15 text-emerald-400 border border-emerald-500/20" },
-  MODERATE: { label: "Moderado", icon: Zap, className: "bg-amber-500/15 text-amber-400 border border-amber-500/20" },
-  HARD: { label: "Difícil", icon: Flame, className: "bg-red-500/15 text-red-400 border border-red-500/20" },
+  EASY: { icon: Leaf, className: "bg-emerald-500/15 text-emerald-400 border border-emerald-500/20" },
+  MODERATE: { icon: Zap, className: "bg-amber-500/15 text-amber-400 border border-amber-500/20" },
+  HARD: { icon: Flame, className: "bg-red-500/15 text-red-400 border border-red-500/20" },
 };
-
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("es-PE", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-}
 
 function SpotsBar({ availability }: { availability: Availability }) {
   const pct = (availability.availableSpots / availability.capacity) * 100;
@@ -36,6 +29,7 @@ function SpotsBar({ availability }: { availability: Availability }) {
 }
 
 export default function ExpeditionDetailPage() {
+  const { t, i18n } = useTranslation();
   const { slug } = useParams<{ slug: string }>();
   const { isAuthenticated, loading: authLoading } = useAuth();
 
@@ -49,6 +43,15 @@ export default function ExpeditionDetailPage() {
   const [bookingLoading, setBookingLoading] = useState(false);
   const [bookingError, setBookingError] = useState<string | null>(null);
   const navigate = useNavigate();
+
+  const formatDate = (dateStr: string) => {
+    const localeMap: Record<string, string> = { es: "es-PE", en: "en-US", qu: "es-PE" };
+    return new Date(dateStr).toLocaleDateString(localeMap[i18n.language] || "es-PE", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  };
 
   useEffect(() => {
     api.get<Expedition[]>("/api/expeditions").then((list) => {
@@ -71,14 +74,19 @@ export default function ExpeditionDetailPage() {
     return (
       <main className="flex-1 flex flex-col items-center justify-center py-32 px-4 gap-6">
         <p className="text-6xl">🦙</p>
-        <h1 className="text-2xl font-bold text-foreground">Expedición no encontrada</h1>
-        <Link to="/viajes"><Button variant="outline">Ver catálogo</Button></Link>
+        <h1 className="text-2xl font-bold text-foreground">{t("expeditionDetail.notFound", "Expedición no encontrada")}</h1>
+        <Link to="/viajes"><Button variant="outline">{t("expeditionDetail.viewCatalog", "Ver catálogo")}</Button></Link>
       </main>
     );
   }
 
-  const { label: diffLabel, icon: DiffIcon, className: diffClass } = DIFFICULTY_CONFIG[expedition.difficulty];
-  const availableAvailabilities = expedition.availabilities.filter((a) => a.availableSpots > 0);
+  const { icon: DiffIcon, className: diffClass } = DIFFICULTY_CONFIG[expedition.difficulty];
+  const diffKey = expedition.difficulty === "EASY" ? "Easy" : expedition.difficulty === "MODERATE" ? "Moderate" : "Hard";
+  const diffLabel = t(`viajes.difficulty${diffKey}`);
+
+  const sortedAvailabilities = [...expedition.availabilities].sort(
+    (a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+  );
   const selected = expedition.availabilities.find((a) => a.id === selectedAvailability);
   const maxPeople = selected?.availableSpots ?? 1;
   const totalPrice = expedition.price * peopleCount;
@@ -105,7 +113,7 @@ export default function ExpeditionDetailPage() {
       const av = expedition.availabilities.find((a) => a.id === selectedAvailability);
       if (av) av.availableSpots -= peopleCount;
     } catch (err: any) {
-      setBookingError(err.message || "No se pudo completar la reserva. Intenta de nuevo.");
+      setBookingError(err.message || t("expeditionDetail.bookingError", "No se pudo completar la reserva. Intenta de nuevo."));
     } finally {
       setBookingLoading(false);
     }
@@ -121,7 +129,7 @@ export default function ExpeditionDetailPage() {
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-brand transition-colors"
         >
           <ChevronLeft size={16} />
-          Volver al catálogo
+          {t("expeditionDetail.back")}
         </Link>
       </div>
 
@@ -133,7 +141,7 @@ export default function ExpeditionDetailPage() {
             <img
               key={activeImage}
               src={expedition.images[activeImage]?.url}
-              alt={expedition.name}
+              alt={t(`expeditions.${expedition.slug}.name`, expedition.name)}
               className="w-full h-full object-cover transition-opacity duration-300"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
@@ -166,20 +174,22 @@ export default function ExpeditionDetailPage() {
               </span>
               <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground bg-card border border-border px-3 py-1 rounded-full">
                 <Clock size={14} />
-                {expedition.durationDays === 1 ? "1 día" : `${expedition.durationDays} días`}
+                {expedition.durationDays === 1
+                  ? t("expeditionCard.days_one", { count: 1 })
+                  : t("expeditionCard.days_other", { count: expedition.durationDays })}
               </span>
               <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground bg-card border border-border px-3 py-1 rounded-full">
-                <MapPin size={14} />{expedition.location}
+                <MapPin size={14} />{t(`expeditions.${expedition.slug}.location`, expedition.location)}
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-foreground mb-4">{expedition.name}</h1>
-            <p className="text-muted-foreground leading-relaxed">{expedition.description}</p>
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-foreground mb-4">{t(`expeditions.${expedition.slug}.name`, expedition.name)}</h1>
+            <p className="text-muted-foreground leading-relaxed">{t(`expeditions.${expedition.slug}.description`, expedition.description)}</p>
           </div>
 
           {expedition.itineraries.length > 0 && (
             <div>
-              <h2 className="text-xl font-bold text-foreground mb-6">Itinerario</h2>
+              <h2 className="text-xl font-bold text-foreground mb-6">{t("expeditionDetail.itinerary")}</h2>
               <div className="relative">
                 <div className="absolute left-5 top-0 bottom-0 w-px bg-border" />
                 <div className="space-y-6">
@@ -189,8 +199,12 @@ export default function ExpeditionDetailPage() {
                         <span className="text-brand font-bold text-sm">{day.dayNumber}</span>
                       </div>
                       <div className="bg-card border border-border rounded-xl p-4 flex-1">
-                        <h3 className="text-foreground font-semibold mb-1">{day.title}</h3>
-                        <p className="text-muted-foreground text-sm leading-relaxed">{day.description}</p>
+                        <h3 className="text-foreground font-semibold mb-1">
+                          {t(`expeditions.${expedition.slug}.itinerary.${day.dayNumber}.title`, day.title)}
+                        </h3>
+                        <p className="text-muted-foreground text-sm leading-relaxed">
+                          {t(`expeditions.${expedition.slug}.itinerary.${day.dayNumber}.description`, day.description)}
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -204,57 +218,74 @@ export default function ExpeditionDetailPage() {
           <div className="sticky top-28 space-y-4">
 
             <div className="bg-card border border-border rounded-2xl p-6">
-              <p className="text-muted-foreground text-sm mb-1">Precio por persona</p>
+              <p className="text-muted-foreground text-sm mb-1">{t("expeditionDetail.pricePerPerson")}</p>
               <p className="text-brand font-extrabold text-4xl">
                 ${expedition.price.toFixed(0)}
                 <span className="text-muted-foreground font-normal text-base ml-1">USD</span>
               </p>
-              <p className="text-muted-foreground text-xs mt-1">Todo incluido · Guía certificado</p>
+              <p className="text-muted-foreground text-xs mt-1">{t("expeditionDetail.allIncluded")}</p>
             </div>
 
             <div className="bg-card border border-border rounded-2xl p-6 space-y-5">
               <h2 className="text-foreground font-bold flex items-center gap-2">
                 <Calendar size={18} className="text-brand" />
-                Reservar expedición
+                {t("expeditionDetail.bookTitle")}
               </h2>
 
-              {availableAvailabilities.length === 0 ? (
-                <p className="text-sm text-muted-foreground">Sin disponibilidad próxima.</p>
+              {sortedAvailabilities.length === 0 ? (
+                <p className="text-sm text-muted-foreground">{t("expeditionDetail.noAvailability")}</p>
               ) : (
                 <div className="space-y-2">
-                  <p className="text-sm text-muted-foreground">Selecciona una fecha</p>
-                  {availableAvailabilities.map((av) => (
-                    <button
-                      key={av.id}
-                      onClick={() => setSelectedAvailability(av.id === selectedAvailability ? null : av.id)}
-                      className={`w-full text-left rounded-xl border p-3.5 transition-all ${
-                        selectedAvailability === av.id
-                          ? "border-brand bg-brand/5"
-                          : "border-border hover:border-brand/40 bg-background"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-foreground text-sm font-medium">
-                          {formatDate(av.startDate)}
-                          {av.startDate !== av.endDate && (
-                            <span className="text-muted-foreground font-normal"> → {formatDate(av.endDate)}</span>
-                          )}
-                        </span>
-                        {selectedAvailability === av.id && <CheckCircle size={15} className="text-brand" />}
-                      </div>
-                      <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                        <Users size={11} />
-                        {av.availableSpots} de {av.capacity} cupos libres
-                      </div>
-                      <SpotsBar availability={av} />
-                    </button>
-                  ))}
+                  <p className="text-sm text-muted-foreground">{t("expeditionDetail.selectDate")}</p>
+                  {sortedAvailabilities.map((av) => {
+                    const isExpired = new Date(av.startDate) < new Date(new Date().setHours(0, 0, 0, 0));
+                    const isSoldOut = av.availableSpots <= 0;
+                    const isDisabled = isExpired || isSoldOut;
+
+                    let statusLabel = "";
+                    if (isExpired) {
+                      statusLabel = ` - ${t("expeditionDetail.expiredStatus")}`;
+                    } else if (isSoldOut) {
+                      statusLabel = ` - ${t("expeditionDetail.soldOutStatus")}`;
+                    }
+
+                    return (
+                      <button
+                        key={av.id}
+                        disabled={isDisabled}
+                        onClick={() => setSelectedAvailability(av.id === selectedAvailability ? null : av.id)}
+                        className={`w-full text-left rounded-xl border p-3.5 transition-all ${
+                          isDisabled
+                            ? "opacity-50 cursor-not-allowed border-border bg-muted/20"
+                            : selectedAvailability === av.id
+                              ? "border-brand bg-brand/5 cursor-pointer"
+                              : "border-border hover:border-brand/40 bg-background cursor-pointer"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between mb-1">
+                          <span className={`text-sm font-medium ${isDisabled ? "text-muted-foreground line-through" : "text-foreground"}`}>
+                            {formatDate(av.startDate)}
+                            {av.startDate !== av.endDate && (
+                              <span className="text-muted-foreground font-normal"> → {formatDate(av.endDate)}</span>
+                            )}
+                            {statusLabel && <span className="text-red-400 font-semibold ml-2 text-xs">{statusLabel}</span>}
+                          </span>
+                          {selectedAvailability === av.id && <CheckCircle size={15} className="text-brand" />}
+                        </div>
+                        <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                          <Users size={11} />
+                          {t("expeditionDetail.spotsLeft", { available: av.availableSpots, capacity: av.capacity, count: av.availableSpots })}
+                        </div>
+                        <SpotsBar availability={av} />
+                      </button>
+                    );
+                  })}
                 </div>
               )}
 
               {selectedAvailability && !booking && (
                 <div className="space-y-2">
-                  <p className="text-sm text-muted-foreground">Número de personas</p>
+                  <p className="text-sm text-muted-foreground">{t("expeditionDetail.peopleCount")}</p>
                   <div className="flex items-center gap-3">
                     <button
                       onClick={() => setPeopleCount((n) => Math.max(1, n - 1))}
@@ -272,12 +303,14 @@ export default function ExpeditionDetailPage() {
                       <Plus size={14} />
                     </button>
                     <span className="text-muted-foreground text-xs ml-1">
-                      máx. {maxPeople} {maxPeople === 1 ? "persona" : "personas"}
+                      {maxPeople === 1
+                        ? t("expeditionDetail.maxPeople_one", { count: 1 })
+                        : t("expeditionDetail.maxPeople_other", { count: maxPeople })}
                     </span>
                   </div>
 
                   <div className="flex items-center justify-between rounded-xl bg-brand/5 border border-brand/20 px-4 py-3 mt-1">
-                    <span className="text-sm text-muted-foreground">Total</span>
+                    <span className="text-sm text-muted-foreground">{t("expeditionDetail.total")}</span>
                     <span className="text-brand font-bold">
                       ${totalPrice.toFixed(0)} USD
                     </span>
@@ -296,27 +329,27 @@ export default function ExpeditionDetailPage() {
                 <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/20 p-4 space-y-2">
                   <div className="flex items-center gap-2">
                     <CheckCircle size={18} className="text-emerald-400" />
-                    <p className="text-emerald-400 font-semibold text-sm">¡Reserva confirmada!</p>
+                    <p className="text-emerald-400 font-semibold text-sm">{t("expeditionDetail.bookingSuccess")}</p>
                   </div>
                   <div className="text-xs text-muted-foreground space-y-1 pt-1">
                     <p>📅 {formatDate(booking.startDate)}{booking.startDate !== booking.endDate ? ` → ${formatDate(booking.endDate)}` : ""}</p>
-                    <p>👥 {booking.peopleCount} {booking.peopleCount === 1 ? "persona" : "personas"}</p>
+                    <p>👥 {booking.peopleCount} {booking.peopleCount === 1 ? t("bookings.person_one", { count: 1 }) : t("bookings.person_other", { count: booking.peopleCount })}</p>
                     <p>💰 ${(expedition.price * booking.peopleCount).toFixed(0)} USD total</p>
                   </div>
                   <Link to="/mis-reservas" className="block mt-2">
-                    <Button variant="outline" className="w-full text-xs h-8">Ver mis reservas</Button>
+                    <Button variant="outline" className="w-full text-xs h-8">{t("expeditionDetail.viewBookings")}</Button>
                   </Link>
                 </div>
               ) : !isAuthenticated ? (
                 <div className="space-y-3">
                   <div className="flex items-start gap-2 rounded-xl bg-brand/5 border border-brand/20 p-3 text-sm text-muted-foreground">
                     <LogIn size={15} className="text-brand flex-shrink-0 mt-0.5" />
-                    Inicia sesión para completar tu reserva
+                    {t("expeditionDetail.loginToBookDesc")}
                   </div>
                   <Link to={`/login?redirect=/viajes/${slug}`}>
                     <Button className="w-full font-bold h-11">
                       <LogIn size={16} className="mr-2" />
-                      Iniciar sesión para reservar
+                      {t("expeditionDetail.loginToBookButton")}
                     </Button>
                   </Link>
                 </div>
@@ -327,24 +360,24 @@ export default function ExpeditionDetailPage() {
                   onClick={handleReservar}
                 >
                   {bookingLoading ? (
-                    <><div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin mr-2" />Reservando...</>
+                    <><div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin mr-2" />{t("expeditionDetail.bookingLoading")}</>
                   ) : canReserve ? (
-                    `Reservar · $${totalPrice.toFixed(0)} USD`
+                    t("expeditionDetail.bookButton", { price: totalPrice.toFixed(0) })
                   ) : (
-                    "Selecciona fecha y personas"
+                    t("expeditionDetail.selectDateAndPeople")
                   )}
                 </Button>
               )}
 
               <p className="text-xs text-muted-foreground text-center">
-                Sin cargo hasta confirmar · Cancela gratis 7 días antes
+                {t("expeditionDetail.cancelPolicy")}
               </p>
             </div>
 
             <div className="bg-card border border-border rounded-2xl p-5 text-center space-y-3">
-              <p className="text-sm text-muted-foreground">¿Quieres una expedición personalizada?</p>
+              <p className="text-sm text-muted-foreground">{t("expeditionDetail.customExpedition")}</p>
               <Link to="/contacto" className="block">
-                <Button variant="outline" className="w-full">Contactar un guía</Button>
+                <Button variant="outline" className="w-full">{t("expeditionDetail.contactGuide")}</Button>
               </Link>
             </div>
 

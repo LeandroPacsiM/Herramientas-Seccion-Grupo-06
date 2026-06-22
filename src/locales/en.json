@@ -31,7 +31,10 @@
     "selectProfile": "Select a profile...",
     "cursorLabel": "Cursor",
     "dyslexicLabel": "Dyslexia friendly",
-    "lineSpacing": "Line Spacing"
+    "lineSpacing": "Line Spacing",
+    "darkMode": "Night Mode",
+    "activated": "Activated",
+    "desactivated": "Disabled"
   },
   "common": {
     "close": "Close",
@@ -40,5 +43,298 @@
     "reset": "Reset",
     "save": "Save",
     "cancel": "Cancel"
+  },
+  "navbar": {
+    "home": "Home",
+    "expeditions": "Tours",
+    "contact": "Contact",
+    "about": "About Us",
+    "bookings": "My Bookings",
+    "loginRequired": "You must log in to access your bookings.",
+    "loginButton": "Log in",
+    "login": "Log In",
+    "logout": "Log Out",
+    "admin": "Admin",
+    "adminPanel": "Admin Panel",
+    "noAccount": "Don't have an account? Sign up"
+  },
+  "footer": {
+    "tagline": "We create high-altitude adventure and elegance experiences across the most stunning peaks in the world.",
+    "explore": "Explore",
+    "contactUs": "Contact Us",
+    "address": "Av. 28 de Julio, La Victoria, Lima - Peru",
+    "copyright": "© 2026 LlamaTours. Creating unforgettable experiences."
+  },
+  "home": {
+    "subtitle": "Luxury Adventures in the Andes",
+    "titlePart1": "Your Unforgettable",
+    "titlePart2": "Expedition",
+    "exploreButton": "Explore Tours",
+    "contactGuide": "Contact a Guide",
+    "premiumTitle": "Premium Experiences",
+    "premiumDesc": "We select the best destinations and services for a worry-free expedition.",
+    "exclusiveTitle": "Exclusive Routes",
+    "exclusiveDesc": "Access to remote areas and luxury campsites in the heart of the mountain range.",
+    "flexibleTitle": "Flexible Dates",
+    "flexibleDesc": "We adapt to your calendar so you can live your adventure whenever you want."
+  },
+  "nosotros": {
+    "subtitle": "About Us",
+    "titlePart1": "Passion for the",
+    "titlePart2": "mountain",
+    "p1": "LlamaTours was born with the idea of sharing the unexplored beauty of the Andes with the world, offering unique experiences that combine adventure, culture, and comfort. We believe that traveling is not just about moving, but connecting deeply with the landscapes, people, and stories that make every destination unforgettable.",
+    "p2": "Our team is made up of expert local guides, passionate about mountains and committed to providing safe, authentic, and enriching experiences. Every route, every expedition, and every detail has been carefully designed so that our travelers live something more than a simple tour.",
+    "p3": "We differentiate ourselves by offering a balance between adventure and elegance, allowing both experienced explorers and first-time travelers to enjoy high-mountain destinations with the backing of a professional and close service.",
+    "p4": "At LlamaTours, we don't just organize trips: we create memories that last over time, foster respect for nature, and promote responsible tourism in every step we take."
+  },
+  "viajes": {
+    "catalog": "Catalog",
+    "titlePart1": "Find your",
+    "titlePart2": "destination",
+    "searchPlaceholder": "Search expedition...",
+    "allDifficulties": "All",
+    "difficultyEasy": "Easy",
+    "difficultyModerate": "Moderate",
+    "difficultyHard": "Hard",
+    "allZones": "All zones",
+    "sortLabel": "Sort by",
+    "priceAsc": "Price: low to high",
+    "priceDesc": "Price: high to low",
+    "durationAsc": "Duration: shortest",
+    "durationDesc": "Duration: longest",
+    "clearFilters": "Clear filters",
+    "noExpeditions": "No expeditions found",
+    "expeditionCount_one": "{{count}} expedition available",
+    "expeditionCount_other": "{{count}} expeditions available",
+    "retry": "Retry",
+    "noResults": "No results",
+    "noResultsDesc": "No expedition matches your search. Try different filters.",
+    "viewAll": "View all expeditions",
+    "viewList": "View List",
+    "viewMap": "View Map"
+  },
+  "expeditionCard": {
+    "days_one": "1 day",
+    "days_other": "{{count}} days",
+    "spots_one": "{{count}} spot available",
+    "spots_other": "{{count}} spots available",
+    "noSpots": "No upcoming availability",
+    "from": "From",
+    "viewDetail": "View details"
+  },
+  "expeditionDetail": {
+    "back": "Back to catalog",
+    "itinerary": "Itinerary",
+    "pricePerPerson": "Price per person",
+    "allIncluded": "All inclusive · Certified guide",
+    "bookTitle": "Book expedition",
+    "noAvailability": "No upcoming availability.",
+    "selectDate": "Select a date",
+    "spotsLeft_one": "1 of {{capacity}} spot left",
+    "spotsLeft_other": "{{available}} of {{capacity}} spots left",
+    "peopleCount": "Number of people",
+    "maxPeople_one": "max. 1 person",
+    "maxPeople_other": "max. {{count}} people",
+    "total": "Total",
+    "bookingSuccess": "Booking confirmed!",
+    "viewBookings": "View my bookings",
+    "loginToBookDesc": "Log in to complete your booking",
+    "loginToBookButton": "Log in to book",
+    "bookingLoading": "Booking...",
+    "bookButton": "Book · ${{price}} USD",
+    "selectDateAndPeople": "Select date and people",
+    "cancelPolicy": "No charge until confirmed · Free cancellation 7 days before",
+    "customExpedition": "Want a custom expedition?",
+    "contactGuide": "Contact a guide",
+    "expiredStatus": "Not available / Expired",
+    "soldOutStatus": "Sold out"
+  },
+  "contacto": {
+    "subtitle": "Contact",
+    "titlePart1": "Let's talk about your",
+    "titlePart2": "next adventure",
+    "desc": "Have questions about a route or want a custom expedition? Our team of experts is ready to help you.",
+    "sentSuccess": "Message sent!",
+    "sentDesc": "Thanks for contacting us, {{name}}. We will reply to {{email}} in less than 24 hours.",
+    "sendAnother": "Send another message",
+    "fullName": "Full name *",
+    "email": "Email address *",
+    "message": "Message *",
+    "messagePlaceholder": "Tell us about your ideal expedition, tentative dates, number of people...",
+    "sending": "Sending...",
+    "sendMessage": "Send message",
+    "contactInfo": "Contact Information",
+    "phone": "Phone",
+    "office": "Office",
+    "address": "Av. 28 de Julio, La Victoria\nLima, Peru",
+    "hours": "Working Hours",
+    "weekdays": "Monday – Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "closed": "Closed",
+    "ready": "Ready to explore?",
+    "readyDesc": "Check our expedition catalog and find your ideal adventure.",
+    "viewExpeditions": "View expeditions"
+  },
+  "auth": {
+    "welcome": "Welcome",
+    "loginTitlePart1": "Log",
+    "loginTitlePart2": "In",
+    "loginDesc": "Access your account to manage your bookings and discover new adventures.",
+    "join": "Join us",
+    "registerTitlePart1": "Create your",
+    "registerTitlePart2": "Account",
+    "registerDesc": "Register to book expeditions and access exclusive offers.",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "confirmPasswordLabel": "Confirm password",
+    "nameLabel": "Full name",
+    "loggingIn": "Logging in...",
+    "loginButton": "Log In",
+    "noAccount": "Don't have an account?",
+    "registerHere": "Register here",
+    "testCredentials": "Test credentials:",
+    "userLabel": "User",
+    "adminLabel": "Admin",
+    "passwordMismatch": "Passwords do not match",
+    "passwordLength": "Password must be at least 6 characters long",
+    "registering": "Registering...",
+    "registerButton": "Create Account",
+    "hasAccount": "Already have an account?",
+    "loginHere": "Log in here"
+  },
+  "bookings": {
+    "myAccount": "My account",
+    "title": "My Bookings",
+    "noBookings": "You don't have any bookings yet",
+    "noBookingsDesc": "Explore the catalog and book your next adventure.",
+    "viewExpeditions": "View expeditions",
+    "upcoming": "Upcoming ({{count}})",
+    "cancelled": "Cancelled ({{count}})",
+    "confirmedStatus": "Confirmed",
+    "pendingStatus": "Pending",
+    "cancelledStatus": "Cancelled",
+    "cancelling": "Cancelling...",
+    "cancelButton": "Cancel booking",
+    "person_one": "1 person",
+    "person_other": "{{count}} people",
+    "totalPrice": "Total Price",
+    "paymentId": "Payment ID",
+    "bookingDate": "Booking Date",
+    "payNowButton": "Pay Now",
+    "paying": "Processing payment...",
+    "paymentSuccess": "Payment successful!"
+  },
+  "expeditions": {
+    "camino-inca-clasico": {
+      "name": "Classic Inca Trail",
+      "location": "Cusco, Peru",
+      "description": "The most famous trek in South America. Four days of hiking through Andean landscapes, Inca ruins, and cloud forests to reach the majestic citadel of Machu Picchu.",
+      "itinerary": {
+        "1": { "title": "Start of the Trail", "description": "Departure from Cusco to km 82. 12 km hike to Wayllabamba. Campsite in the valley." },
+        "2": { "title": "Dead Woman's Pass", "description": "Climb to the highest point (4,215 m). Descent to Pacaymayo valley." },
+        "3": { "title": "Ruins and Cloud Forest", "description": "Visit Runkurakay, Sayacmarca, and Phuyupatamarca. Descent to Wiñay Wayna." },
+        "4": { "title": "Machu Picchu", "description": "Early departure to Inti Punku (Sun Gate). First view of Machu Picchu and guided tour." }
+      }
+    },
+    "montana-7-colores": {
+      "name": "Rainbow Mountain",
+      "location": "Cusco, Peru",
+      "description": "Vinicunca, the most famous rainbow mountain in the world. One-day trek at 5,200 m to contemplate the natural color stripes created by minerals.",
+      "itinerary": {
+        "1": { "title": "Ascent to Rainbow Mountain", "description": "4 AM departure from Cusco. Breakfast en route. 2-3 hours hike to the summit. Return and lunch in Cusipata." }
+      }
+    },
+    "ausangate-trek": {
+      "name": "Ausangate Trek",
+      "location": "Cusco, Peru",
+      "description": "Mystical expedition around Apu Ausangate (6,384 m). Seven days of trekking through glaciers, turquoise lagoons, and isolated Andean communities.",
+      "itinerary": {
+        "1": { "title": "Tinki - Upis", "description": "Transfer to Tinki. Start of the trek to Upis (4,400 m). First night at campsite." },
+        "2": { "title": "Upis - Arapa Pass", "description": "Climb to Arapa Pass (4,850 m). View of glaciers. Descent to Ausangate Cocha camp." },
+        "3": { "title": "Ausangate Cocha - Palomani Pass", "description": "Demanding day crossing the Palomani Pass (5,200 m). Spectacular views of Mount Ausangate." },
+        "4": { "title": "Sibinacocha Lagoon", "description": "Hike towards the largest lagoon in the region. Andean wildlife observation." },
+        "5": { "title": "Jampa Pass", "description": "Cross the Jampa Pass (5,100 m). Descent to the hot springs of Pacchanta." },
+        "6": { "title": "Pacchanta Community", "description": "Rest in natural hot springs. Interaction with the local community." },
+        "7": { "title": "Return to Cusco", "description": "Final walk to Tinki. Transfer back to Cusco." }
+      }
+    },
+    "salkantay-trek": {
+      "name": "Salkantay Trek",
+      "location": "Cusco, Peru",
+      "description": "Alternative route to Machu Picchu crossing the majestic Salkantay mountain (6,271 m). Five days of trekking through glaciers, high jungle, and Inca ruins.",
+      "itinerary": {
+        "1": { "title": "Soraypampa", "description": "Transfer to Mollepata. Hike to Soraypampa (3,900 m). View of Salkantay and Humantay mountains." },
+        "2": { "title": "Salkantay Pass", "description": "Climb to Salkantay Pass (4,650 m), the highest point of the trek. Descent to Chaullay." },
+        "3": { "title": "High Jungle", "description": "Change of ecosystem towards the high jungle. Hike through cloud forest to Santa Teresa." },
+        "4": { "title": "Aguas Calientes", "description": "Walk along the train tracks to Aguas Calientes. Night in the base town of Machu Picchu." },
+        "5": { "title": "Machu Picchu", "description": "Guided visit of Machu Picchu. Return by train to Cusco." }
+      }
+    },
+    "huayhuash-circuit": {
+      "name": "Huayhuash Circuit",
+      "location": "Huaraz, Peru",
+      "description": "The most spectacular trekking circuit in Peru. Ten days surrounding the Cordillera Huayhuash with views of snow-capped peaks above 6,000 m.",
+      "itinerary": {
+        "1": { "title": "Llamac - Cuartelhuain", "description": "Start of the circuit from Llamac. First camp at 4,200 m." },
+        "2": { "title": "Cacananpunta Pass", "description": "Crossing the first pass at 4,700 m. Views of Yerupajá peak." },
+        "3": { "title": "Mitucocha Lagoon", "description": "Hike to Mitucocha lagoon. Camp next to the lake." },
+        "4": { "title": "Carhuac Pass", "description": "Climb to Carhuac Pass (4,650 m). Panoramas of Siulá and Yerupajá." },
+        "5": { "title": "Huayhuash", "description": "Base camp of Mount Huayhuash. Optional acclimatization day." },
+        "6": { "title": "San Antonio Pass", "description": "Crossing the San Antonio Pass (5,000 m). Descent to Huanacpatay valley." },
+        "7": { "title": "Jahuacocha Lagoon", "description": "Trekking to the most beautiful lagoon of the circuit." },
+        "8": { "title": "Tapush Pass", "description": "Crossing the Tapush Pass (4,750 m). Views of Jirishanca." },
+        "9": { "title": "Cajatambo", "description": "Final descent to the town of Cajatambo." },
+        "10": { "title": "Return to Huaraz", "description": "Transfer back to Huaraz. End of the circuit." }
+      }
+    },
+    "laguna-69": {
+      "name": "Lake 69",
+      "location": "Huaraz, Peru",
+      "description": "One-day trek to one of the most beautiful lagoons in the Cordillera Blanca. Turquoise water surrounded by snow-capped peaks at 4,600 m.",
+      "itinerary": {
+        "1": { "title": "Lake 69", "description": "Departure from Huaraz to Cebollapampa. 3 hours walk to Lake 69. Return and transfer back to Huaraz." }
+      }
+    },
+    "choquequirao-trek": {
+      "name": "Choquequirao Trek",
+      "location": "Cusco, Peru",
+      "description": "Machu Picchu's 'sacred sister'. Four-day trek to an Inca city that is less visited but equally impressive, surrounded by mountains and condors.",
+      "itinerary": {
+        "1": { "title": "Cachora - Chiquisca", "description": "Transfer to Cachora. Descent to the Apurímac River. Campsite in Chiquisca." },
+        "2": { "title": "Choquequirao", "description": "Steep climb to the ruins of Choquequirao. Guided tour of the citadel." },
+        "3": { "title": "Exploration", "description": "Full day exploring terraces, plazas, and observing condors." },
+        "4": { "title": "Return", "description": "Return to Cachora. Transfer to Cusco." }
+      }
+    },
+    "glaciar-pastoruri": {
+      "name": "Pastoruri Glacier",
+      "location": "Huaraz, Peru",
+      "description": "One-day excursion to Pastoruri Glacier in the Cordillera Blanca. A witness to climate change, this retreating glacier remains a natural wonder.",
+      "itinerary": {
+        "1": { "title": "Pastoruri Glacier", "description": "Departure from Huaraz. Stops at the Puya Raimondi forest and carbonated waters. Short walk to the glacier. Return." }
+      }
+    },
+    "lares-trek": {
+      "name": "Lares Trek",
+      "location": "Cusco, Peru",
+      "description": "Three-day cultural trek through traditional Andean communities. Encounters with local weavers, hot springs, and views of Mount Verónica.",
+      "itinerary": {
+        "1": { "title": "Lares - Huacahuasi", "description": "Transfer to Lares. Bath in the hot springs. Hike to the community of Huacahuasi." },
+        "2": { "title": "Ipsaycocha Pass", "description": "Crossing the Ipsaycocha Pass (4,500 m). Descent to the community of Patacancha." },
+        "3": { "title": "Ollantaytambo - Machu Picchu", "description": "Descent to Ollantaytambo. Train to Aguas Calientes and visit to Machu Picchu." }
+      }
+    },
+    "santa-cruz-trek": {
+      "name": "Santa Cruz Trek",
+      "location": "Huaraz, Peru",
+      "description": "The most popular trek in the Cordillera Blanca. Four days crossing glacier valleys, turquoise lagoons, and the impressive Punta Unión Pass at 4,750 m.",
+      "itinerary": {
+        "1": { "title": "Cashapampa - Llamacorral", "description": "Start of the trek from Cashapampa. Walk through the Santa Cruz gorge to Llamacorral." },
+        "2": { "title": "Ichiccocha Lagoon", "description": "Walk to Ichiccocha lagoon. Views of Alpamayo and Taulliraju." },
+        "3": { "title": "Punta Unión Pass", "description": "Ascent to Punta Unión Pass (4,750 m). 360° view of snow-capped peaks. Descent to Taullipampa." },
+        "4": { "title": "Vaquería", "description": "Final descent through the Huaripampa gorge to Vaquería. Transfer to Huaraz." }
+      }
+    }
   }
 }

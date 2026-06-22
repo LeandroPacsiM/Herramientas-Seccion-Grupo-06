@@ -31,7 +31,10 @@
     "selectProfile": "Seleccione un perfil...",
     "cursorLabel": "Cursor",
     "dyslexicLabel": "Dislexia amigable",
-    "lineSpacing": "Interlineado"
+    "lineSpacing": "Interlineado",
+    "darkMode": "Modo Nocturno",
+    "activated": "Activado",
+    "desactivated": "Desactivado"
   },
   "common": {
     "close": "Cerrar",
@@ -40,5 +43,298 @@
     "reset": "Restablecer",
     "save": "Guardar",
     "cancel": "Cancelar"
+  },
+  "navbar": {
+    "home": "Inicio",
+    "expeditions": "Viajes",
+    "contact": "Contacto",
+    "about": "Sobre Nosotros",
+    "bookings": "Mis Reservas",
+    "loginRequired": "Debes iniciar sesión para acceder a tus reservas.",
+    "loginButton": "Iniciar sesión",
+    "login": "Ingresar",
+    "logout": "Salir",
+    "admin": "Admin",
+    "adminPanel": "Panel Admin",
+    "noAccount": "¿No tienes cuenta? Regístrate"
+  },
+  "footer": {
+    "tagline": "Creamos experiencias de aventura y elegancia en gran altitud a través de los picos más impresionantes del mundo.",
+    "explore": "Explorar",
+    "contactUs": "Contáctanos",
+    "address": "Av. 28 de Julio, La Victoria, Lima - Perú",
+    "copyright": "© 2026 LlamaTours. Creando experiencias inolvidables."
+  },
+  "home": {
+    "subtitle": "Aventuras de Lujo en los Andes",
+    "titlePart1": "Tu Expedición",
+    "titlePart2": "Inolvidable",
+    "exploreButton": "Explorar Viajes",
+    "contactGuide": "Contactar un Guía",
+    "premiumTitle": "Experiencias Premium",
+    "premiumDesc": "Seleccionamos los mejores destinos y servicios para una expedición sin preocupaciones.",
+    "exclusiveTitle": "Rutas Exclusivas",
+    "exclusiveDesc": "Acceso a zonas remotas y campamentos de lujo en el corazón de la cordillera.",
+    "flexibleTitle": "Fechas Flexibles",
+    "flexibleDesc": "Nos adaptamos a tu calendario para que vivas tu aventura cuando lo desees."
+  },
+  "nosotros": {
+    "subtitle": "Sobre Nosotros",
+    "titlePart1": "Pasión por la",
+    "titlePart2": "montaña",
+    "p1": "LlamaTours nació con la idea de compartir la belleza inexplorada de los Andes con el mundo, ofreciendo experiencias únicas que combinan aventura, cultura y confort. Creemos que viajar no solo es desplazarse, sino conectar profundamente con los paisajes, las personas y las historias que hacen de cada destino algo inolvidable.",
+    "p2": "Nuestro equipo está conformado por guías locales expertos, apasionados por la montaña y comprometidos con brindar experiencias seguras, auténticas y enriquecedoras. Cada ruta, cada expedición y cada detalle ha sido cuidadosamente diseñado para que nuestros viajeros vivan algo más que un simple recorrido.",
+    "p3": "Nos diferenciamos por ofrecer un equilibrio entre aventura y elegancia, permitiendo que tanto exploradores experimentados como viajeros primerizos puedan disfrutar de destinos de alta montaña con el respaldo de un servicio profesional y cercano.",
+    "p4": "En LlamaTours, no solo organizamos viajes: creamos recuerdos que perduran en el tiempo, fomentamos el respeto por la naturaleza y promovemos el turismo responsable en cada paso que damos."
+  },
+  "viajes": {
+    "catalog": "Catálogo",
+    "titlePart1": "Encuentra tu",
+    "titlePart2": "destino",
+    "searchPlaceholder": "Buscar expedición...",
+    "allDifficulties": "Todos",
+    "difficultyEasy": "Fácil",
+    "difficultyModerate": "Moderado",
+    "difficultyHard": "Difícil",
+    "allZones": "Todas las zonas",
+    "sortLabel": "Ordenar",
+    "priceAsc": "Precio: menor a mayor",
+    "priceDesc": "Precio: mayor a menor",
+    "durationAsc": "Duración: más corto",
+    "durationDesc": "Duración: más largo",
+    "clearFilters": "Limpiar filtros",
+    "noExpeditions": "No se encontraron expediciones",
+    "expeditionCount_one": "{{count}} expedición disponible",
+    "expeditionCount_other": "{{count}} expediciones disponibles",
+    "retry": "Reintentar",
+    "noResults": "Sin resultados",
+    "noResultsDesc": "Ninguna expedición coincide con tu búsqueda. Intenta con otros filtros.",
+    "viewAll": "Ver todas las expediciones",
+    "viewList": "Ver Lista",
+    "viewMap": "Ver Mapa"
+  },
+  "expeditionCard": {
+    "days_one": "1 día",
+    "days_other": "{{count}} días",
+    "spots_one": "{{count}} cupo disponible",
+    "spots_other": "{{count}} cupos disponibles",
+    "noSpots": "Sin disponibilidad próxima",
+    "from": "Desde",
+    "viewDetail": "Ver detalle"
+  },
+  "expeditionDetail": {
+    "back": "Volver al catálogo",
+    "itinerary": "Itinerario",
+    "pricePerPerson": "Precio por persona",
+    "allIncluded": "Todo incluido · Guía certificado",
+    "bookTitle": "Reservar expedición",
+    "noAvailability": "Sin disponibilidad próxima.",
+    "selectDate": "Selecciona una fecha",
+    "spotsLeft_one": "1 de {{capacity}} cupo libre",
+    "spotsLeft_other": "{{available}} de {{capacity}} cupos libres",
+    "peopleCount": "Número de personas",
+    "maxPeople_one": "máx. 1 persona",
+    "maxPeople_other": "máx. {{count}} personas",
+    "total": "Total",
+    "bookingSuccess": "¡Reserva confirmada!",
+    "viewBookings": "Ver mis reservas",
+    "loginToBookDesc": "Inicia sesión para completar tu reserva",
+    "loginToBookButton": "Iniciar sesión para reservar",
+    "bookingLoading": "Reservando...",
+    "bookButton": "Reservar · ${{price}} USD",
+    "selectDateAndPeople": "Selecciona fecha y personas",
+    "cancelPolicy": "Sin cargo hasta confirmar · Cancela gratis 7 días antes",
+    "customExpedition": "¿Quieres una expedición personalizada?",
+    "contactGuide": "Contactar un guía",
+    "expiredStatus": "No disponible / Vencido",
+    "soldOutStatus": "Agotado"
+  },
+  "contacto": {
+    "subtitle": "Contacto",
+    "titlePart1": "Hablemos de tu",
+    "titlePart2": "próxima aventura",
+    "desc": "¿Tienes dudas sobre una ruta o quieres una expedición personalizada? Nuestro equipo de expertos está listo para ayudarte.",
+    "sentSuccess": "¡Mensaje enviado!",
+    "sentDesc": "Gracias por contactarnos, {{name}}. Te responderemos a {{email}} en menos de 24 horas.",
+    "sendAnother": "Enviar otro mensaje",
+    "fullName": "Nombre completo *",
+    "email": "Correo electrónico *",
+    "message": "Mensaje *",
+    "messagePlaceholder": "Cuéntanos sobre tu expedición ideal, fechas tentativas, número de personas...",
+    "sending": "Enviando...",
+    "sendMessage": "Enviar mensaje",
+    "contactInfo": "Información de contacto",
+    "phone": "Teléfono",
+    "office": "Oficina",
+    "address": "Av. 28 de Julio, La Victoria\nLima, Perú",
+    "hours": "Horario de atención",
+    "weekdays": "Lunes – Viernes",
+    "saturday": "Sábado",
+    "sunday": "Domingo",
+    "closed": "Cerrado",
+    "ready": "¿Listo para explorar?",
+    "readyDesc": "Revisa nuestro catálogo de expediciones y encuentra tu aventura ideal.",
+    "viewExpeditions": "Ver expediciones"
+  },
+  "auth": {
+    "welcome": "Bienvenido",
+    "loginTitlePart1": "Inicia",
+    "loginTitlePart2": "Sesión",
+    "loginDesc": "Accede a tu cuenta para gestionar tus reservas y descubrir nuevas aventuras.",
+    "join": "Únete",
+    "registerTitlePart1": "Crea tu",
+    "registerTitlePart2": "Cuenta",
+    "registerDesc": "Regístrate para reservar expediciones y acceder a ofertas exclusivas.",
+    "emailLabel": "Email",
+    "passwordLabel": "Contraseña",
+    "confirmPasswordLabel": "Confirmar contraseña",
+    "nameLabel": "Nombre completo",
+    "loggingIn": "Iniciando sesión...",
+    "loginButton": "Iniciar Sesión",
+    "noAccount": "¿No tienes cuenta?",
+    "registerHere": "Regístrate aquí",
+    "testCredentials": "Credenciales de prueba:",
+    "userLabel": "Usuario",
+    "adminLabel": "Admin",
+    "passwordMismatch": "Las contraseñas no coinciden",
+    "passwordLength": "La contraseña debe tener al menos 6 caracteres",
+    "registering": "Registrando...",
+    "registerButton": "Crear Cuenta",
+    "hasAccount": "¿Ya tienes cuenta?",
+    "loginHere": "Inicia sesión aquí"
+  },
+  "bookings": {
+    "myAccount": "Mi cuenta",
+    "title": "Mis Reservas",
+    "noBookings": "Aún no tienes reservas",
+    "noBookingsDesc": "Explora el catálogo y reserva tu próxima aventura.",
+    "viewExpeditions": "Ver expediciones",
+    "upcoming": "Próximas ({{count}})",
+    "cancelled": "Canceladas ({{count}})",
+    "confirmedStatus": "Confirmada",
+    "pendingStatus": "Pendiente",
+    "cancelledStatus": "Cancelada",
+    "cancelling": "Cancelando...",
+    "cancelButton": "Cancelar reserva",
+    "person_one": "1 persona",
+    "person_other": "{{count}} personas",
+    "totalPrice": "Precio total",
+    "paymentId": "ID de Pago",
+    "bookingDate": "Fecha de reserva",
+    "payNowButton": "Pagar ahora",
+    "paying": "Procesando pago...",
+    "paymentSuccess": "¡Pago realizado con éxito!"
+  },
+  "expeditions": {
+    "camino-inca-clasico": {
+      "name": "Camino Inca Clásico",
+      "location": "Cusco, Perú",
+      "description": "El trek más famoso de Sudamérica. Cuatro días de caminata atravesando paisajes andinos, ruinas incas y bosques nubosos hasta llegar a la majestuosa ciudadela de Machu Picchu.",
+      "itinerary": {
+        "1": { "title": "Inicio del Camino", "description": "Salida desde Cusco hacia el km 82. Caminata de 12 km hasta Wayllabamba. Acampada en valle." },
+        "2": { "title": "Paso de la Mujer Muerta", "description": "Ascenso al punto más alto (4,215 msnm). Descenso hacia el valle de Pacaymayo." },
+        "3": { "title": "Ruinas y Bosque Nuboso", "description": "Visita a Runkurakay, Sayacmarca y Phuyupatamarca. Descenso a Wiñay Wayna." },
+        "4": { "title": "Machu Picchu", "description": "Salida temprano hacia Inti Punku (Puerta del Sol). Primera vista de Machu Picchu y tour guiado." }
+      }
+    },
+    "montana-7-colores": {
+      "name": "Montaña de 7 Colores",
+      "location": "Cusco, Perú",
+      "description": "Vinicunca, la montaña arcoíris más famosa del mundo. Trek de un día a 5,200 msnm para contemplar las franjas naturales de colores creadas por minerales.",
+      "itinerary": {
+        "1": { "title": "Ascenso a la Montaña Arcoíris", "description": "Salida 4 AM desde Cusco. Desayuno en ruta. Caminata de 2-3 horas hasta la cumbre. Retorno y almuerzo en Cusipata." }
+      }
+    },
+    "ausangate-trek": {
+      "name": "Ausangate Trek",
+      "location": "Cusco, Perú",
+      "description": "Expedición mística alrededor del Apu Ausangate (6,384 msnm). Siete días de trekking atravesando glaciares, lagunas turquesas y comunidades andinas aisladas.",
+      "itinerary": {
+        "1": { "title": "Tinki - Upis", "description": "Transfer a Tinki. Inicio del trek hacia Upis (4,400 msnm). Primera noche de acampada." },
+        "2": { "title": "Upis - Arapa Pass", "description": "Ascenso al paso Arapa (4,850 msnm). Vista de glaciares. Descenso a campamento Ausangate Cocha." },
+        "3": { "title": "Ausangate Cocha - Paso Palomani", "description": "Día exigente cruzando el paso Palomani (5,200 msnm). Vistas espectaculares del nevado Ausangate." },
+        "4": { "title": "Laguna Sibinacocha", "description": "Caminata hacia la laguna más grande de la región. Observación de fauna andina." },
+        "5": { "title": "Jampa Pass", "description": "Cruce del paso Jampa (5,100 msnm). Descenso hacia aguas termales de Pacchanta." },
+        "6": { "title": "Comunidad de Pacchanta", "description": "Descanso en aguas termales naturales. Interacción con comunidad local." },
+        "7": { "title": "Retorno a Cusco", "description": "Caminata final hacia Tinki. Transfer de regreso a Cusco." }
+      }
+    },
+    "salkantay-trek": {
+      "name": "Salkantay Trek",
+      "location": "Cusco, Perú",
+      "description": "Ruta alternativa a Machu Picchu atravesando el majestuoso nevado Salkantay (6,271 msnm). Cinco días de trekking por glaciares, selva alta y ruinas incas.",
+      "itinerary": {
+        "1": { "title": "Soraypampa", "description": "Transfer a Mollepata. Caminata hasta Soraypampa (3,900 msnm). Vista del nevado Salkantay y Humantay." },
+        "2": { "title": "Paso Salkantay", "description": "Ascenso al paso Salkantay (4,650 msnm), punto más alto del trek. Descenso hacia Chaullay." },
+        "3": { "title": "Selva Alta", "description": "Cambio de ecosistema hacia la selva alta. Caminata por bosque nuboso hasta Santa Teresa." },
+        "4": { "title": "Aguas Calientes", "description": "Caminata por vías del tren hacia Aguas Calientes. Noche en pueblo base de Machu Picchu." },
+        "5": { "title": "Machu Picchu", "description": "Visita guiada a Machu Picchu. Retorno en tren a Cusco." }
+      }
+    },
+    "huayhuash-circuit": {
+      "name": "Circuito Huayhuash",
+      "location": "Huaraz, Perú",
+      "description": "El circuito de trekking más espectacular de Perú. Diez días rodeando la Cordillera Huayhuash con vistas de picos nevados superiores a 6,000 msnm.",
+      "itinerary": {
+        "1": { "title": "Llamac - Cuartelhuain", "description": "Inicio del circuito desde Llamac. Primera acampada a 4,200 msnm." },
+        "2": { "title": "Paso Cacananpunta", "description": "Cruce del primer paso a 4,700 msnm. Vistas del nevado Yerupajá." },
+        "3": { "title": "Laguna Mitucocha", "description": "Caminata hacia la laguna Mitucocha. Campamento junto al lago." },
+        "4": { "title": "Paso Carhuac", "description": "Ascenso al paso Carhuac (4,650 msnm). Panorámicas del Siulá y Yerupajá." },
+        "5": { "title": "Huayhuash", "description": "Campamento base del nevado Huayhuash. Día de aclimatación opcional." },
+        "6": { "title": "Paso San Antonio", "description": "Cruce del paso San Antonio (5,000 msnm). Descenso hacia valle Huanacpatay." },
+        "7": { "title": "Laguna Jahuacocha", "description": "Trekking hasta la laguna más hermosa del circuito." },
+        "8": { "title": "Paso Tapush", "description": "Cruce del paso Tapush (4,750 msnm). Vistas de Jirishanca." },
+        "9": { "title": "Cajatambo", "description": "Descenso final hacia el pueblo de Cajatambo." },
+        "10": { "title": "Retorno a Huaraz", "description": "Transfer de regreso a Huaraz. Fin del circuito." }
+      }
+    },
+    "laguna-69": {
+      "name": "Laguna 69",
+      "location": "Huaraz, Perú",
+      "description": "Trek de un día a una de las lagunas más hermosas de la Cordillera Blanca. Agua turquesa rodeada de nevados a 4,600 msnm.",
+      "itinerary": {
+        "1": { "title": "Laguna 69", "description": "Salida desde Huaraz hacia Cebollapampa. Caminata de 3 horas hasta Laguna 69. Retorno y regreso a Huaraz." }
+      }
+    },
+    "choquequirao-trek": {
+      "name": "Choquequirao Trek",
+      "location": "Cusco, Perú",
+      "description": "La 'hermana sagrada' de Machu Picchu. Trek de cuatro días hacia una ciudad inca menos visitada pero igualmente impresionante, rodeada de montañas y cóndores.",
+      "itinerary": {
+        "1": { "title": "Cachora - Chiquisca", "description": "Transfer a Cachora. Descenso al río Apurímac. Acampada en Chiquisca." },
+        "2": { "title": "Choquequirao", "description": "Ascenso empinado hasta las ruinas de Choquequirao. Tour guiado por la ciudadela." },
+        "3": { "title": "Exploración", "description": "Día completo explorando terrazas, plazas y observando cóndores." },
+        "4": { "title": "Retorno", "description": "Regreso a Cachora. Transfer a Cusco." }
+      }
+    },
+    "glaciar-pastoruri": {
+      "name": "Glaciar Pastoruri",
+      "location": "Huaraz, Perú",
+      "description": "Excursión de un día al glaciar Pastoruri en la Cordillera Blanca. Testigo del cambio climático, este glaciar en retroceso sigue siendo una maravilla natural.",
+      "itinerary": {
+        "1": { "title": "Glaciar Pastoruri", "description": "Salida desde Huaraz. Paradas en bosque de Puyas Raimondi y aguas gasificadas. Caminata corta al glaciar. Retorno." }
+      }
+    },
+    "lares-trek": {
+      "name": "Lares Trek",
+      "location": "Cusco, Perú",
+      "description": "Trek cultural de tres días por comunidades andinas tradicionales. Encuentros con tejedores locales, aguas termales y vistas del nevado Verónica.",
+      "itinerary": {
+        "1": { "title": "Lares - Huacahuasi", "description": "Transfer a Lares. Baño en aguas termales. Caminata hasta la comunidad de Huacahuasi." },
+        "2": { "title": "Paso Ipsaycocha", "description": "Cruce del paso Ipsaycocha (4,500 msnm). Descenso a la comunidad de Patacancha." },
+        "3": { "title": "Ollantaytambo - Machu Picchu", "description": "Descenso a Ollantaytambo. Tren a Aguas Calientes y visita a Machu Picchu." }
+      }
+    },
+    "santa-cruz-trek": {
+      "name": "Santa Cruz Trek",
+      "location": "Huaraz, Perú",
+      "description": "El trek más popular de la Cordillera Blanca. Cuatro días atravesando valles glaciares, lagunas turquesas y el impresionante paso Punta Unión a 4,750 msnm.",
+      "itinerary": {
+        "1": { "title": "Cashapampa - Llamacorral", "description": "Inicio del trek desde Cashapampa. Caminata por la Quebrada Santa Cruz hasta Llamacorral." },
+        "2": { "title": "Laguna Ichiccocha", "description": "Caminata hasta la laguna Ichiccocha. Vistas del Alpamayo y Taulliraju." },
+        "3": { "title": "Paso Punta Unión", "description": "Ascenso al paso Punta Unión (4,750 msnm). Vista de 360° de los nevados. Descenso a Taullipampa." },
+        "4": { "title": "Vaquería", "description": "Descenso final por la Quebrada Huaripampa hasta Vaquería. Transfer a Huaraz." }
+      }
+    }
   }
 }

@@ -1,11 +1,12 @@
 import { Link } from "react-router";
+import { useTranslation } from "react-i18next";
 import { MapPin, Clock, Users, ChevronRight, Flame, Leaf, Zap } from "lucide-react";
 import type { Expedition } from "../types";
 
 const DIFFICULTY_CONFIG = {
-  EASY: { label: "Fácil", icon: Leaf, className: "bg-emerald-500/15 text-emerald-400 border border-emerald-500/20" },
-  MODERATE: { label: "Moderado", icon: Zap, className: "bg-amber-500/15 text-amber-400 border border-amber-500/20" },
-  HARD: { label: "Difícil", icon: Flame, className: "bg-red-500/15 text-red-400 border border-red-500/20" },
+  EASY: { icon: Leaf, className: "bg-emerald-500/15 text-emerald-400 border border-emerald-500/20" },
+  MODERATE: { icon: Zap, className: "bg-amber-500/15 text-amber-400 border border-amber-500/20" },
+  HARD: { icon: Flame, className: "bg-red-500/15 text-red-400 border border-red-500/20" },
 };
 
 interface ExpeditionCardProps {
@@ -13,12 +14,24 @@ interface ExpeditionCardProps {
 }
 
 export default function ExpeditionCard({ expedition }: ExpeditionCardProps) {
-  const { label, icon: DiffIcon, className: diffClass } = DIFFICULTY_CONFIG[expedition.difficulty];
+  const { t, i18n } = useTranslation();
+  const { icon: DiffIcon, className: diffClass } = DIFFICULTY_CONFIG[expedition.difficulty];
+
+  const diffKey = expedition.difficulty === "EASY" ? "Easy" : expedition.difficulty === "MODERATE" ? "Moderate" : "Hard";
+  const difficultyLabel = t(`viajes.difficulty${diffKey}`);
+
   const coverImage = expedition.images[0]?.url ?? "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800";
   const nextAvailability = expedition.availabilities.find((a) => a.availableSpots > 0);
   const totalSpots = nextAvailability?.capacity ?? 0;
   const availableSpots = nextAvailability?.availableSpots ?? 0;
   const spotsPercent = totalSpots > 0 ? (availableSpots / totalSpots) * 100 : 0;
+
+  // Formatear la fecha según el idioma actual
+  const getFormattedDate = (dateStr: string) => {
+    const localeMap: Record<string, string> = { es: "es-PE", en: "en-US", qu: "es-PE" };
+    const currentLocale = localeMap[i18n.language] || "es-PE";
+    return new Date(dateStr).toLocaleDateString(currentLocale, { month: "short", day: "numeric" });
+  };
 
   return (
     <Link
@@ -28,7 +41,7 @@ export default function ExpeditionCard({ expedition }: ExpeditionCardProps) {
       <div className="relative h-52 overflow-hidden bg-muted">
         <img
           src={coverImage}
-          alt={expedition.name}
+          alt={t(`expeditions.${expedition.slug}.name`, expedition.name)}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
@@ -36,12 +49,14 @@ export default function ExpeditionCard({ expedition }: ExpeditionCardProps) {
 
         <span className={`absolute top-3 left-3 inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full ${diffClass}`}>
           <DiffIcon size={11} />
-          {label}
+          {difficultyLabel}
         </span>
 
         <span className="absolute top-3 right-3 inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-black/50 text-white border border-white/10">
           <Clock size={11} />
-          {expedition.durationDays === 1 ? "1 día" : `${expedition.durationDays} días`}
+          {expedition.durationDays === 1
+            ? t("expeditionCard.days_one", { count: 1 })
+            : t("expeditionCard.days_other", { count: expedition.durationDays })}
         </span>
       </div>
 
@@ -49,17 +64,17 @@ export default function ExpeditionCard({ expedition }: ExpeditionCardProps) {
         <div>
           <div className="flex items-start justify-between gap-2 mb-1">
             <h3 className="text-card-foreground font-semibold leading-snug group-hover:text-brand transition-colors line-clamp-2">
-              {expedition.name}
+              {t(`expeditions.${expedition.slug}.name`, expedition.name)}
             </h3>
           </div>
           <div className="flex items-center gap-1 text-muted-foreground text-sm">
             <MapPin size={13} />
-            <span>{expedition.location}</span>
+            <span>{t(`expeditions.${expedition.slug}.location`, expedition.location)}</span>
           </div>
         </div>
 
         <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2">
-          {expedition.description}
+          {t(`expeditions.${expedition.slug}.description`, expedition.description)}
         </p>
 
         {nextAvailability ? (
@@ -67,9 +82,11 @@ export default function ExpeditionCard({ expedition }: ExpeditionCardProps) {
             <div className="flex items-center justify-between text-xs text-muted-foreground">
               <span className="flex items-center gap-1">
                 <Users size={12} />
-                {availableSpots} cupos disponibles
+                {availableSpots === 1
+                  ? t("expeditionCard.spots_one", { count: 1 })
+                  : t("expeditionCard.spots_other", { count: availableSpots })}
               </span>
-              <span>{new Date(nextAvailability.startDate).toLocaleDateString("es-PE", { month: "short", day: "numeric" })}</span>
+              <span>{getFormattedDate(nextAvailability.startDate)}</span>
             </div>
             <div className="h-1 rounded-full bg-muted overflow-hidden">
               <div
@@ -79,19 +96,19 @@ export default function ExpeditionCard({ expedition }: ExpeditionCardProps) {
             </div>
           </div>
         ) : (
-          <p className="text-xs text-red-400">Sin disponibilidad próxima</p>
+          <p className="text-xs text-red-400">{t("expeditionCard.noSpots")}</p>
         )}
 
         <div className="flex items-center justify-between pt-1 border-t border-border">
           <div>
-            <span className="text-muted-foreground text-xs">Desde</span>
+            <span className="text-muted-foreground text-xs">{t("expeditionCard.from")}</span>
             <p className="text-brand font-bold text-lg leading-none">
               ${expedition.price.toFixed(0)}
               <span className="text-muted-foreground font-normal text-xs ml-1">USD</span>
             </p>
           </div>
           <span className="flex items-center gap-1 text-xs font-semibold text-brand group-hover:gap-2 transition-all">
-            Ver detalle <ChevronRight size={14} />
+            {t("expeditionCard.viewDetail")} <ChevronRight size={14} />
           </span>
         </div>
       </div>
