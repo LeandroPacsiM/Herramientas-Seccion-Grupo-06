@@ -86,6 +86,24 @@
     "p2": "Nuestro equipo está conformado por guías locales expertos, apasionados por la montaña y comprometidos con brindar experiencias seguras, auténticas y enriquecedoras. Cada ruta, cada expedición y cada detalle ha sido cuidadosamente diseñado para que nuestros viajeros vivan algo más que un simple recorrido.",
     "p3": "Nos diferenciamos por ofrecer un equilibrio entre aventura y elegancia, permitiendo que tanto exploradores experimentados como viajeros primerizos puedan disfrutar de destinos de alta montaña con el respaldo de un servicio profesional y cercano.",
     "p4": "En LlamaTours, no solo organizamos viajes: creamos recuerdos que perduran en el tiempo, fomentamos el respeto por la naturaleza y promovemos el turismo responsable en cada paso que damos."
+    
+    "misionTitle": "Misión",
+    "misionText": "Brindar a los entusiastas de la aventura una plataforma moderna e intuitiva donde puedan explorar expediciones únicas y gestionar sus reservas de viajes con total facilidad, garantizando una experiencia organizada, segura y eficiente a través de tecnologías modernas.",
+    
+    "visionTitle": "Visión",
+    "visionText": "Convertirnos en la plataforma de referencia para el turismo de aventura y alta montaña, integrando innovación tecnológica continua para conectar de manera óptima a los viajeros con las riquezas naturales del mundo de forma sostenible.",
+    
+    "valoresTitle": "Valores Organizacionales",
+    "val1Title": "Innovación tecnológica",
+    "val1Text": "Buscamos mejorar continuamente nuestra plataforma mediante herramientas modernas como Spring Boot y React para ofrecer un servicio eficiente.",
+    "val2Title": "Trabajo en equipo",
+    "val2Text": "Fomentamos la colaboración y la comunicación activa entre nuestros guías, desarrolladores y personal de atención.",
+    "val3Title": "Compromiso con la calidad",
+    "val3Text": "Desarrollamos funcionalidades robustas, fáciles de utilizar y enfocadas en la satisfacción integral del viajero.",
+    "val4Title": "Turismo responsable",
+    "val4Text": "Promovemos el respeto absoluto por la naturaleza y las comunidades locales que nos reciben en cada expedición.",
+    "val5Title": "Mejora continua",
+    "val5Text": "Analizamos constantemente los comentarios de nuestros usuarios para optimizar los procesos de reserva y exploración."
   },
   "viajes": {
     "catalog": "Catálogo",
