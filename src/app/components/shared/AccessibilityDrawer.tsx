@@ -173,17 +173,17 @@ export default function AccessibilityDrawer() {
                   onClick={() => setDarkMode(!darkMode)}
                   className={`${btnBase} col-span-2 ${darkMode ? btnActive : btnInactive} flex-row gap-3 py-3 px-5 justify-start`}
                   aria-pressed={darkMode}
-                  aria-label="Modo Nocturno"
+                  aria-label={t("accessibility.darkMode")}
                 >
                   <svg className={`w-6 h-6 transition-colors ${darkMode ? "text-primary" : "text-muted-foreground group-hover:text-primary"}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/>
                   </svg>
                   <div className="text-left flex-grow">
                     <span className="text-sm font-semibold text-foreground block">
-                      Modo Nocturno
+                      {t("accessibility.darkMode")}
                     </span>
                     <span className="text-xs text-muted-foreground">
-                      {darkMode ? "Activado" : "Desactivado"}
+                      {darkMode ? t("accessibility.activated") : t("accessibility.desactivated")}
                     </span>
                   </div>
                 </button>

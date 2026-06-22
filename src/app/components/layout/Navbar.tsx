@@ -30,10 +30,10 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Inicio", href: "/" },
-    { name: "Viajes", href: "/viajes" },
-    { name: "Contacto", href: "/contacto" },
-    { name: "Sobre Nosotros", href: "/nosotros" },
+    { name: t("navbar.home"), href: "/" },
+    { name: t("navbar.expeditions"), href: "/viajes" },
+    { name: t("navbar.contact"), href: "/contacto" },
+    { name: t("navbar.about"), href: "/nosotros" },
   ];
 
   const navigate = useNavigate();
@@ -70,7 +70,7 @@ export default function Navbar() {
               {isAuthenticated ? (
                 <Link to="/mis-reservas" className="flex items-center gap-1.5 text-foreground/80 hover:text-brand transition-colors">
                   <CalendarCheck size={15} />
-                  Mis Reservas
+                  {t("navbar.bookings")}
                 </Link>
               ) : (
                 <>
@@ -79,7 +79,7 @@ export default function Navbar() {
                     className="flex items-center gap-1.5 text-foreground/40 hover:text-foreground/60 transition-colors cursor-pointer"
                   >
                     <CalendarCheck size={15} />
-                    Mis Reservas
+                    {t("navbar.bookings")}
                   </button>
 
                   {reservasPopover && (
@@ -89,13 +89,13 @@ export default function Navbar() {
                       <div className="flex items-center gap-2 text-muted-foreground">
                         <Lock size={14} className="text-brand flex-shrink-0" />
                         <p className="text-xs leading-snug">
-                          Debes iniciar sesión para acceder a tus reservas.
+                          {t("navbar.loginRequired")}
                         </p>
                       </div>
                       <Link to="/login?redirect=/mis-reservas" onClick={() => setReservasPopover(false)}>
                         <Button className="w-full h-8 text-xs font-bold">
                           <LogIn size={13} className="mr-1.5" />
-                          Iniciar sesión
+                          {t("navbar.loginButton")}
                         </Button>
                       </Link>
                     </div>
@@ -125,7 +125,7 @@ export default function Navbar() {
               {isAdmin ? (
                 <Link to="/admin" className="hidden sm:flex items-center gap-2 text-sm text-brand hover:text-brand-soft transition-colors">
                   <Shield size={16} />
-                  <span className="font-semibold">Admin</span>
+                  <span className="font-semibold">{t("navbar.admin")}</span>
                 </Link>
               ) : (
                 <Link to="/mis-reservas" className="hidden sm:flex items-center gap-2 text-sm text-foreground/80 hover:text-brand transition-colors">
@@ -135,14 +135,14 @@ export default function Navbar() {
               )}
               <Button onClick={handleLogout} variant="outline" className="hidden sm:flex font-bold border-background/10">
                 <LogOut size={16} className="mr-2" />
-                Salir
+                {t("navbar.logout")}
               </Button>
             </>
           ) : (
             <Link to="/login">
               <Button variant="default" className="hidden sm:flex font-bold shadow-lg shadow-brand/10 text-foreground">
                 <LogIn size={16} className="mr-2" />
-                Ingresar
+                {t("navbar.login")}
               </Button>
             </Link>
           )}
@@ -182,18 +182,18 @@ export default function Navbar() {
                       className="flex items-center gap-3 px-4 py-3.5 bg-card border border-border rounded-xl hover:border-primary hover:bg-primary/5 transition-all shadow-sm text-foreground font-medium text-sm"
                     >
                       <CalendarCheck size={18} className="text-brand" />
-                      Mis Reservas
+                      {t("navbar.bookings")}
                     </Link>
                   ) : (
                     <div className="bg-card border border-border rounded-xl p-4 space-y-3 shadow-sm">
                       <div className="flex items-center gap-2 text-muted-foreground">
                         <CalendarCheck size={18} />
-                        <span className="font-medium text-sm">Mis Reservas</span>
+                        <span className="font-medium text-sm">{t("navbar.bookings")}</span>
                       </div>
                       <div className="flex items-start gap-2 bg-brand/5 border border-brand/20 rounded-lg px-3 py-2">
                         <Lock size={13} className="text-brand flex-shrink-0 mt-0.5" />
                         <p className="text-xs text-muted-foreground">
-                          Inicia sesión para ver tus reservas.
+                          {t("navbar.loginRequired")}
                         </p>
                       </div>
                     </div>
@@ -211,13 +211,13 @@ export default function Navbar() {
                         className="flex items-center gap-3 px-4 py-3 bg-card border border-border rounded-xl hover:border-primary hover:bg-primary/5 transition-all shadow-sm text-brand font-medium text-sm"
                       >
                         <Shield size={18} />
-                        Panel Admin
+                        {t("navbar.adminPanel")}
                       </Link>
                     )}
-                    <p className="text-xs text-muted-foreground px-1">Sesión: {user?.name}</p>
+                    <p className="text-xs text-muted-foreground px-1">{t("auth.userLabel")}: {user?.name}</p>
                     <Button onClick={handleLogout} variant="outline" className="w-full font-bold">
                       <LogOut size={16} className="mr-2" />
-                      Cerrar Sesión
+                      {t("navbar.logout")}
                     </Button>
                   </>
                 ) : (
@@ -225,11 +225,11 @@ export default function Navbar() {
                     <Link to="/login">
                       <Button className="w-full font-bold">
                         <LogIn size={16} className="mr-2" />
-                        Ingresar
+                        {t("navbar.login")}
                       </Button>
                     </Link>
                     <Link to="/register" className="block text-center text-sm text-brand hover:underline">
-                      ¿No tienes cuenta? Regístrate
+                      {t("navbar.noAccount")}
                     </Link>
                   </>
                 )}
