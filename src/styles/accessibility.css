@@ -7,7 +7,7 @@
   --accessibility-line-spacing: 1.5;
 
   /* OpenDyslexic font import (loaded in fonts.css) */
-  --accessibility-dyslexic-font: "OpenDyslexic", sans-serif;
+  --accessibility-dyslexic-font: "OpenDyslexic", "Comic Sans MS", "Comic Sans", cursive, sans-serif;
 
   /* Default color variables (inherits from theme) */
   --accessibility-text-color: var(--foreground, #000000);
@@ -23,29 +23,52 @@
   --accessibility-line-spacing: 2.2;
 }
 
-/* High Contrast Mode */
+/* High Contrast Mode - Overrides theme CSS variables to enforce WCAG AAA contrast */
 .accessibility-high-contrast {
-  --accessibility-text-color: #000000;
-  --accessibility-bg-color: #ffffff;
+  --accessibility-text-color: #000000 !important;
+  --accessibility-bg-color: #ffffff !important;
+  --background: #ffffff !important;
+  --foreground: #000000 !important;
+  --card: #ffffff !important;
+  --card-foreground: #000000 !important;
+  --popover: #ffffff !important;
+  --popover-foreground: #000000 !important;
+  --primary: #000000 !important;
+  --primary-foreground: #ffffff !important;
+  --secondary: #ffffff !important;
+  --secondary-foreground: #000000 !important;
+  --muted: #ffffff !important;
+  --muted-foreground: #000000 !important;
+  --accent: #ffffff !important;
+  --accent-foreground: #000000 !important;
+  --border: #000000 !important;
+  --input: #000000 !important;
+  --ring: #000000 !important;
+  --brand: #000000 !important;
+  --brand-soft: #ffffff !important;
 }
 
 .accessibility-high-contrast body {
-  background-color: white;
-  color: black;
-  border-color: black;
+  background-color: white !important;
+  color: black !important;
+  border-color: black !important;
 }
 
 .accessibility-high-contrast button,
 .accessibility-high-contrast a {
-  border: 2px solid black;
+  border: 2px solid black !important;
 }
 
 .accessibility-high-contrast input,
 .accessibility-high-contrast textarea,
 .accessibility-high-contrast select {
-  border: 2px solid black;
-  background-color: white;
-  color: black;
+  border: 2px solid black !important;
+  background-color: white !important;
+  color: black !important;
+}
+
+.accessibility-high-contrast * {
+  border-color: #000000 !important;
 }
 
 /* Inverted Contrast Mode */
