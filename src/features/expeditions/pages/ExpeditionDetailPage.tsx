@@ -109,9 +109,9 @@ export default function ExpeditionDetailPage() {
         availabilityId: selectedAvailability,
         peopleCount,
       });
-      setBooking(result);
       const av = expedition.availabilities.find((a) => a.id === selectedAvailability);
       if (av) av.availableSpots -= peopleCount;
+      navigate(`/checkout/${result.id}`);
     } catch (err: any) {
       setBookingError(err.message || t("expeditionDetail.bookingError", "No se pudo completar la reserva. Intenta de nuevo."));
     } finally {

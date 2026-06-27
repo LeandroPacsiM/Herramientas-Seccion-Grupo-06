@@ -12,6 +12,9 @@ import ContactoPage from "@/features/contact/pages/ContactoPage";
 import LoginPage from "@/features/auth/pages/LoginPage";
 import RegisterPage from "@/features/auth/pages/RegisterPage";
 import MisReservasPage from "@/features/bookings/pages/MisReservasPage";
+import CheckoutPage from "@/features/payment/pages/CheckoutPage";
+import PaymentSuccessPage from "@/features/payment/pages/PaymentSuccessPage";
+import PaymentReceiptPage from "@/features/payment/pages/PaymentReceiptPage";
 import AdminDashboardPage from "@/features/admin/pages/AdminDashboardPage";
 import AdminExpeditionsPage from "@/features/admin/pages/AdminExpeditionsPage";
 
@@ -34,6 +37,30 @@ export default function AppRoutes() {
           element={
             <ProtectedRoute>
               <MisReservasPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/checkout/:bookingId"
+          element={
+            <ProtectedRoute>
+              <CheckoutPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/payment/success"
+          element={
+            <ProtectedRoute>
+              <PaymentSuccessPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/payment/receipt/:bookingId"
+          element={
+            <ProtectedRoute>
+              <PaymentReceiptPage />
             </ProtectedRoute>
           }
         />
