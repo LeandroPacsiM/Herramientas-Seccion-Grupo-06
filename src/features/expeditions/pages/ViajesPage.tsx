@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { Search, SlidersHorizontal, X, Map as MapIcon } from "lucide-react";
+import { Search, SlidersHorizontal, X, Map as MapIcon, Star, MessageSquare, BookOpen } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Input } from "@/app/components/ui/input";
 import { Button } from "@/app/components/ui/button";
@@ -24,6 +24,10 @@ export default function ViajesPage() {
   const [sort, setSort] = useState<SortOption>("price-asc");
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const [showMapOnMobile, setShowMapOnMobile] = useState(false);
+
+  // Estados para el formulario de opiniones y el libro de reclamaciones
+  const [rating, setRating] = useState(5);
+  const [showReclamaciones, setShowReclamaciones] = useState(false);
 
   const DIFFICULTY_OPTIONS = useMemo(() => [
     { value: "ALL" as Difficulty, label: t("viajes.allDifficulties") },
@@ -183,7 +187,7 @@ export default function ViajesPage() {
         )}
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-8 items-start relative w-full">
+      <div className="flex flex-col lg:flex-row gap-8 items-start relative w-full mb-16">
         {/* Left Side: Cards and filters / loading states */}
         <div className={`w-full lg:w-7/12 xl:w-8/12 ${showMapOnMobile ? "hidden" : "block"} lg:block`}>
           {!loading && !error && (
@@ -235,7 +239,7 @@ export default function ViajesPage() {
           )}
         </div>
 
-        {/* Right Side: Map (shown side-by-side on desktop, toggled on mobile) */}
+        {/* Right Side: Map (corregido para cerrarse correctamente sin condicionar el final de la página) */}
         {!loading && !error && filtered.length > 0 && (
           <>
             {/* Desktop sticky map */}
@@ -255,6 +259,7 @@ export default function ViajesPage() {
               <ExpeditionMap
                 expeditions={filtered}
                 hoveredId={hoveredId}
+                onMarkerClick={() => {}}
               />
             </div>
 
@@ -277,6 +282,142 @@ export default function ViajesPage() {
             </button>
           </>
         )}
+      </div>
+
+      {/* ======================================================================= */}
+      {/* NUEVA INTEGRACIÓN COMPLEMENTARIA: OPINIONES Y LIBRO DE RECLAMACIONES    */}
+      {/* ======================================================================= */}
+      <hr className="border-border my-12" />
+      
+      <div className="space-y-6">
+        <div>
+          <p className="text-brand font-bold tracking-widest uppercase text-xs mb-1">Feedback del Usuario</p>
+          <h2 className="text-3xl font-bold text-foreground flex items-center gap-2">
+            <MessageSquare className="text-brand" size={24} /> Experiencias y Soporte
+          </h2>
+          <p className="text-muted-foreground text-sm mt-1">
+            Módulo de investigación propuesto para la recolección de métricas de satisfacción y cumplimiento legal.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Formulario de Calificación */}
+          <div className="bg-card border border-border p-6 rounded-2xl shadow-sm">
+            <h3 className="text-lg font-bold text-foreground mb-4">⭐ Califica tu Expedición</h3>
+            <form onSubmit={(e) => { e.preventDefault(); alert("¡Muchas gracias! Tu opinión ha sido guardada en el entorno de desarrollo."); }} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-muted-foreground mb-1">Selecciona el Viaje realizado:</label>
+                <select className="w-full p-2.5 rounded-lg bg-background border border-border text-foreground text-sm outline-none focus:border-brand" required>
+                  <option value="">-- Elige un destino --</option>
+                  <option value="1">Cusco & Machu Picchu Místico</option>
+                  <option value="2">Lago Titicaca e Islas Flotantes</option>
+                  <option value="3">Aventura en las Dunas de Huacachina</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-muted-foreground mb-1">Tu Puntuación:</label>
+                <div className="flex gap-1 text-2xl text-amber-400 cursor-pointer">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button key={star} type="button" onClick={() => setRating(star)}>
+                      {star <= rating ? "★" : "☆"}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-muted-foreground mb-1">Cuéntanos tu experiencia:</label>
+                <textarea 
+                  className="w-full p-2.5 rounded-lg bg-background border border-border text-foreground text-sm outline-none focus:border-brand" 
+                  rows={3} 
+                  placeholder="¿Qué te pareció el itinerario, los transportes y la atención del guía?" 
+                  required
+                />
+              </div>
+
+              <Button type="submit" className="w-full bg-brand text-black font-bold hover:bg-brand/90 rounded-lg">
+                Enviar Comentario
+              </Button>
+            </form>
+          </div>
+
+          {/* Historial Simulado de Comentarios */}
+          <div className="bg-card border border-border p-6 rounded-2xl shadow-sm space-y-4">
+            <h3 className="text-lg font-bold text-foreground">👥 Reseñas de la Comunidad</h3>
+            
+            <div className="border-l-2 border-brand pl-3 py-1 space-y-1 bg-background/50 p-3 rounded-r-lg">
+              <div className="flex justify-between items-center text-sm">
+                <span className="font-bold text-foreground">Carlos Mendoza</span>
+                <span className="text-amber-400">★★★★★</span>
+              </div>
+              <p className="text-xs text-muted-foreground">Destino: Cusco & Machu Picchu Místico</p>
+              <p className="text-sm text-foreground/90">¡Excelente organización! El software se adaptó de maravilla y las ayudas de accesibilidad visual nos facilitaron todo el viaje.</p>
+            </div>
+
+            <div className="border-l-2 border-brand pl-3 py-1 space-y-1 bg-background/50 p-3 rounded-r-lg">
+              <div className="flex justify-between items-center text-sm">
+                <span className="font-bold text-foreground">Ana Bartra</span>
+                <span className="text-amber-400">★★★★☆</span>
+              </div>
+              <p className="text-xs text-muted-foreground">Destino: Dunas de Huacachina</p>
+              <p className="text-sm text-foreground/90">Súper divertido el sandboarding en las dunas de Ica. El buggy llegó puntual, aunque el sol estuvo fuertísimo. Recomendado.</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Módulo Regulatorio: Libro de Reclamaciones INDECOPI */}
+        <div className="border border-red-500/30 bg-red-500/5 p-6 rounded-2xl text-center space-y-3">
+          <div className="flex items-center justify-center gap-2 text-red-400 font-bold">
+            <BookOpen size={20} />
+            <h3>Libro de Reclamaciones Virtual</h3>
+          </div>
+          <p className="text-muted-foreground text-xs max-w-xl mx-auto">
+            Conforme al Código de Protección y Defensa del Consumidor de Perú. Ponemos a su disposición esta herramienta para registrar cualquier disconformidad.
+          </p>
+          <Button 
+            variant="outline" 
+            onClick={() => setShowReclamaciones(!showReclamaciones)}
+            className="border-red-500/40 text-red-400 hover:bg-red-500/10 hover:text-red-300 text-xs rounded-full"
+          >
+            {showReclamaciones ? "Ocultar Formulario" : "Abrir Hoja de Reclamación"}
+          </Button>
+
+          {showReclamaciones && (
+            <div className="mt-6 text-left bg-card border border-border p-5 rounded-xl space-y-4 max-w-2xl mx-auto animate-in fade-in-50 duration-200">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs text-muted-foreground mb-1">Nombre y Apellidos:</label>
+                  <input type="text" className="w-full p-2 bg-background border border-border rounded text-sm text-foreground outline-none" placeholder="Juan Pérez" />
+                </div>
+                <div>
+                  <label className="block text-xs text-muted-foreground mb-1">Documento de Identidad (DNI/CE):</label>
+                  <input type="text" className="w-full p-2 bg-background border border-border rounded text-sm text-foreground outline-none" placeholder="00000000" />
+                </div>
+              </div>
+              <div>
+                <label className="block text-xs text-muted-foreground mb-1">Tipo de Incidencia:</label>
+                <select className="w-full p-2 bg-background border border-border rounded text-sm text-foreground outline-none">
+                  <option>Reclamo (Disconformidad relacionada directamente con los servicios turísticos)</option>
+                  <option>Queja (Descontento referente a la atención brindada por el personal)</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs text-muted-foreground mb-1">Descripción clara del hecho:</label>
+                <textarea className="w-full p-2 bg-background border border-border rounded text-sm text-foreground outline-none" rows={4} placeholder="Detalle lo ocurrido de la manera más descriptiva posible..." />
+              </div>
+              <div className="flex justify-end">
+                <Button 
+                  type="button" 
+                  onClick={() => { alert("Reclamación registrada exitosamente de forma local. Se enviará una copia digital al correo asignado."); setShowReclamaciones(false); }}
+                  className="bg-red-600 hover:bg-red-700 text-white font-semibold text-xs py-2 px-4 rounded"
+                >
+                  Registrar Hoja de Reclamación
+                </Button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </main>
   );

@@ -85,7 +85,25 @@
     "p1": "LlamaTours nació con la idea de compartir la belleza inexplorada de los Andes con el mundo, ofreciendo experiencias únicas que combinan aventura, cultura y confort. Creemos que viajar no solo es desplazarse, sino conectar profundamente con los paisajes, las personas y las historias que hacen de cada destino algo inolvidable.",
     "p2": "Nuestro equipo está conformado por guías locales expertos, apasionados por la montaña y comprometidos con brindar experiencias seguras, auténticas y enriquecedoras. Cada ruta, cada expedición y cada detalle ha sido cuidadosamente diseñado para que nuestros viajeros vivan algo más que un simple recorrido.",
     "p3": "Nos diferenciamos por ofrecer un equilibrio entre aventura y elegancia, permitiendo que tanto exploradores experimentados como viajeros primerizos puedan disfrutar de destinos de alta montaña con el respaldo de un servicio profesional y cercano.",
-    "p4": "En LlamaTours, no solo organizamos viajes: creamos recuerdos que perduran en el tiempo, fomentamos el respeto por la naturaleza y promovemos el turismo responsable en cada paso que damos."
+    "p4": "En LlamaTours, no solo organizamos viajes: creamos recuerdos que perduran en el tiempo, fomentamos el respeto por la naturaleza y promovemos el turismo responsable en cada paso que damos.",
+    
+    "misionTitle": "Misión",
+    "misionText": "Brindar a los entusiastas de la aventura una plataforma moderna e intuitiva donde puedan explorar expediciones únicas y gestionar sus reservas de viajes con total facilidad, garantizando una experiencia organizada, segura y eficiente a través de tecnologías modernas.",
+    
+    "visionTitle": "Visión",
+    "visionText": "Convertirnos en la plataforma de referencia para el turismo de aventura y alta montaña, integrando innovación tecnológica continua para conectar de manera óptima a los viajeros con las riquezas naturales del mundo de forma sostenible.",
+    
+    "valoresTitle": "Valores Organizacionales",
+    "val1Title": "Innovación tecnológica",
+    "val1Text": "Buscamos mejorar continuamente nuestra plataforma mediante herramientas modernas como Spring Boot y React para ofrecer un servicio eficiente.",
+    "val2Title": "Trabajo en equipo",
+    "val2Text": "Fomentamos la colaboración y la comunicación activa entre nuestros guías, desarrolladores y personal de atención.",
+    "val3Title": "Compromiso con la calidad",
+    "val3Text": "Desarrollamos funcionalidades robustas, fáciles de utilizar y enfocadas en la satisfacción integral del viajero.",
+    "val4Title": "Turismo responsable",
+    "val4Text": "Promovemos el respeto absoluto por la naturaleza y las comunidades locales que nos reciben en cada expedición.",
+    "val5Title": "Mejora continua",
+    "val5Text": "Analizamos constantemente los comentarios de nuestros usuarios para optimizar los procesos de reserva y exploración."
   },
   "viajes": {
     "catalog": "Catálogo",
@@ -203,6 +221,34 @@
     "hasAccount": "¿Ya tienes cuenta?",
     "loginHere": "Inicia sesión aquí"
   },
+  "checkout": {
+    "backToBookings": "Volver a mis reservas",
+    "paymentSummary": "Resumen de pago",
+    "pricePerPerson": "Precio por persona",
+    "people": "Personas",
+    "total": "Total",
+    "confirmAndPay": "Confirmar y pagar — ${{price}} USD",
+    "paying": "Procesando pago...",
+    "securePayment": "Pago seguro mediante conexión encriptada",
+    "cancelPolicy": "Cancelación gratuita hasta 7 días antes de la salida",
+    "needHelp": "¿Necesitas ayuda? Contáctanos",
+    "itineraryPreview": "Vista previa del itinerario",
+    "moreDays": "+{{count}} días más",
+    "stepReserved": "Reservado",
+    "stepPending": "Pendiente de pago",
+    "stepConfirmed": "Confirmado",
+    "errorTitle": "Algo salió mal",
+    "invalidBooking": "Reserva inválida",
+    "bookingNotAvailable": "Esta reserva ya no está disponible",
+    "loadError": "No se pudieron cargar los detalles de la reserva",
+    "payError": "No se pudo procesar el pago. Intenta de nuevo.",
+    "paySuccessTitle": "¡Pago exitoso!",
+    "paySuccessDesc": "Tu expedición está confirmada. Prepárate para una aventura inolvidable.",
+    "redirecting": "Redirigiendo...",
+    "viewBookings": "Ver mis reservas",
+    "viewReceipt": "Ver comprobante",
+    "continueExploring": "Seguir explorando"
+  },
   "bookings": {
     "myAccount": "Mi cuenta",
     "title": "Mis Reservas",
@@ -219,11 +265,27 @@
     "person_one": "1 persona",
     "person_other": "{{count}} personas",
     "totalPrice": "Precio total",
-    "paymentId": "ID de Pago",
+    "receiptNumber": "Comprobante",
     "bookingDate": "Fecha de reserva",
     "payNowButton": "Pagar ahora",
     "paying": "Procesando pago...",
+    "viewReceipt": "Ver comprobante",
     "paymentSuccess": "¡Pago realizado con éxito!"
+  },
+  "receipt": {
+    "voucher": "Comprobante",
+    "paid": "Pagado",
+    "expedition": "Expedición",
+    "dates": "Fechas",
+    "people": "Personas",
+    "customer": "Cliente",
+    "paymentInfo": "Información de pago",
+    "bookingDate": "Fecha de reserva",
+    "totalPaid": "Total pagado",
+    "printButton": "Imprimir / Guardar PDF",
+    "backToBookings": "Volver a mis reservas",
+    "notFound": "Comprobante no encontrado",
+    "footer": "Este comprobante es válido como constancia de pago.\nLlamaTours — Aventuras de Lujo en los Andes"
   },
   "expeditions": {
     "camino-inca-clasico": {

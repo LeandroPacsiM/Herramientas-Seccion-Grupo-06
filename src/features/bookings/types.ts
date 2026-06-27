@@ -12,4 +12,5 @@ export interface Booking {
   updatedAt?: string;
   totalAmount?: number;
   paymentId?: string;
+  receiptNumber?: string;
 }

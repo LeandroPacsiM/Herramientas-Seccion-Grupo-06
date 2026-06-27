@@ -17,7 +17,7 @@ function figmaAssetResolver() {
 }
 
 export default defineConfig(({ mode }) => ({
-  base: mode === 'production' ? '/Herramientas-Seccion-Grupo-06/' : '/',
+  base: process.env.VERCEL ? '/' : (mode === 'production' ? '/Herramientas-Seccion-Grupo-06/' : '/'),
   plugins: [
     figmaAssetResolver(),
     // The React and Tailwind plugins are both required for Make, even if

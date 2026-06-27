@@ -184,7 +184,9 @@ function applyAccessibilityStyles(settings: AccessibilitySettings) {
     120: "19.2px",
     150: "24px",
   };
-  root.style.setProperty("--accessibility-font-size-base", fontSizeScale[settings.textScale as keyof typeof fontSizeScale]);
+  const scaledSize = fontSizeScale[settings.textScale as keyof typeof fontSizeScale];
+  root.style.setProperty("--font-size", scaledSize);
+  root.style.setProperty("--accessibility-font-size-base", scaledSize);
   root.style.setProperty("--accessibility-text-scale", `${settings.textScale / 100}`);
 
   // Contraste

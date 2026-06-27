@@ -1,8 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@700;800&family=DM+Serif+Display:wght@400&display=swap');
 
 /* OpenDyslexic Font for Accessibility */
-@import url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.4.3/fonts/OpenDyslexic-Regular.otf');
-@import url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.4.3/fonts/OpenDyslexic-Bold.otf');
 
 @font-face {
   font-family: 'OpenDyslexic';
