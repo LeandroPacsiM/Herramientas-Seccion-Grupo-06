@@ -1,11 +1,12 @@
 import { ReactNode } from "react";
 import { Link, useNavigate } from "react-router";
-import { LayoutDashboard, Map, LogOut, ChevronRight } from "lucide-react";
+import { LayoutDashboard, Map, LogOut, ChevronRight, ClipboardList } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
 const NAV_ITEMS = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/expediciones", label: "Expediciones", icon: Map },
+  { href: "/admin/reclamaciones", label: "Reclamaciones", icon: ClipboardList },
 ];
 
 interface AdminLayoutProps {
