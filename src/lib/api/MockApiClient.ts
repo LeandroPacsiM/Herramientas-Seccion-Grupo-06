@@ -437,6 +437,18 @@ export class MockApiClient {
       return {} as T;
     }
 
+    if (endpoint === "/api/claims") {
+      const claim = data as any;
+      const code = `${claim.claimType}-${new Date().getFullYear()}-${String(Math.floor(10000 + Math.random() * 90000))}`;
+      return {
+        ...claim,
+        id: Date.now(),
+        code,
+        createdAt: new Date().toISOString(),
+        status: "PENDIENTE",
+      } as T;
+    }
+
     if (endpoint === "/api/admin/expeditions") {
       const payload = data as Expedition;
       const newExp: Expedition = {

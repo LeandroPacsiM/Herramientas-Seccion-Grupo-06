@@ -11,12 +11,14 @@ import ExpeditionDetailPage from "@/features/expeditions/pages/ExpeditionDetailP
 import ContactoPage from "@/features/contact/pages/ContactoPage";
 import LoginPage from "@/features/auth/pages/LoginPage";
 import RegisterPage from "@/features/auth/pages/RegisterPage";
+import ClaimsPage from "@/features/claims/pages/ClaimsPage";
 import MisReservasPage from "@/features/bookings/pages/MisReservasPage";
 import CheckoutPage from "@/features/payment/pages/CheckoutPage";
 import PaymentSuccessPage from "@/features/payment/pages/PaymentSuccessPage";
 import PaymentReceiptPage from "@/features/payment/pages/PaymentReceiptPage";
 import AdminDashboardPage from "@/features/admin/pages/AdminDashboardPage";
 import AdminExpeditionsPage from "@/features/admin/pages/AdminExpeditionsPage";
+import AdminClaimsPage from "@/features/admin/pages/AdminClaimsPage";
 
 export default function AppRoutes() {
   return (
@@ -30,6 +32,7 @@ export default function AppRoutes() {
         <Route path="/nosotros" element={<NosotrosPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/libro-de-reclamaciones" element={<ClaimsPage />} />
 
         {/* User Protected Routes */}
         <Route
@@ -79,6 +82,14 @@ export default function AppRoutes() {
           element={
             <ProtectedRoute requireAdmin>
               <AdminExpeditionsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/reclamaciones"
+          element={
+            <ProtectedRoute requireAdmin>
+              <AdminClaimsPage />
             </ProtectedRoute>
           }
         />

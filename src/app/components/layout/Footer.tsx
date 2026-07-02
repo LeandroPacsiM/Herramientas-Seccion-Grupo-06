@@ -39,6 +39,17 @@ export default function Footer() {
             <li><a href="/viajes" className="hover:text-white transition-colors">{t("viajes.catalog")}</a></li>
             <li><a href="/nosotros" className="hover:text-white transition-colors">{t("navbar.about")}</a></li>
             <li><a href="/contacto" className="hover:text-white transition-colors">{t("navbar.contact")}</a></li>
+            <li>
+              <a href="/libro-de-reclamaciones" className="hover:text-brand transition-colors flex items-center gap-2 mt-2 pt-2 border-t border-white/10">
+                <svg className="w-5 h-5 text-brand flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z" />
+                  <path d="M6 6h10" />
+                  <path d="M6 10h10" />
+                  <path d="M6 14h10" />
+                </svg>
+                <span className="text-sm font-semibold tracking-wide text-brand/90 hover:text-brand">{t("footer.claimsBook")}</span>
+              </a>
+            </li>
           </ul>
         </div>
 
